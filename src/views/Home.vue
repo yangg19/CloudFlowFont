@@ -9,7 +9,8 @@
         </div>
         <el-dropdown class="userInfo" @command="commandHandler">
           <span class="el-dropdown-link">
-            {{user.username}}<i><img :src="user.userFace"></i>
+            {{user.username}}
+            <i><img :src="user.userFace"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
@@ -46,7 +47,7 @@
             欢迎来到飞流工作管理系统
           </div>
           <!--展示路由主键-->
-          <router-view/>
+          <router-view class="homeRouterView"/>
         </el-main>
       </el-container>
     </el-container>
@@ -140,6 +141,10 @@ export default {
   font-size: 30px;
   font-family: 微软雅黑;
   padding-top: 50px;
+}
+
+.homeRouterView {
+  margin-top: 30px;
 }
 
 

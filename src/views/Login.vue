@@ -24,13 +24,13 @@
 
         <!--        <el-checkbox v-model="checked" class="checkBox">记住我</el-checkbox>-->
 
-        <el-form-item prop="code" style="transform: translateY(10px)">
-          <el-input class="captchaBox" type="code" auto-complete="false" placeholder="点击图片更换验证码"
-                    v-model="loginForm.code"
-                    style="width:230px; margin-right: 10px; transform: translateY(-15px)">
-          </el-input>
-          <img :src="captchaUrl" @click="updateCaptcha" style="">
-        </el-form-item>
+<!--        <el-form-item prop="code" style="transform: translateY(10px)">-->
+<!--          <el-input class="captchaBox" type="code" auto-complete="false" placeholder="点击图片更换验证码"-->
+<!--                    v-model="loginForm.code"-->
+<!--                    style="width:230px; margin-right: 10px; transform: translateY(-15px)">-->
+<!--          </el-input>-->
+<!--          <img :src="captchaUrl" @click="updateCaptcha" style="">-->
+<!--        </el-form-item>-->
 
         <el-button type="primary" style="width: 100%; transform: translateY(10px)" class="login-button"
                    @click="submitLogin">登录
@@ -48,26 +48,26 @@ export default {
   data() {
     return {
       logo1: require("../assets/CloudFlow.png"),
-      captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
+      // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
         username: 'admin',
         password: '123',
-        code: ''
+        // code: ''
       },
       loading: false,
       checked: true,
       rules: {
         username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
         password: [{required: true, message: '请输入密码', trigger: 'blur'}],
-        code: [{required: true, message: '请输入验证码', trigger: 'blur'}]
+        // code: [{required: true, message: '请输入验证码', trigger: 'blur'}]
       }
     }
   },
   methods: {
-    // 更新验证码方法
-    updateCaptcha() {
-      this.captchaUrl = '/captcha?time=' + new Date()
-    },
+    // // 更新验证码方法
+    // updateCaptcha() {
+    //   this.captchaUrl = '/captcha?time=' + new Date()
+    // },
     // 登录方法
     submitLogin() {
       this.$refs['loginForm'].validate((valid) => {
@@ -82,9 +82,9 @@ export default {
               // 存储用户token
               window.sessionStorage.setItem('tokenStr', tokenStr);
               // 跳转首页
-              // this.$router.replace('/home');
-              let path = this.$route.query.redirect;
-              this.$router.replace((path === '/' || path === undefined) ? '/home' : path);
+              this.$router.replace('/home');
+              // let path = this.$route.query.redirect;
+              // this.$router.replace((path === '/' || path === undefined) ? '/home' : path);
             }
           })
         } else {

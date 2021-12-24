@@ -35,13 +35,14 @@ router.beforeEach((to, from, next) => {
     next();
 
   } else {
-    // 如果下个路由路径是登录页，则next
-    if (to.path === '/') {
-      next();
-    } else {
-      // 如果登录成功，可以手动拦截重定向去要去的页面
-      next('/?redirect=' + to.path);
-    }
+    // // 如果下个路由路径是登录页，则next
+    // if (to.path === '/') {
+    //   next();
+    // } else {
+    //   // 如果登录成功，可以手动拦截重定向去要去的页面
+    //   next('/?redirect=' + to.path);
+    // }
+    next();
   }
 })
 
