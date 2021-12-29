@@ -9,9 +9,10 @@
         </div>
         <el-dropdown class="userInfo" @command="commandHandler">
           <span class="el-dropdown-link">
-            {{user.username}}
-            <i><img :src="user.userFace"></i>
+              {{user.username}}
+              <i><img :src="user.userFace"></i>
           </span>
+
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
             <el-dropdown-item command="setting">设置</el-dropdown-item>
@@ -89,7 +90,9 @@ export default {
             message: '已取消'
           });
         });
-
+      }
+      if (command === 'userInfo') {
+        this.$router.push('/userInfo');
       }
     }
   }

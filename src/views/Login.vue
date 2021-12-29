@@ -47,7 +47,7 @@ export default {
   name: "Login",
   data() {
     return {
-      logo1: require("../assets/CloudFlow.png"),
+      // logo1: require("../assets/CloudFlow.png"),
       // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
         username: 'admin',
