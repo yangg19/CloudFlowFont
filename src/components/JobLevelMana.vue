@@ -110,7 +110,7 @@
                   active-color="#0e57a2"
                   inactive-color="#dcdfe6"
                   active-text="启用"
-                  inactive-text="关闭">
+                  inactive-text="禁用">
               </el-switch>
             </td>
           </tr>

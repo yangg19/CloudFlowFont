@@ -50,7 +50,7 @@ export default {
       // logo1: require("../assets/CloudFlow.png"),
       // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
-        username: 'admin',
+        username: 'yangg',
         password: '123',
         // code: ''
       },
