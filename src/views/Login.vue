@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <!--    <div>-->
-    <!--      <img :src="logo1">-->
-    <!--    </div>-->
-    <div>
 
+  <div class="backgroundWall">
+    <div>
       <el-form :rules="rules"
                ref="loginForm"
                v-loading="loading"
@@ -13,28 +10,52 @@
                element-loading-background="rgba(0, 0, 0, 0.8)"
                :model="loginForm"
                class="loginContainer">
-        <h3 class="loginTitle">用户登录</h3>
-        <el-form-item label="账号" prop="username">
-          <el-input type="text" auto-complete="false" placeholder="请输入用户名" v-model="loginForm.username"></el-input>
-        </el-form-item>
+        <div>
+          <div class="introduce">
+            <h3>
+              协作公园
+              <h3 class="introduceSub">
+                问答、检索、梳理，致力提高团队知识利用
+              </h3>
+            </h3>
+            <div class="el-image-introduce">
+              <el-image :src="require('../img/left2.jpg')" fit="contain" style="width: 400px"></el-image>
+            </div>
 
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" auto-complete="false" placeholder="请输入密码" v-model="loginForm.password"></el-input>
-        </el-form-item>
+          </div>
 
-        <!--        <el-checkbox v-model="checked" class="checkBox">记住我</el-checkbox>-->
+          <div class="loginAll">
+<!--            <h3 class="logoWord">-->
+<!--              TEAMPARK-->
+<!--            </h3>-->
+            <el-image :src="require('../img/teampark3.png')" fit="contain" class="el-image-logo"></el-image>
+            <div class="loginMain">
+              <el-form-item label="账号" prop="username" size="big" style="font-size: 20px">
+                <el-input type="text" auto-complete="false" placeholder="请输入用户名" v-model="loginForm.username" style="width: 350px"></el-input>
+              </el-form-item>
 
-<!--        <el-form-item prop="code" style="transform: translateY(10px)">-->
-<!--          <el-input class="captchaBox" type="code" auto-complete="false" placeholder="点击图片更换验证码"-->
-<!--                    v-model="loginForm.code"-->
-<!--                    style="width:230px; margin-right: 10px; transform: translateY(-15px)">-->
-<!--          </el-input>-->
-<!--          <img :src="captchaUrl" @click="updateCaptcha" style="">-->
-<!--        </el-form-item>-->
+              <el-form-item label="密码" prop="password" size="big">
+                <el-input type="password" auto-complete="false" placeholder="请输入密码" v-model="loginForm.password" style="width: 350px"></el-input>
+              </el-form-item>
 
-        <el-button type="primary" style="width: 100%; transform: translateY(10px)" class="login-button"
-                   @click="submitLogin">登录
-        </el-button>
+              <!--        <el-checkbox v-model="checked" class="checkBox">记住我</el-checkbox>-->
+
+              <!--        <el-form-item prop="code" style="transform: translateY(10px)">-->
+              <!--          <el-input class="captchaBox" type="code" auto-complete="false" placeholder="点击图片更换验证码"-->
+              <!--                    v-model="loginForm.code"-->
+              <!--                    style="width:230px; margin-right: 10px; transform: translateY(-15px)">-->
+              <!--          </el-input>-->
+              <!--          <img :src="captchaUrl" @click="updateCaptcha" style="">-->
+              <!--        </el-form-item>-->
+
+              <el-button type="primary" style="width: 350px; transform: translateY(10px)" class="login-button"
+                         @click="submitLogin" size="big">登录
+              </el-button>
+            </div>
+          </div>
+
+        </div>
+
 
       </el-form>
     </div>
@@ -47,6 +68,7 @@ export default {
   name: "Login",
   data() {
     return {
+      imgSrc:require('../img/background.png'),
       // logo1: require("../assets/CloudFlow.png"),
       // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
@@ -104,23 +126,48 @@ export default {
   /*规定背景的绘制区域*/
   background-clip: padding-box;
   /*外边距属性。*/
-  margin: 180px auto;
-  /*内边距属性*/
-  padding: 5px 35px 70px 35px;
+  /*margin: 180px auto;*/
+  /*外边距属性。*/
+  margin:150px 300px 180px auto;
+  /*内边距属性 上 右 下 左*/
+  padding: 50px 50px 80px 85px;
   /*宽度*/
-  width: 350px;
+  width: 1000px;
+  /*高度*/
+  height: 450px;
   /*背景颜色*/
   background: #fff;
   /*线属性*/
   border: 2px solid #dcdfe6;
   /*!*阴影*!*/
-  /*box-shadow: 0 0 25px #cac6c6;*/
+  box-shadow: 0 0 1px #cac6c6;
 }
 
-.loginTitle {
-  /*margin:0px auto 40px auto;*/
-  text-align: center;
+.loginMain {
+  /*margin-left: 400px;*/
+  /*display: inline-block;*/
+}
+
+.loginAll {
+  display: inline-block;
+  position: relative;
+  margin-right: 8%;
+  margin-top: 3%;
+  float: right;
+
+}
+
+.introduce {
+  text-align: left;
   font-size: 25px;
+  display: inline-block;
+  /*margin-top: 5%;*/
+}
+
+.introduceSub {
+  text-align: left;
+  font-size: 18px;
+  font-family: "微软雅黑 Light";
 }
 
 .login-button {
@@ -135,4 +182,34 @@ export default {
 /*  !*color: #0e57a2;*!*/
 /*}*/
 
+.el-image-logo {
+  display: inline-block;
+  width: 300px;
+  float: right;
+  position: relative;
+  margin-right: 5%;
+  /*margin-left: 400px;*/
+}
+
+.el-image-introduce {
+  display: inline-block;
+  width: 200px;
+
+}
+
+/*.logoWord {*/
+/*  font-size: 35px;*/
+/*  color: #0e57a2;*/
+/*  margin-left: 70px;*/
+/*  !*float: right;*!*/
+/*}*/
+
+.backgroundWall {
+  /*background: url("../img/blue.png") center center no-repeat;*/
+  background: #f0f2f5;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  /*background-size: 100% 100%;*/
+}
 </style>

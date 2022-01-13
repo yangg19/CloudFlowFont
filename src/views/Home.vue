@@ -2,14 +2,22 @@
   <div>
     <el-container>
       <el-header class="homeHeader">
-        <div class="title">CloudFlow
-          <div class="sub-title">
-            飞流工作管理
+<!--        <div class="title">CloudFlow-->
+<!--          <div class="sub-title">-->
+<!--            飞流工作管理-->
+<!--          </div>-->
+          <div>
+            <el-image :src="require('../img/teampark.png')" fit="cover" class="el-image-logo"></el-image>
           </div>
-        </div>
+<!--        </div>-->
+<!--        <head>-->
+<!--          <link rel="icon" href="../img/teamtree.png">-->
+<!--        </head>-->
         <el-dropdown class="userInfo" @command="commandHandler">
           <span class="el-dropdown-link">
-              {{user.username}}
+            <span style="position: fixed; top: 25px; right: 80px; font-size: 15px" >
+              {{user.name}}
+            </span>
               <i><img :src="user.userFace"></i>
           </span>
 
@@ -101,6 +109,7 @@ export default {
 
 <style scoped>
 .homeHeader {
+  /*background: #ffffff;*/
   background: #0e57a2;
   display: flex;
   /*居中*/
@@ -148,6 +157,12 @@ export default {
 
 .homeRouterView {
   margin-top: 30px;
+}
+
+.el-image-logo {
+  width: 300px;
+  height: 300px;
+  margin-left: -30px;
 }
 
 
