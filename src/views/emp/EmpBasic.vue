@@ -30,22 +30,34 @@
           </el-button>
         </div>
         <div>
-          <el-button type="primary"
-                     style="background: #0e57a2;border-color: #0e57a2">
-            <i class="fa fa-level-up" aria-hidden="true"></i>
-            导入数据
-          </el-button>
+          <el-upload
+              style="display: inline-flex; margin-right: 10px"
+              :show-file-list="false"
+              :before-upload="beforeUpload"
+              :on-success="onSuccess"
+              :on-error="onError"
+              :headers="headers"
+              :disabled="importDataDisabled"
+              action="/employee/basic/import">
+              <el-button type="primary"
+                         style="background: #0e57a2;border-color: #0e57a2"
+                         :disabled="importDataDisabled = false"
+                         :icon="importDataButtonIcon">
+                {{ importDataButtonText }}
+              </el-button>
+          </el-upload>
+
           <el-button type="primary"
                      @click="exportData"
+                     icon="el-icon-download"
                      style="background: #0e57a2;border-color: #0e57a2">
-            <i class="fa fa-level-down" aria-hidden="true"></i>
             导出数据
           </el-button>
           <el-button
               type="primary"
               style="background: #0e57a2;border-color: #0e57a2"
               @click="showAddEmpView"
-              prefix-icon="el-icon-plus">
+              icon="el-icon-plus">
             添加员工
           </el-button>
         </div>
@@ -502,6 +514,12 @@ export default {
   name: "EmpBasic",
   data() {
     return {
+      headers:{
+        Authorization: window.sessionStorage.getItem('tokenStr')
+      },
+      importDataDisabled: 'false',
+      importDataButtonText:'导入数据',
+      importDataButtonIcon:'el-icon-upload2',
       emps: [],
       total: 0,
       currentPage: 1,
@@ -581,6 +599,22 @@ export default {
     this.initData();
   },
   methods: {
+    onSuccess(){
+      this.importDataButtonIcon = 'el-icon-upload2';
+      this.importDataButtonText = '导入数据';
+      this.importDataDisabled = false;
+      this.initEmps();
+    },
+    onError(){
+      this.importDataButtonIcon = 'el-icon-upload2';
+      this.importDataButtonText = '导入数据';
+      this.importDataDisabled = false;
+    },
+    beforeUpload(){
+      this.importDataButtonIcon = 'el-icon-loading';
+      this.importDataButtonText = '正在导入';
+      this.importDataDisabled = true;
+    },
     exportData(){
       this.downloadRequest('/employee/basic/export');
     },
