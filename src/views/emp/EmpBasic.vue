@@ -36,6 +36,7 @@
             导入数据
           </el-button>
           <el-button type="primary"
+                     @click="exportData"
                      style="background: #0e57a2;border-color: #0e57a2">
             <i class="fa fa-level-down" aria-hidden="true"></i>
             导出数据
@@ -580,6 +581,9 @@ export default {
     this.initData();
   },
   methods: {
+    exportData(){
+      this.downloadRequest('/employee/basic/export');
+    },
     showEditEmpView(data) {
       this.title = '编辑员工信息';
       this.emp = data;

@@ -10,6 +10,7 @@ import {deleteRequest} from "./utils/api";
 import store from "./store"
 import {initMenu} from "./utils/menuList";
 import 'font-awesome/css/font-awesome.css'
+import {downloadRequest} from "./utils/download";
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {size:'small'})
@@ -17,6 +18,7 @@ Vue.prototype.postRequest = postRequest
 Vue.prototype.putRequest = putRequest
 Vue.prototype.getRequest = getRequest
 Vue.prototype.deleteRequest = deleteRequest
+Vue.prototype.downloadRequest = downloadRequest
 
 // 前置守卫
 router.beforeEach((to, from, next) => {
