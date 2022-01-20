@@ -11,7 +11,7 @@ const routes = [
         path: '/',
         name: 'Login',
         component: Login,
-        hidden: true
+        hidden: true // 在路由循环时隐藏登录页面
     },
     {
         path: '/home',

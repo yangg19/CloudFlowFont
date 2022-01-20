@@ -6,6 +6,7 @@
 <!--          <div class="sub-title">-->
 <!--            飞流工作管理-->
 <!--          </div>-->
+
           <div>
             <el-image :src="require('../img/teampark.png')" fit="cover" class="el-image-logo"></el-image>
           </div>
@@ -30,17 +31,21 @@
       </el-header>
       <el-container>
         <el-aside width="200px">
-          <el-menu router unique-opened>
+          <!-- router相当于启用vue router模式，以index的path路径进行路由跳转-->
+          <!-- routes是从router/index.js中获取-->
+          <el-menu router>
             <el-submenu :index="index + ''"
                         v-for="(item, index) in routes"
                         :key="index"
                         v-if="!item.hidden">
+              <!-- hidden隐藏了Login页面-->
               <template slot="title">
                 <i :class="item.iconCls" style="color:#0e57a2; margin-right: 10px"></i>
                 <span>{{ item.name }}</span>
               </template>
               <el-menu-item :index="children.path"
-                            v-for="(children, indexj) in item.children">
+                            v-for="(children, indexj) in item.children"
+                            :key="indexj">
                 {{ children.name }}
               </el-menu-item>
             </el-submenu>
@@ -48,12 +53,13 @@
         </el-aside>
 
         <el-main>
-          <el-breadcrumb separator-class="el-icon-arrow-right" v-if="this.$router.currentRoute.path!=='/home'">
+          <el-breadcrumb separator-class="el-icon-arrow-right"
+                         v-if="this.$router.currentRoute.path!=='/home'">
             <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+            <el-breadcrumb-item>{{ this.$router.currentRoute.name }}</el-breadcrumb-item>
           </el-breadcrumb>
           <div class="homeInitPage" v-if="this.$router.currentRoute.path==='/home'">
-            欢迎来到飞流工作管理系统
+            主页
           </div>
           <!--展示路由主键-->
           <router-view class="homeRouterView"/>

@@ -94,7 +94,7 @@ export default {
     submitLogin() {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
-          // this.loading = true;
+          this.loading = true;
           this.postRequest('/login', this.loginForm).then(resp => {
             // 如果有返回值，跳转到home
             if (resp) {
