@@ -307,7 +307,7 @@
             width="170">
           <template slot-scope="scope">
             <el-button @click="showEditEmpView(scope.row)" style="padding:8px">编辑</el-button>
-            <el-button style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff">查看</el-button>
+            <el-button @click="showEmpView(scope.row)" style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff">查看</el-button>
             <el-button @click="deleteEmp(scope.row)" style="padding:8px" type="danger">删除</el-button>
           </template>
         </el-table-column>
@@ -672,6 +672,13 @@ export default {
       this.emp = data;
       this.initPositions();
       this.dialogVisible = true;
+    },
+    showEmpView(data) {
+      this.title = '查看员工信息';
+      this.emp = data;
+      this.initPositions();
+      this.dialogVisible = true;
+
     },
     deleteEmp(data) {
         this.$confirm('此操作将永久删除[' + data.name + '], 是否继续?', '提示', {
