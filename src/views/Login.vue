@@ -22,7 +22,7 @@
                 <el-input type="password" auto-complete="false" placeholder="请输入密码" v-model="loginForm.password"></el-input>
               </el-form-item>
               <el-button type="primary" style="transform: translateY(10px)" class="login-button"
-                         @click="submitLogin" size="big">登录TEAMPARK
+                         @click="submitLogin" size="big">登录 TEAMPARK
               </el-button>
             </div>
           </el-form>
