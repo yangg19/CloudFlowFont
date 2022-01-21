@@ -6,7 +6,7 @@
         <el-submenu index="2">
           <template slot="title">密码相关</template>
           <el-menu-item index="/passInfo">密码修改</el-menu-item>
-          <el-menu-item index="/findPassword">密码找回</el-menu-item>
+          <el-menu-item index="/findPassword">密码保护</el-menu-item>
         </el-submenu>
         <el-menu-item index="/messageCenter">消息中心</el-menu-item>
       </el-menu>
