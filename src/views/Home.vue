@@ -37,8 +37,7 @@
             <el-submenu :index="index + ''"
                         v-for="(item, index) in routes"
                         :key="index"
-                        v-if="!item.hidden">
-              <!-- hidden隐藏了Login页面-->
+                        v-if="!item.hidden"> <!-- hidden隐藏了Login页面-->
               <template slot="title">
                 <i :class="item.iconCls" style="color:#0e57a2; margin-right: 10px"></i>
                 <span>{{ item.name }}</span>
@@ -79,6 +78,7 @@ export default {
   },
   computed: {
     routes() {
+      console.log(this.$store.state.routes)
       return this.$store.state.routes;
     }
   },

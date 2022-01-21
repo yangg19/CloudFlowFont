@@ -1,12 +1,11 @@
 <template>
   <div>
-    人事记录统计
+    统计记录
   </div>
 </template>
 
 <script>
 export default {
-  name: "StaRecord"
 }
 </script>
 

@@ -6,7 +6,7 @@
         <el-submenu index="2">
           <template slot="title">修改信息</template>
           <el-menu-item index="2-1">个人信息修改</el-menu-item>
-          <el-menu-item index="2-2">密码修改</el-menu-item>
+          <el-menu-item index="/passInfo">密码修改</el-menu-item>
           <el-menu-item index="2-3">密码找回</el-menu-item>
         </el-submenu>
         <el-menu-item index="3">消息中心</el-menu-item>
@@ -22,12 +22,12 @@ export default {
   data() {
     return {
       activeIndex: '1',
-      activeIndex2: '1'
+      activeIndex2: '1',
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    handleSelect(index) {
+      this.$router.push(index);
     }
   }
 }
