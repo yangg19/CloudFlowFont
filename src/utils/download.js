@@ -1,7 +1,6 @@
 // 封装导出数据工具类
 // 本身也是通过 axios 调用后端接口
 import axios from "axios";
-
 // 让 axios 默认带一个响应的类型 arraybuffer 二进制数组 流
 const service = axios.create({
     responseType: 'arraybuffer'

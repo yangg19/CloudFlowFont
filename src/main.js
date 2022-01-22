@@ -11,6 +11,11 @@ import store from "./store"
 import {initMenu} from "./utils/menuList";
 import 'font-awesome/css/font-awesome.css'
 import {downloadRequest} from "./utils/download";
+// import ECharts from 'vue-echarts'  // 在 webpack 环境下指向 components/ECharts.vue
+// // /* 引入echarts工具 */
+// import 'echarts/lib/component/tooltip'
+// import 'echarts/lib/component/title'
+// import 'echarts/lib/component/legend'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {size:'small'})
@@ -19,6 +24,7 @@ Vue.prototype.putRequest = putRequest
 Vue.prototype.getRequest = getRequest
 Vue.prototype.deleteRequest = deleteRequest
 Vue.prototype.downloadRequest = downloadRequest
+// Vue.use(ECharts)
 
 // 使用 router.beforeEach 注册一个全局前置守卫
 router.beforeEach((to, from, next) => {

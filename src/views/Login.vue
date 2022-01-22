@@ -1,37 +1,42 @@
 <template>
-  <div>
-    <div class="wrap">
-      <div class="form">
-        <div class="left">
-          <video src="../assets/video.mp4" muted loop autoplay></video>
-        </div>
-        <div class="right">
-          <el-form :rules="rules"
-                   ref="loginForm"
-                   v-loading="loading"
-                   element-loading-text="正在登录"
-                   :model="loginForm"
-                   class="right-con">
-            <el-image :src="require('../img/teampark3.png')" fit="contain" class="el-image-logo"></el-image>
-            <div class="loginMain">
-              <el-form-item label="账号" prop="username" size="big" style="font-size: 20px">
-                <el-input type="text" auto-complete="false" placeholder="请输入用户名" v-model="loginForm.username"></el-input>
-              </el-form-item>
+  <div class="wrap">
+    <div class="container">
+      <div class="left">
+        <h1>TEAMPARK</h1>
+        <p>问答系统，知识检索，尽在协作公园</p>
+      </div>
+      <div class="right">
+        <el-form action=""
+                 :rules="rules"
+                 ref="loginForm"
+                 v-loading="loading"
+                 element-loading-text="正在登录"
+                 :model="loginForm"
+                 class="right-con">
+          <div class="inputBox">
+            <el-form-item prop="username">
+              <el-input type="text" placeholder="用户名" v-model="loginForm.username" size="big"> </el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input type="password" placeholder="密码" v-model="loginForm.password" size="big"> </el-input>
+            </el-form-item>
+          </div>
 
-              <el-form-item label="密码" prop="password" size="big">
-                <el-input type="password" auto-complete="false" placeholder="请输入密码" v-model="loginForm.password"></el-input>
-              </el-form-item>
-              <el-button type="primary" style="transform: translateY(10px)" class="login-button"
-                         @click="submitLogin" size="big">登录 TEAMPARK
-              </el-button>
-            </div>
-          </el-form>
-        </div>
+          <el-button class="loginBtn" @click="submitLogin">登录</el-button>
+          <a href="" class="forget">忘记密码?</a>
+          <div class="sign-up">
+            <a href="" class="signupBtn">新建账户</a>
+          </div>
+        </el-form>
+<!--        <p><b>新建账户服务</b>目前直接联系管理员即可</p>-->
+        <p><b>众人拾柴</b> 火焰高.</p>
+      </div>
+      <div class="groupCopyright">
+        <h5 style="color: #5a5959">Copyright©2022 研发A8团队</h5>
+        <h5 style="color: #5a5959">如有任何问题，请联系 yangg19@spdb.com.cn</h5>
       </div>
     </div>
-    <div class="groupCopyright">
-      <h5 style="color: #5a5959">copyright©2022 研发A8团队</h5>
-    </div>
+
   </div>
 </template>
 
@@ -45,8 +50,8 @@ export default {
       // logo1: require("../assets/CloudFlow.png"),
       // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
-        username: 'yangg',
-        password: '123',
+        username: '',
+        password: '',
         // code: ''
       },
       loading: false,
@@ -98,94 +103,171 @@ export default {
 
 <style scoped>
 
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.wrap {
-  width: 100%;
-  height: 100vh;
+.wrap{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #dde4e6;
-  /*background-image: linear-gradient(to left top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);*/
+  background-color: #f0f2f5;
+  /*background-image: linear-gradient(to left bottom, #ffffff, #f4f3f4, #e9e8e9, #dedcdd, #d4d1d1);*/
+  width: 100%;
+  height: 100vh;
+  /*margin: 10px;*/
 }
 
-.form{
-  width:900px;
-  height:560px;
+.container{
+  width:100%;
+  height:100%;
   display: flex;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+  /*justify-content: space-around	;*/
+  align-items: center;
+}
+
+.left, .right, form{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  flex:1;
 }
 
 .left{
-  width: 500px;
-  height: 560px;
+  width:500px;
+  align-items: flex-end;
+  margin-right: 200px;
 }
 
-.left video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.left h1{
+  font-family: "facebook letter faces";
+  font-size: 60px;
+  color: #0e57a2;
+  align-items: flex-start;
 }
 
-.right {
-  width: 400px;
-  height: 560px;
-  background: rgba(255, 255, 255, .9);
+.left p{
+  font-size: 30px;
+  color:#1c1e21;
+  height: 200px;
+  font-family: "Roboto Condensed", sans-serif;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.right{
+  width:500px;
+  align-items: flex-start;
+}
+
+form{
+  background-color: white;
+  border-radius: 10px;
+  width:400px;
+  display: flex;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+form input{
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  outline: none;
+  font-size: 16px;
+}
+
+/deep/ .el-input__inner{
+  height: 58px;
+}
+
+.inputBox{
+  width: 100%;
+  margin-bottom: 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+.loginBtn{
+  background-color: #0e57a2;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  height: 58px;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+  font-family: 'Arial';
+  font-weight: 700;
+  transition: 0.5s;
+}
+
+.loginBtn:hover{
+  background-color: #4257b2;
+}
+
+.forget{
+  margin: 15px 0;
+  text-decoration: none;
+  color: #1877f2;
+  font-family: 'Arial';
+  font-size: 14px;
+}
+
+.sign-up{
+  padding-top: 20px;
+  border-top: 1px solid #999;
+  width: 100%;
+  display: flex;
   justify-content: center;
 }
 
-.right-con{
-  width: 70%;
-  display: flex;
-  flex-direction: column;
+.signupBtn{
+  background-color: #13a305;
+  padding: 15px;
   text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 17px;
+  font-family: 'Arial';
+  font-weight: 600;
+  transition: 0.5s;
 }
 
-
-.login-button {
-  background: #0e57a2;
-  border-color: #0e57a2;
-  /*color: #0e57a2;*/
+.signupBtn:hover{
+  background-color: green;
 }
 
-/*.checkBox {*/
-/*  !*background: #0e57a2;*!*/
-/*  !*border-color: #0e57a2;*!*/
-/*  !*color: #0e57a2;*!*/
-/*}*/
-
-.el-image-logo {
-  /*display: inline-block;*/
-  width: 220px;
-  /*float: right;*/
-  position: relative;
-  margin-left: 10%;
-  /*margin-left: 400px;*/
+.right p{
+  font-family: 'Arial';
+  font-size: 15px;
+  margin-left: 155px;
 }
 
-.login-button {
-  width: 100%;
-  height: 40px;
-  /*border-radius: 20px;*/
-  border: none;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 30px;
-  /*background-image: linear-gradient(120deg, #76daec 0%, #c5a8de 100%);*/
-}
+@media(max-width:950px){
+  .container{
+    flex-direction: column;
+  }
 
-.loginMain {
-  margin-top: 40px
+  .left{
+    width: 400px;
+    align-content: center;
+    align-items: center;
+  }
+
+  .left p{
+    height: 75px;
+  }
 }
 
 .groupCopyright {
@@ -195,5 +277,7 @@ export default {
   margin-bottom: 20px;
   text-align: center;
 }
+
+
 
 </style>

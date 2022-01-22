@@ -10,6 +10,10 @@ export default new Vuex.Store({
     },
 
     mutations:{
+        // 编辑用户 同步用户信息
+        INIT_ADMIN(state, admin) {
+            state.currentAdmin = admin
+        },
         initRoutes(state, data) {
             state.routes = data;
         }

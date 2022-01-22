@@ -2,18 +2,11 @@
   <div>
     <el-container>
       <el-header class="homeHeader">
-<!--        <div class="title">CloudFlow-->
-<!--          <div class="sub-title">-->
-<!--            飞流工作管理-->
-<!--          </div>-->
 
           <div>
             <el-image :src="require('../img/teampark.png')" fit="cover" class="el-image-logo"></el-image>
           </div>
-<!--        </div>-->
-<!--        <head>-->
-<!--          <link rel="icon" href="../img/teamtree.png">-->
-<!--        </head>-->
+
         <el-dropdown class="userInfo" @command="commandHandler">
           <span class="el-dropdown-link">
             <span style="position: fixed; top: 25px; right: 80px; font-size: 15px" >
@@ -54,11 +47,11 @@
         <el-main>
           <el-breadcrumb separator-class="el-icon-arrow-right"
                          v-if="this.$router.currentRoute.path!=='/home'">
-            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{path:'/home'}">首页</el-breadcrumb-item>
             <el-breadcrumb-item>{{ this.$router.currentRoute.name }}</el-breadcrumb-item>
           </el-breadcrumb>
           <div class="homeInitPage" v-if="this.$router.currentRoute.path==='/home'">
-            主页
+              首页
           </div>
           <!--展示路由主键-->
           <router-view class="homeRouterView"/>
@@ -83,6 +76,10 @@ export default {
     }
   },
   methods:{
+    handleClick(){
+      console.log('handle')
+      this.$router.push('/userInfo')
+    },
     commandHandler(command){
       if (command === 'logout') {
         this.$confirm('此操作将注销登录, 是否继续?', '提示', {
