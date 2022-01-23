@@ -13,6 +13,7 @@
     "element-ui": "^2.15.6",
     "font-awesome": "^4.7.0",
     "js-file-download": "^0.4.12",
+    "less-loader": "^6.0.0",
     "vue": "^2.6.11",
     "vue-echarts": "^6.0.2",
     "vue-router": "^3.2.0",
@@ -22,7 +23,13 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "vue-template-compiler": "^2.6.11"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.7.0",
+    "eslint-config-alloy": "^4.4.0",
+    "sass": "1.26.2",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.0.0"
   },
   "browserslist": [
     "> 1%",

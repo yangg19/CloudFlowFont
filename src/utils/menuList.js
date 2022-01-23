@@ -43,10 +43,6 @@ export const formatRoutes = (routes) =>{
                     require(['../views/' +component + '.vue'], resolve);
                 }else if (component.startsWith('Emp')) {   // 按照组件名定位目录并寻找菜单
                     require(['../views/emp/' + component + '.vue'], resolve);
-                }else if(component.startsWith('Per')) {
-                    require(['../views/per/' + component + '.vue'], resolve);
-                }else if(component.startsWith('Sal')) {
-                    require(['../views/sal/' + component + '.vue'], resolve);
                 }else if(component.startsWith('Sta')) {
                     require(['../views/sta/' + component + '.vue'], resolve);
                 }else if(component.startsWith('Sys')) {
