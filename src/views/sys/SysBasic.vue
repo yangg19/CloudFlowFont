@@ -11,10 +11,10 @@
 
 <script>
 
-import DepMana from "../../components/DepMana";
-import JobLevelMana from "../../components/JobLevelMana";
-import PermissMana from "../../components/PermissMana";
-import PosMana from "../../components/PosMana";
+import DepMana from "../../components/tabcop/DepMana";
+import JobLevelMana from "../../components/tabcop/JobLevelMana";
+import PermissMana from "../../components/tabcop/PermissMana";
+import PosMana from "../../components/tabcop/PosMana";
 
 export default {
   name: "SysBasic",

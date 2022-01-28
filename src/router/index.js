@@ -3,9 +3,9 @@ import VueRouter from 'vue-router'
 import Login from "../views/Login"
 import Home from "../views/Home"
 import UserInfo from "../views/UserInfo";
-import PassInfo from "../components/PassInfo";
-import MessageCenter from "../components/MessageCenter";
-import FindMessage from "../components/FindPassword";
+import PassInfo from "../components/adminInfo/PassInfo";
+import MessageCenter from "../components/adminInfo/MessageCenter";
+import FindMessage from "../components/adminInfo/FindPassword";
 
 Vue.use(VueRouter)
 

@@ -55,13 +55,13 @@
             border
             style="width: 100%">
           <!--          @selection-change="handleSelectionChange">-->
-          <el-table-column
-              prop="id"
-              label="序号"
-              fixed="left"
-              align="left"
-              width="100">
-          </el-table-column>
+<!--          <el-table-column-->
+<!--              prop="id"-->
+<!--              label="序号"-->
+<!--              fixed="left"-->
+<!--              align="left"-->
+<!--              width="100">-->
+<!--          </el-table-column>-->
           <el-table-column
               prop="dicType"
               label="字典类型"

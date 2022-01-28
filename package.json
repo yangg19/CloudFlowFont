@@ -14,6 +14,7 @@
     "font-awesome": "^4.7.0",
     "js-file-download": "^0.4.12",
     "less-loader": "^6.0.0",
+    "tdesign-vue": "^0.33.2",
     "vue": "^2.6.11",
     "vue-echarts": "^6.0.2",
     "vue-router": "^3.2.0",
@@ -28,6 +29,8 @@
     "eslint-config-alloy": "^4.4.0",
     "sass": "1.26.2",
     "sass-loader": "^8.0.2",
+    "unplugin-auto-import": "^0.5.11",
+    "unplugin-vue-components": "^0.17.14",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.0.0"
   },

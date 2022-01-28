@@ -323,7 +323,7 @@
       </div>
 
       <el-dialog
-          title="添加员工"
+          title="员工信息"
           :visible.sync="dialogVisible"
           width="80%">
         <div>

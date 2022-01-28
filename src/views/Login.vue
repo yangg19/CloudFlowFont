@@ -4,6 +4,8 @@
       <div class="left">
         <h1>TEAMPARK</h1>
         <p>问答系统，知识检索，尽在协作公园</p>
+<!--        <p>工作统计，进度跟踪，尽在协作公园</p>-->
+
       </div>
       <div class="right">
         <el-form action=""
