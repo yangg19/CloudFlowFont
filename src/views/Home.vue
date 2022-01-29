@@ -52,29 +52,44 @@
           <div class="homeInitPage" v-if="this.$router.currentRoute.path==='/home'">
             <template>
               <div class="wrap">
-                <div class="left">
-                  <div>
-                    <el-calendar v-model="calendarDate" class="calendarDate">
-                    </el-calendar>
+                <div class="container">
+                  <div class="left">
+                    <div>
+                      <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                          <span>重要通知</span>
+                          <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+                        </div>
+                        <div style="font-size: 20px; text-align:left">
+                          各职能部处、基层党组织、二级学院：
+                        </div>
+                        <div style="font-size: 20px; text-align:left">
+                          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp为切实落实校党委务虚会会议精神，科学谋划和统筹安排2019年学校工作，现将提交2019年度工作要点的有关事项通知如下：
+                          一、认真学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神，紧密联系国家重大战略、上级政策动向和区域经济社会发展需求，根据教育部、市教卫党委、市教委和各条线的2019年度工作要点，结合学校第四届党代会会议精神、“十三五”事业发展规划，围绕今年学校的重点任务、中心工作，立足工作发展目标和师生期盼要求，科学制定2019年度工作计划。
+                        </div>
+
+                      </el-card>
+                    </div>
+                  </div>
+                  <div class="right">
+                    <el-tabs class="todolistTab"
+                             v-model="activeName"
+                             @tab-click="handleClick"
+                             stretch
+                             type="border-card">
+                      <el-tab-pane label="任务清单" name="ProTask">
+                        <ProTask v-if="isProTaskUpdate"></ProTask>
+                      </el-tab-pane>
+                      <el-tab-pane label="完成任务" name="ComTask">
+                        <ComTask v-if="isComTaskUpdate"></ComTask>
+                      </el-tab-pane>
+                      <el-tab-pane label="删除任务" name="DelTask">
+                        <DelTask v-if="isDelTaskUpdate"></DelTask>
+                      </el-tab-pane>
+                    </el-tabs>
                   </div>
                 </div>
-                <div class="right">
-                  <el-tabs class="todolistTab"
-                           v-model="activeName"
-                           @tab-click="handleClick"
-                           stretch
-                           type="border-card">
-                    <el-tab-pane label="任务清单" name="ProTask">
-                      <ProTask v-if="isProTaskUpdate"></ProTask>
-                    </el-tab-pane>
-                    <el-tab-pane label="完成任务" name="ComTask">
-                      <ComTask v-if="isComTaskUpdate"></ComTask>
-                    </el-tab-pane>
-                    <el-tab-pane label="删除任务" name="DelTask">
-                      <DelTask v-if="isDelTaskUpdate"></DelTask>
-                    </el-tab-pane>
-                  </el-tabs>
-                </div>
+
               </div>
             </template>
           </div>
@@ -176,6 +191,7 @@ export default {
 </script>
 
 <style scoped>
+
 .homeHeader {
   /*background: #ffffff;*/
   background: #0e57a2;
@@ -235,34 +251,50 @@ export default {
 }
 
 
-.wrap {
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrap{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*background-color: #f0f2f5;*/
   /*background-image: linear-gradient(to left bottom, #ffffff, #f4f3f4, #e9e8e9, #dedcdd, #d4d1d1);*/
   width: 100%;
   /*height: 100vh;*/
+  /*margin: 10px;*/
 }
 
-.left, .right{
+.container{
+  width:100%;
+  height:100%;
+  display: flex;
+  /*justify-content: space-around	;*/
+  /*align-items: center;*/
+}
+
+.left, .right, form{
   display: flex;
   flex-direction: column;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
+  /*align-content: center;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
   margin: 10px;
   flex:1;
 }
 
 .left{
-  width:500px;
-  align-items: flex-start;
-  margin-right: 200px;
+  /*width:500px;*/
+  align-items: flex-end;
+  margin-right: 100px;
 }
 
 .right{
-  width:500px;
-  align-items: flex-end;
+  /*width:500px;*/
+  align-items: flex-start;
 }
 
 .calendarDate {
@@ -270,15 +302,25 @@ export default {
   /*margin: 20px;*/
   width: 90%;
   font-size: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
 }
 
 .todolistTab {
-   /*overflow-y: auto;*/
-}
-.todolistTab .el-tab-pane {
+  /*height: calc(100vh - 110px);*/
+
   /*overflow-y: auto;*/
 }
+.todolistTab {
+  /*height: calc(100vh - 110px);*/
+  /*overflow-y: auto;*/
+  /*border-radius: 15px;*/
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 
-
+.box-card {
+  width: 700px;
+  height: 700px;
+}
 
 </style>

@@ -146,6 +146,11 @@ export default {
   margin-right: 200px;
 }
 
+.right{
+  width:500px;
+  align-items: flex-start;
+}
+
 .left h1{
   font-family: "facebook letter faces";
   font-size: 60px;
@@ -162,10 +167,7 @@ export default {
   align-items: flex-start;
 }
 
-.right{
-  width:500px;
-  align-items: flex-start;
-}
+
 
 form{
   background-color: white;

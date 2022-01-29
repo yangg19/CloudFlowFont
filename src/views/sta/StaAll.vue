@@ -1,24 +1,18 @@
 <template>
   <div class="wrap">
     <div class="left">
-    </div>
-    <div class="right">
-      <el-tabs class="todolistTab"
-               v-model="activeName"
-               type="border-card">
-        <el-tab-pane label="任务清单" name="ProTask"><ProTask></ProTask></el-tab-pane>
-        <el-tab-pane label="过期任务" name="OverTask"><OverTask></OverTask></el-tab-pane>
-        <el-tab-pane label="完成任务" name="ComTask"><ComTask></ComTask></el-tab-pane>
-      </el-tabs>
+      统计框
     </div>
 
+    <div class="right">
+      统计图表
+    </div>
   </div>
 </template>
 
 <script>
 
 import ComTask from "../../components/todolist/ComTask";
-import OverTask from "../../components/todolist/OverTask";
 import ProTask from "../../components/todolist/ProTask";
 
 export default {
@@ -30,7 +24,6 @@ export default {
   },
   components:{
     ComTask,
-    OverTask,
     ProTask
   }
 

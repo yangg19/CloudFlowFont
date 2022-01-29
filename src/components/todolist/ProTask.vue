@@ -12,20 +12,18 @@
     <div>
       <el-table
           :data="todolists"
+          ref="filterTable"
           style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" class="table-expand">
-              <el-form-item label="执行用户:">
-                <span>{{ props.row.userID }}</span>
-              </el-form-item>
-              <el-form-item label="任务分数:">
+              <el-form-item label="任务分数">
                 <span>{{ props.row.taskScore }}</span>
               </el-form-item>
-              <el-form-item label="延期次数:">
+              <el-form-item label="延期次数">
                 <span>{{ props.row.postCount }}</span>
               </el-form-item>
-              <el-form-item label="待办详情:">
+              <el-form-item label="待办详情">
                 <span>{{ props.row.taskDetails }}</span>
               </el-form-item>
             </el-form>
@@ -34,7 +32,7 @@
         <el-table-column
             prop="todoTask, planTime"
             label="待办事项"
-            width="300">
+            width="400">
           <template slot-scope="scope">
             <el-tag color=white
                     style="color: #000000">
@@ -46,11 +44,14 @@
         <el-table-column
             prop="isProcess"
             label="状态"
+            :filters="[{ text: '新建', value: '新建' }, { text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"
+            :filter-method="filterTag"
+            filter-placement="bottom-end"
             width="100">
           <template slot-scope="scope">
             <el-tag
                 @click="changeStatus"
-                :type="scope.row.tagColor">
+                :type="scope.row.taskStatusID === '逾期' ? 'danger' : ''">
               {{scope.row.taskStatusID}}
             </el-tag>
           </template>
@@ -77,6 +78,7 @@
     </div>
     <div>
       <el-dialog
+          class="addDialog"
           title="添加待办"
           style="text-align: left; font-weight: bold"
           :visible.sync="addDialogVisible"
@@ -117,6 +119,19 @@
                 <el-radio-button label="新建"></el-radio-button>
                 <el-radio-button label="进行中"></el-radio-button>
               </el-radio-group>
+            </el-form-item>
+            <el-form-item label="执行人：" prop="addTodolist.userID">
+              <el-select v-model="addTodolist.userID"
+                         clearable
+                         default-first-option
+                         filterable placeholder="请选择执行人">
+                <el-option
+                    v-for="item in users"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id">
+                </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="计划完成时间:" prop="planTime">
               <el-date-picker
@@ -174,7 +189,6 @@ export default {
       addDialogVisible: false,
       type:'',
       addTodolist:{
-        userID: 4,
         todoTask:'',
         taskScore: 0,
         postCount:'',
@@ -183,6 +197,7 @@ export default {
         taskStatusID:'新建',
         taskDetails: ''
       },
+      users:[],
       total: 0,
       currentPage: 1,
       size: 10,
@@ -190,12 +205,19 @@ export default {
   },
   mounted() {
     this.initTodolist();
+    this.initUserID();
   },
   methods: {
+    initUserID(){
+      this.getRequest('/system/admin/').then(resp=>{
+        if(resp) {
+          this.users = resp;
+        }
+      })
+    },
     closeAddTask() {
       this.addDialogVisible = false;
       this.addTodolist = {
-        userID: 4,
         todoTask:'',
         taskScore: 0,
         postCount:'',
@@ -255,6 +277,7 @@ export default {
       this.addDialogVisible = true;
     },
     addTodoTask() {
+      console.log(this.addTodolist)
       if (this.addTodolist.id) {
         this.$refs['taskForm'].validate(valid=>{
           if(valid) {
@@ -305,11 +328,27 @@ export default {
       this.initTodolist();
     },
     handleClose(done) {
-      this.$confirm('确认关闭？')
+      this.$confirm('是否以保存待办内容的方式关闭？如果不希望保存可点击“取消” ')
         .then(_ => {
           done();
         })
         .catch(_ => {});
+    },
+    // resetDateFilter() {
+    //   this.$refs.filterTable.clearFilter('date');
+    // },
+    // clearFilter() {
+    //   this.$refs.filterTable.clearFilter();
+    // },
+    // formatter(row, column) {
+    //   return row.address;
+    // },
+    filterTag(value, row) {
+      return row.taskStatusID === value;
+    },
+    filterHandler(value, row, column) {
+      const property = column['property'];
+      return row[property] === value;
     }
   }
 }
@@ -346,4 +385,10 @@ export default {
   margin-bottom: 0;
 /*  width: 50%;*/
 }
+
+.addDialog /deep/.el-dialog {
+  border-radius: 10px;
+  /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+}
+
 </style>

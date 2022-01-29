@@ -233,15 +233,15 @@ export default {
 
 .adminCard {
   margin-top: 20px;
-  margin-right: 10px;
-  justify-content: space-around;
-  width: 350px;
+  margin-right: 50px;
+  justify-content: space-between;
+  width: 400px;
 }
 
 .adminContainer {
   display: flex;
   margin-top: 30px;
-  justify-content: space-around;
+  justify-content: left;
   flex-wrap: wrap;
 
 }
