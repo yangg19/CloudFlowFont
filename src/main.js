@@ -11,11 +11,8 @@ import store from "./store"
 import {initMenu} from "./utils/menuList";
 import 'font-awesome/css/font-awesome.css'
 import {downloadRequest} from "./utils/download";
-// import ECharts from 'vue-echarts'  // 在 webpack 环境下指向 components/ECharts.vue
-// // /* 引入echarts工具 */
-// import 'echarts/lib/component/tooltip'
-// import 'echarts/lib/component/title'
-// import 'echarts/lib/component/legend'
+// import VCharts from 'v-charts'
+// Vue.use(VCharts)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {size:'small'})

@@ -112,9 +112,9 @@ export default {
   data() {
     return {
       isProTaskUpdate:true,
-      calendarDate: new Date(),
       isComTaskUpdate:false,
       isDelTaskUpdate:false,
+      calendarDate: new Date(),
       activeName: 'ProTask',
       openeds:['0','1','2','3'],
       addDialogVisible: false,
@@ -127,7 +127,6 @@ export default {
   },
   components:{
     ComTask,
-    // OverTask,
     ProTask,
     DelTask
   },
