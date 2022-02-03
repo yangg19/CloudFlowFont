@@ -1,9 +1,24 @@
 <template>
   <div>
     <div class="wrap">
-
+      <div class="container">
+        <el-tabs class="todolistTab"
+                 v-model="activeName"
+                 @tab-click="handleClick"
+                 stretch
+                 type="border-card">
+          <el-tab-pane label="任务清单" name="AllProTask">
+            <AllProTask v-if="isProTaskUpdate"></AllProTask>
+          </el-tab-pane>
+          <el-tab-pane label="完成任务" name="AllComTask">
+            <AllComTask v-if="isComTaskUpdate"></AllComTask>
+          </el-tab-pane>
+          <el-tab-pane label="删除任务" name="AllDelTask">
+            <AllDelTask v-if="isDelTaskUpdate"></AllDelTask>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -14,7 +29,7 @@ import AllDelTask from "../../components/todolist/AllDelTask";
 import AllProTask from "../../components/todolist/AllProTask";
 
 export default {
-  name: "StaAll",
+  name: "StaTodo",
   data() {
     return {
       isProTaskUpdate:true,
@@ -74,36 +89,6 @@ export default {
   display: flex;
   /*justify-content: space-around	;*/
   /*align-items: center;*/
-}
-
-.left, .right, form{
-  display: flex;
-  flex-direction: column;
-  /*align-content: center;*/
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  margin: 10px;
-  flex:1;
-}
-
-.left{
-  /*width:500px;*/
-  align-items: flex-end;
-  margin-right: 100px;
-}
-
-.right{
-  /*width:500px;*/
-  align-items: flex-start;
-}
-
-.calendarDate {
-
-  /*margin: 20px;*/
-  width: 90%;
-  font-size: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-
 }
 
 .todolistTab {

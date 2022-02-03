@@ -117,26 +117,6 @@
 
         <el-row style="margin-top: 20px; margin-left: 100px">
           <el-col :span="5">
-            聘用形式：
-            <el-radio-group v-model="searchValue.engageForm">
-              <el-radio label="劳动合同">劳动合同</el-radio>
-              <el-radio label="劳务合同">劳务合同</el-radio>
-            </el-radio-group>
-          </el-col>
-          <el-col :span="13" size="mini">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;入职日期：
-            <el-date-picker
-                v-model="searchValue.beginDateScope"
-                size="mini"
-                type="daterange"
-                value-format="yyyy-MM-dd"
-                unlink-panels
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期">
-            </el-date-picker>
-          </el-col>
-          <el-col :span="5">
             <el-button size="mini" icon="el-icon-arrow-left">取消</el-button>
             <el-button type="primary" icon="el-icon-search" @click="initEmps('advanced')" size="mini" style="background: #0e57a2; border-color: #0e57a2">搜索</el-button>
           </el-col>
@@ -227,12 +207,6 @@
             width="300">
         </el-table-column>
         <el-table-column
-            prop="department.name"
-            label="所属部门"
-            align="left"
-            width="180">
-        </el-table-column>
-        <el-table-column
             prop="joblevel.name"
             label="职称"
             align="left"
@@ -243,12 +217,6 @@
             label="职位"
             align="left"
             width="100">
-        </el-table-column>
-        <el-table-column
-            prop="engageForm"
-            label="聘用形式"
-            align="left"
-            width="80">
         </el-table-column>
         <el-table-column
             prop="tiptopDegree"
@@ -273,33 +241,6 @@
             label="在职状态"
             align="left"
             width="70">
-        </el-table-column>
-        <el-table-column
-            prop="beginDate"
-            label="入职日期"
-            align="left"
-            width="95">
-        </el-table-column>
-        <el-table-column
-            prop="beginContract"
-            label="合同起始日期"
-            align="left"
-            width="95">
-        </el-table-column>
-        <el-table-column
-            prop="endContract"
-            label="合同结束日期"
-            align="left"
-            width="95">
-        </el-table-column>
-        <el-table-column
-            label="合同期限"
-            align="left"
-            width="100">
-          <template slot-scope="scope">
-            <el-tag>{{ scope.row.contractTerm }}</el-tag>
-            年
-          </template>
         </el-table-column>
         <el-table-column
             label="操作"
@@ -424,11 +365,6 @@
                   </el-select>
                 </el-form-item>
               </el-col>
-              <el-col :span="6">
-                <el-form-item label="所属部门：" prop="departmentId">
-                  <el-input v-model="emp.departmentId" placeholder="请输入所属部门" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
-                </el-form-item>
-              </el-col>
               <el-col :span="7">
                 <el-form-item label="电话号码：" prop="phone">
                   <el-input v-model="emp.phone" placeholder="请输入联系地址" prefix-icon="el-icon-phone" size="mini" style="width:200px"></el-input>
@@ -466,62 +402,8 @@
             </el-row>
             <el-row>
               <el-col :span="6">
-                <el-form-item label="入职日期:" prop="beginDate">
-                  <el-date-picker
-                      size="mini"
-                      v-model="emp.beginDate"
-                      type="date"
-                      value-format="yyyy-MM-dd"
-                      placeholder="选择日期">
-                  </el-date-picker>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="转正日期:" prop="conversionTime">
-                  <el-date-picker
-                      size="mini"
-                      v-model="emp.conversionTime"
-                      type="date"
-                      value-format="yyyy-MM-dd"
-                      placeholder="选择日期">
-                  </el-date-picker>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="合同起始日期:" prop="beginContract">
-                  <el-date-picker
-                      size="mini"
-                      v-model="emp.beginContract"
-                      type="date"
-                      value-format="yyyy-MM-dd"
-                      placeholder="选择日期">
-                  </el-date-picker>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="合同截止日期:" prop="endContract">
-                  <el-date-picker
-                      size="mini"
-                      v-model="emp.endContract"
-                      type="date"
-                      value-format="yyyy-MM-dd"
-                      placeholder="选择日期">
-                  </el-date-picker>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="6">
                 <el-form-item label="身份证号码：" prop="idCard">
                   <el-input v-model="emp.idCard" placeholder="请输入身份证号码" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="聘用形式：" prop="engageForm">
-                  <el-radio-group v-model="emp.engageForm">
-                    <el-radio label="劳动合同">劳动合同</el-radio>
-                    <el-radio label="劳务合同">劳务合同</el-radio>
-                  </el-radio-group>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
@@ -557,9 +439,6 @@ export default {
         nationId: null,
         posId: null,
         jobLevelId: null,
-        engageForm: null,
-        departmentId: null,
-        beginDateScope: null
       },
       showAdvanceSearchVisible: false,
       headers:{
@@ -587,23 +466,13 @@ export default {
         email: '',
         phone: '',
         address: '',
-        departmentId: null,
         jobLevelId: null,
         posId: null,
-        engageForm: '',
         tiptopDegree: '',
         specialty: '',
         school: '',
-        beginDate: '',
         workState: '在职',
         workID: '',
-        contractTerm: null,
-        conversionTime: '',
-        notWorkDate: null,
-        beginContract: '',
-        endContract: '',
-        workAge: null,
-        salaryId: null
       },
       nations:[],
       joblevels:[],
@@ -623,23 +492,14 @@ export default {
           {type:'email', message: '邮箱地址格式不正确', trigger: 'blur'}],
         phone: [{required: true, message: '请输入电话', trigger: 'blur'}],
         address: [{required: true, message: '请输入地址', trigger: 'blur'}],
-        departmentId: [{required: true, message: '请输入部门', trigger: 'blur'}],
         jobLevelId: [{required: true, message: '请输入职称', trigger: 'blur'}],
         posId: [{required: true, message: '请输入职位', trigger: 'blur'}],
-        engageForm: [{required: true, message: '请输入聘用形式', trigger: 'blur'}],
         tiptopDegree: [{required: true, message: '请输入学历', trigger: 'blur'}],
         specialty: [{required: true, message: '请输入专业', trigger: 'blur'}],
         school: [{required: true, message: '请输入学校', trigger: 'blur'}],
-        beginDate: [{required: true, message: '请输入入职日期', trigger: 'blur'}],
         workState: [{required: true, message: '请输入工作状态', trigger: 'blur'}],
         workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
-        contractTerm: [{required: true, message: '请输入合同期限', trigger: 'blur'}],
-        conversionTime: [{required: true, message: '请输入转正日期', trigger: 'blur'}],
-        notWorkDate: [{required: true, message: '请输入离职日期', trigger: 'blur'}],
-        beginContract: [{required: true, message: '请输入合同起始日期', trigger: 'blur'}],
-        endContract: [{required: true, message: '请输入合同起始日期', trigger: 'blur'}],
-        workAge: [{required: true, message: '请输入工龄', trigger: 'blur'}]
-        }
+       }
     }
   },
   mounted() {
@@ -786,23 +646,14 @@ export default {
             email: '',
             phone: '',
             address: '',
-            departmentId: null,
             jobLevelId: null,
             posId: null,
-            engageForm: '',
             tiptopDegree: '',
             specialty: '',
             school: '',
-            beginDate: '',
             workState: '在职',
             workID: '',
-            contractTerm: null,
-            conversionTime: '',
-            notWorkDate: null,
-            beginContract: '',
-            endContract: '',
             workAge: null,
-            salaryId: null
       }
       this.getMaxWorkID();
       this.dialogVisible = true;
@@ -821,15 +672,6 @@ export default {
         }
         if(this.searchValue.jobLevelId) {
           url += '&jobLevelId=' + this.searchValue.jobLevelId;
-        }
-        if(this.searchValue.engageForm) {
-          url += '&engageForm=' + this.searchValue.engageForm;
-        }
-        if(this.searchValue.departmentId) {
-          url += '&departmentId=' + this.searchValue.departmentId;
-        }
-        if(this.searchValue.beginDateScope) {
-          url += '&beginDateScope=' + this.searchValue.beginDateScope;
         }
 
       } else {
