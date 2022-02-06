@@ -4,9 +4,7 @@
       <div class="container">
         <el-tabs class="todolistTab"
                  v-model="activeName"
-                 @tab-click="handleClick"
-                 stretch
-                 type="border-card">
+                 @tab-click="handleClick">
           <el-tab-pane label="任务清单" name="AllProTask">
             <AllProTask v-if="isProTaskUpdate"></AllProTask>
           </el-tab-pane>
@@ -96,15 +94,15 @@ export default {
 
   /*overflow-y: auto;*/
 }
-.todolistTab {
-  /*height: calc(100vh - 110px);*/
-  /*overflow-y: auto;*/
-  /*border-radius: 15px;*/
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
+/*.todolistTab {*/
+/*  !*height: calc(100vh - 110px);*!*/
+/*  !*overflow-y: auto;*!*/
+/*  !*border-radius: 15px;*!*/
+/*  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+/*}*/
 
 .box-card {
-  width: 700px;
-  height: 700px;
+  width: 1000px;
+  height: 1000px;
 }
 </style>

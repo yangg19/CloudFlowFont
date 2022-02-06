@@ -32,7 +32,7 @@
         <el-table-column
             prop="todoTask, planTime"
             label="待办事项"
-            width="400">
+            width="500">
           <template slot-scope="scope">
             <el-tag color=white
                     style="color: #000000">
@@ -44,7 +44,7 @@
         <el-table-column
             prop="isProcess"
             label="状态"
-            :filters="[{ text: '新建', value: '新建' }, { text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"
+            :filters="[{ text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"
             :filter-method="filterTag"
             filter-placement="bottom-end"
             width="100">
@@ -106,20 +106,20 @@
                         width="100%">
               </el-input>
             </el-form-item>
-            <el-form-item label="分数设置：" prop="addTodolist.todoTask">
-              <el-radio-group v-model="addTodolist.taskScore">
-                <el-radio-button label="1"></el-radio-button>
-                <el-radio-button label="2"></el-radio-button>
-                <el-radio-button label="3"></el-radio-button>
-                <el-radio-button label="4"></el-radio-button>
-              </el-radio-group>
-            </el-form-item>
-            <el-form-item label="状态设置：" prop="addTodolist.taskStatusID">
-              <el-radio-group v-model="addTodolist.taskStatusID">
-                <el-radio-button label="新建"></el-radio-button>
-                <el-radio-button label="进行中"></el-radio-button>
-              </el-radio-group>
-            </el-form-item>
+<!--            <el-form-item label="分数设置：" prop="addTodolist.todoTask">-->
+<!--              <el-radio-group v-model="addTodolist.taskScore">-->
+<!--                <el-radio-button label="1"></el-radio-button>-->
+<!--                <el-radio-button label="2"></el-radio-button>-->
+<!--                <el-radio-button label="3"></el-radio-button>-->
+<!--                <el-radio-button label="4"></el-radio-button>-->
+<!--              </el-radio-group>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="状态设置：" prop="addTodolist.taskStatusID">-->
+<!--              <el-radio-group v-model="addTodolist.taskStatusID">-->
+<!--                <el-radio-button label="新建"></el-radio-button>-->
+<!--                <el-radio-button label="进行中"></el-radio-button>-->
+<!--              </el-radio-group>-->
+<!--            </el-form-item>-->
             <el-form-item label="执行人：" prop="addTodolist.userID">
               <el-select v-model="addTodolist.userID"
                          clearable
@@ -183,6 +183,13 @@ export default {
             date.setTime(date.getTime() + 3600 * 1000 * 24 * 7);
             picker.$emit('pick', date);
           }
+        }, {
+          text: '两周后',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() + 3600 * 1000 * 24 * 14);
+            picker.$emit('pick', date);
+          }
         }]
       },
       todolists:[],
@@ -191,10 +198,10 @@ export default {
       addTodolist:{
         todoTask:'',
         taskScore: 0,
-        postCount:'',
+        postCount: 0,
         planTime:'',
         tagColor:'',
-        taskStatusID:'新建',
+        taskStatusID:'进行中',
         taskDetails: ''
       },
       users:[],
@@ -223,7 +230,7 @@ export default {
         postCount:'',
         planTime:'',
         tagColor:'',
-        taskStatusID:'新建',
+        taskStatusID:'进行中',
         taskDetails: ''
       };
     },
@@ -264,16 +271,6 @@ export default {
     },
     showAddTodoTask() {
       this.initTodolist();
-      // this.addTodolist = {
-      //   userID: 4,
-      //   todoTask:'',
-      //   taskScore: 0,
-      //   postCount:'',
-      //   planTime:'',
-      //   tagColor:'',
-      //   taskStatusID:'新建',
-      //   taskDetails: ''
-      // };
       this.addDialogVisible = true;
     },
     addTodoTask() {
@@ -306,19 +303,6 @@ export default {
         })
       }
     },
-    // addTodoTask(){
-    //   this.$refs['taskForm'].validate(valid=>{
-    //     if(valid) {
-    //       this.postRequest('/todolist/', this.addTodolist).then(resp=>{
-    //         if(resp) {
-    //           this.addDialogVisible = false;
-    //           this.addTodolist.todoTask = '';
-    //           this.initTodolist()
-    //         }
-    //       })
-    //     }
-    //   })
-    // },
     currentChange(currentPage) {
       this.currentPage = currentPage;
       this.initTodolist();
@@ -334,15 +318,6 @@ export default {
         })
         .catch(_ => {});
     },
-    // resetDateFilter() {
-    //   this.$refs.filterTable.clearFilter('date');
-    // },
-    // clearFilter() {
-    //   this.$refs.filterTable.clearFilter();
-    // },
-    // formatter(row, column) {
-    //   return row.address;
-    // },
     filterTag(value, row) {
       return row.taskStatusID === value;
     },

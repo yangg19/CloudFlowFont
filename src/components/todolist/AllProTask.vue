@@ -17,15 +17,6 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" class="table-expand">
-              <el-form-item label="任务执行人">
-                <span>{{ props.row.userID }}</span>
-              </el-form-item>
-              <el-form-item label="任务分数">
-                <span>{{ props.row.taskScore }}</span>
-              </el-form-item>
-              <el-form-item label="延期次数">
-                <span>{{ props.row.postCount }}</span>
-              </el-form-item>
               <el-form-item label="待办详情">
                 <span>{{ props.row.taskDetails }}</span>
               </el-form-item>
@@ -33,21 +24,50 @@
           </template>
         </el-table-column>
         <el-table-column
-            prop="todoTask, planTime"
+            prop="todoTask"
             label="待办事项"
-            width="400">
+            width="500">
           <template slot-scope="scope">
-            <el-tag color=white
-                    style="color: #000000">
-              {{scope.row.planTime}}
-            </el-tag>
-            &nbsp&nbsp&nbsp&nbsp&nbsp{{scope.row.todoTask}}
+            {{scope.row.todoTask}}
           </template>
         </el-table-column>
         <el-table-column
-            prop="isProcess"
+            prop="planTime"
+            label="计划时间"
+            width="150">
+          <template slot-scope="scope">
+            <el-tag color=white
+                    style="color: #000000">{{scope.row.planTime}}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="userID"
+            label="任务执行人"
+            width="100">
+          <template slot-scope="scope">
+            {{scope.row.adminName.name}}
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="postCount"
+            label="延期次数"
+            width="100">
+          <template slot-scope="scope">
+            {{scope.row.postCount}}
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="taskScore"
+            label="任务分数"
+            width="100">
+          <template slot-scope="scope">
+            {{scope.row.taskScore}}
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="taskStatusID"
             label="状态"
-            :filters="[{ text: '新建', value: '新建' }, { text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"
+            :filters="[{ text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"
             :filter-method="filterTag"
             filter-placement="bottom-end"
             width="100">
@@ -116,12 +136,12 @@
                 <el-radio-button label="4"></el-radio-button>
               </el-radio-group>
             </el-form-item>
-            <el-form-item label="状态设置：" prop="addTodolist.taskStatusID">
-              <el-radio-group v-model="addTodolist.taskStatusID">
-                <el-radio-button label="新建"></el-radio-button>
-                <el-radio-button label="进行中"></el-radio-button>
-              </el-radio-group>
-            </el-form-item>
+<!--            <el-form-item label="状态设置：" prop="addTodolist.taskStatusID">-->
+<!--              <el-radio-group v-model="addTodolist.taskStatusID">-->
+<!--                <el-radio-button label="新建"></el-radio-button>-->
+<!--                <el-radio-button label="进行中"></el-radio-button>-->
+<!--              </el-radio-group>-->
+<!--            </el-form-item>-->
             <el-form-item label="执行人：" prop="addTodolist.userID">
               <el-select v-model="addTodolist.userID"
                          clearable
@@ -185,6 +205,13 @@ export default {
             date.setTime(date.getTime() + 3600 * 1000 * 24 * 7);
             picker.$emit('pick', date);
           }
+        }, {
+          text: '两周后',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() + 3600 * 1000 * 24 * 14);
+            picker.$emit('pick', date);
+          }
         }]
       },
       todolists:[],
@@ -193,10 +220,10 @@ export default {
       addTodolist:{
         todoTask:'',
         taskScore: 0,
-        postCount:'',
+        postCount: 0,
         planTime:'',
         tagColor:'',
-        taskStatusID:'新建',
+        taskStatusID:'进行中',
         taskDetails: ''
       },
       users:[],
@@ -225,7 +252,7 @@ export default {
         postCount:'',
         planTime:'',
         tagColor:'',
-        taskStatusID:'新建',
+        taskStatusID:'进行中',
         taskDetails: ''
       };
     },

@@ -23,7 +23,7 @@
         <el-table-column
             prop="todoTask"
             label="待办事项"
-            width="500">
+            width="600">
         </el-table-column>
         <el-table-column
             label="操作"

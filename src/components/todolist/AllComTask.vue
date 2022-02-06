@@ -7,12 +7,6 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" class="table-expand">
-              <el-form-item label="任务分数">
-                <span>{{ props.row.taskScore }}</span>
-              </el-form-item>
-              <el-form-item label="延期次数">
-                <span>{{ props.row.postCount }}</span>
-              </el-form-item>
               <el-form-item label="待办详情">
                 <span>{{ props.row.taskDetails }}</span>
               </el-form-item>
@@ -20,11 +14,44 @@
           </template>
         </el-table-column>
         <el-table-column
-            prop="todoTask, planTime"
+            prop="todoTask"
             label="待办事项"
-            width="500">
+            width="300">
           <template slot-scope="scope">
-            <el-tag type="">{{scope.row.planTime}}</el-tag>&nbsp&nbsp&nbsp&nbsp&nbsp{{scope.row.todoTask}}
+            {{scope.row.todoTask}}
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="planTime"
+            label="计划时间"
+            width="150">
+          <template slot-scope="scope">
+            <el-tag color=white
+                    style="color: #000000">{{scope.row.planTime}}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="userID"
+            label="任务执行人"
+            width="100">
+          <template slot-scope="scope">
+            {{scope.row.adminName.name}}
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="postCount"
+            label="延期次数"
+            width="100">
+          <template slot-scope="scope">
+            {{scope.row.postCount}}
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="taskScore"
+            label="任务分数"
+            width="100">
+          <template slot-scope="scope">
+            {{scope.row.taskScore}}
           </template>
         </el-table-column>
         <el-table-column

@@ -163,7 +163,7 @@
             prop="idCard"
             label="证件号码"
             align="left"
-            width="150">
+            width="180">
         </el-table-column>
         <el-table-column
             prop="wedlock"
@@ -198,7 +198,7 @@
             prop="phone"
             label="电话号码"
             align="left"
-            width="100">
+            width="120">
         </el-table-column>
         <el-table-column
             prop="address"
@@ -235,12 +235,6 @@
             label="专业"
             align="left"
             width="150">
-        </el-table-column>
-        <el-table-column
-            prop="workState"
-            label="在职状态"
-            align="left"
-            width="70">
         </el-table-column>
         <el-table-column
             label="操作"
@@ -374,7 +368,7 @@
             <el-row>
               <el-col :span="6">
                 <el-form-item label="工号：" prop="workID">
-                  <el-input v-model="emp.workID" placeholder="请输入工号" prefix-icon="el-icon-edit" disabled size="mini" style="width:200px"></el-input>
+                  <el-input v-model="emp.workID" placeholder="请输入工号" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="5">
@@ -471,7 +465,6 @@ export default {
         tiptopDegree: '',
         specialty: '',
         school: '',
-        workState: '在职',
         workID: '',
       },
       nations:[],
@@ -497,7 +490,6 @@ export default {
         tiptopDegree: [{required: true, message: '请输入学历', trigger: 'blur'}],
         specialty: [{required: true, message: '请输入专业', trigger: 'blur'}],
         school: [{required: true, message: '请输入学校', trigger: 'blur'}],
-        workState: [{required: true, message: '请输入工作状态', trigger: 'blur'}],
         workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
        }
     }
@@ -584,13 +576,13 @@ export default {
       }
 
     },
-    getMaxWorkID(){
-      this.getRequest('/employee/basic/maxWorkID').then(resp=>{
-         if(resp) {
-           this.emp.workID = resp.obj;
-         }
-      })
-    },
+    // getMaxWorkID(){
+    //   this.getRequest('/employee/basic/maxWorkID').then(resp=>{
+    //      if(resp) {
+    //        this.emp.workID = resp.obj;
+    //      }
+    //   })
+    // },
     initPositions(){
       this.getRequest('/employee/basic/positions').then(resp=>{
         if(resp) {
@@ -651,11 +643,9 @@ export default {
             tiptopDegree: '',
             specialty: '',
             school: '',
-            workState: '在职',
             workID: '',
             workAge: null,
       }
-      this.getMaxWorkID();
       this.dialogVisible = true;
     },
     initEmps(type) {
