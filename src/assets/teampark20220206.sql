@@ -11,11 +11,29 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 06/02/2022 22:46:25
+ Date: 06/02/2022 23:34:19
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for billboard
+-- ----------------------------
+DROP TABLE IF EXISTS `billboard`;
+CREATE TABLE `billboard`  (
+  `id` int(11) NOT NULL COMMENT '序号',
+  `noticeContent1` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公告内容第一段',
+  `noticeContent2` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公告内容第二段',
+  `noticeContent3` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公告内容第三段',
+  `creatDate` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of billboard
+-- ----------------------------
+INSERT INTO `billboard` VALUES (1, '国际热核聚变实验堆（International Thermonuclear Experimental Reactor，简称“ITER”）计划是当今世界最大的大科学工程国际科技合作计划之一，也是迄今我国以平等身份参加的规模最大的国际科技合作计划。ITER装置是一个能产生大规模核聚变反应的超导托卡马克，俗称“人造太阳”，其目标是验证和平利用聚变能的科学与技术可行性。ITER计划吸引了包括中国、欧盟、印度、日本、韩国、俄罗斯和美国七个成员方共三十多个国家共同参与。', 'ITER国际聚变能组织（简称“ITER组织”）于2007年10月24日正式成立，总部设在法国南部城市圣宝莱·杜朗兹。ITER计划在七个成员方设立“国内执行机构”（Domestic Agency, DA），以统筹协调成员方参与ITER计划事务。\r\n\r\n', '近日，ITER组织在其官方网站上发布了68个实习生岗位，为相关领域的博士研究生、硕士研究生、本科生以及中学生提供实习机会，帮助他们参与ITER国际大科学计划，获取项目实操经验，并提供国际化、多元化的工作与学习环境。该实习机会只面向包括中国在内的ITER计划成员方，实习地点在法国ITER组织总部，实习期从数月到数年不等。实习生将会在ITER组织员工的指导和带领下，深度参与ITER计划相关活动，协助完成或独自承担有关任务。', '2021-12-07 00:00:00');
 
 -- ----------------------------
 -- Table structure for ret_dic

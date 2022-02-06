@@ -57,15 +57,26 @@
                     <div>
                       <el-card class="box-card">
                         <div slot="header" class="clearfix">
-                          <span>重要通知</span>
-                          <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+                          <span>通知</span>
+<!--                          <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
                         </div>
-                        <div style="font-size: 20px; text-align:left">
-                          各职能部处、基层党组织、二级学院：
+                        <div style="font-size: 20px; text-align:left; font-family: 新宋体">
+                          各位同事好：
                         </div>
-                        <div style="font-size: 20px; text-align:left">
-                          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp为切实落实校党委务虚会会议精神，科学谋划和统筹安排2019年学校工作，现将提交2019年度工作要点的有关事项通知如下：
-                          一、认真学习贯彻习近平新时代中国特色社会主义思想和党的十九大精神，紧密联系国家重大战略、上级政策动向和区域经济社会发展需求，根据教育部、市教卫党委、市教委和各条线的2019年度工作要点，结合学校第四届党代会会议精神、“十三五”事业发展规划，围绕今年学校的重点任务、中心工作，立足工作发展目标和师生期盼要求，科学制定2019年度工作计划。
+                        <div>
+                          &nbsp
+                        </div>
+                        <div style="font-size: 20px; text-align:left; font-family: 新宋体">
+                          &nbsp&nbsp<span v-text="noticeContent1"> </span>
+                        </div>
+                        <div style="font-size: 20px; text-align:left; font-family: 新宋体; margin-top: 10px">
+                          &nbsp&nbsp<span v-text="noticeContent2"> </span>
+                        </div>
+                        <div style="font-size: 20px; text-align:left; font-family: 新宋体; margin-top: 10px">
+                          &nbsp&nbsp<span v-text="noticeContent3"> </span>
+                        </div>
+                        <div style="font-size: 20px; text-align:right; font-family: 新宋体; margin-top: 30px;">
+                          &nbsp&nbsp<span v-text="creatDate"> </span>
                         </div>
 
                       </el-card>
@@ -121,7 +132,12 @@ export default {
       finishDialogVisible: false,
       unfinishDialogVisible: false,
       type:'',
-      user: JSON.parse(window.sessionStorage.getItem('user')) // 将获取的用户信息转换为对象
+      user: JSON.parse(window.sessionStorage.getItem('user')), // 将获取的用户信息转换为对象
+      noticeContent1:'',
+      noticeContent2:'',
+      noticeContent3:'',
+      creatDate:''
+
     }
   },
   components:{
@@ -131,11 +147,23 @@ export default {
   },
   computed: {
     routes() {
+      this.notice();
       console.log(this.$store.state.routes)
       return this.$store.state.routes;
     }
   },
   methods:{
+    notice() {
+      this.getRequest('/billboard/').then(resp=>{
+        if(resp) {
+          this.noticeContent1 = resp.noticeContent1;
+          this.noticeContent2 = resp.noticeContent2;
+          this.noticeContent3 = resp.noticeContent3;
+          this.creatDate = resp.creatDate;
+
+        }
+      })
+    },
     handleClose(done) {
       this.$confirm('确认关闭？')
           .then(_ => {
@@ -319,6 +347,9 @@ export default {
 .box-card {
   width: 700px;
   height: 700px;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
 }
 
 </style>
