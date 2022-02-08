@@ -51,13 +51,13 @@
                      style="background: #0e57a2;border-color: #0e57a2">
             导出数据
           </el-button>
-<!--          <el-button-->
-<!--              type="primary"-->
-<!--              style="background: #0e57a2;border-color: #0e57a2"-->
-<!--              @click="showAddAdminView"-->
-<!--              icon="el-icon-plus">-->
-<!--            添加员工-->
-<!--          </el-button>-->
+          <el-button
+              type="primary"
+              style="background: #0e57a2;border-color: #0e57a2"
+              @click="showAddAdminView"
+              icon="el-icon-plus">
+            添加员工
+          </el-button>
         </div>
       </div>
 
@@ -241,9 +241,10 @@
         <el-table-column
             label="操作"
             fixed="right"
-            width="65">
+            width="115">
           <template slot-scope="scope">
             <el-button @click="showEditAdminView(scope.row)" style="padding:8px">编辑</el-button>
+            <el-button @click="deleteAdmin(scope.row)" style="padding:8px;color: white;background: #c61919; border-color: #c61919">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -406,13 +407,18 @@
                   <el-input v-model="adminInfo.idCard" placeholder="请输入身份证号码" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="5">
                 <el-form-item label="婚姻状况：" prop="wedlock">
                   <el-radio-group v-model="adminInfo.wedlock">
                     <el-radio label="已婚">已婚</el-radio>
                     <el-radio label="未婚">未婚</el-radio>
                     <el-radio label="离异">离异</el-radio>
                   </el-radio-group>
+                </el-form-item>
+              </el-col>
+              <el-col :span="6">
+                <el-form-item label="工作域名：" prop="username">
+                  <el-input v-model="adminInfo.username" placeholder="请输入工作域名" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -430,7 +436,7 @@
 
 <script>
 export default {
-  name: "EmpBasic",
+  name: "SysAdminInfo",
   data() {
     return {
       // 搜索条件
@@ -472,7 +478,8 @@ export default {
         tiptopDegree: '',
         specialty: '',
         school: '',
-        workID: ''
+        workID: '',
+        username: ''
       },
       nations:[],
       joblevels:[],
@@ -499,7 +506,8 @@ export default {
         specialty: [{required: true, message: '请输入专业', trigger: 'blur'}],
         school: [{required: true, message: '请输入学校', trigger: 'blur'}],
         workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
-       }
+        username: [{required: true, message: '请输入域名', trigger: 'blur'}]
+      }
     }
   },
   mounted() {
@@ -541,23 +549,23 @@ export default {
 
     },
     deleteAdmin(data) {
-        this.$confirm('此操作将永久删除[' + data.name + '], 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.deleteRequest('/admin/' + data.id).then(resp => {
-            if(resp) {
-              this.initAdminInfo();
-            }
-          })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });
+      this.$confirm('此操作将永久删除[' + data.name + '], 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteRequest('/admin/' + data.id).then(resp => {
+          if(resp) {
+            this.initAdminInfo();
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
         });
-      },
+      });
+    },
     doAddAdmin(){
       if (this.adminInfo.id) {
         this.$refs['empForm'].validate(valid=>{
@@ -635,25 +643,26 @@ export default {
     showAddAdminView(){
       this.initPositions();
       this.adminInfo= {
-            id: null,
-            name: '',
-            gender: '',
-            // birthday: '',
-            idCard: '',
-            wedlock: '',
-            nationId: null,
-            nativePlace: '',
-            politicId: null,
-            email: '',
-            phone: '',
-            telephone: '',
-            address: '',
-            jobLevelId: null,
-            posId: null,
-            tiptopDegree: '',
-            specialty: '',
-            school: '',
-            workID: '',
+        id: null,
+        name: '',
+        gender: '',
+        // birthday: '',
+        idCard: '',
+        wedlock: '',
+        nationId: null,
+        nativePlace: '',
+        politicId: null,
+        email: '',
+        phone: '',
+        telephone: '',
+        address: '',
+        jobLevelId: null,
+        posId: null,
+        tiptopDegree: '',
+        specialty: '',
+        school: '',
+        workID: '',
+        username: '',
       }
       this.dialogVisible = true;
     },
@@ -674,7 +683,7 @@ export default {
         }
 
       } else {
-          url += '&name=' + this. adminName;
+        url += '&name=' + this. adminName;
       }
       this.getRequest(url).then(resp => {
         if (resp) {

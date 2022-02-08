@@ -48,24 +48,24 @@
           </div>
         </div>
         <div class="userInfoContainer">
-          <div style="margin-top: 10px">
-            <span style="font-weight: bold">
-              手机号码：
-            </span>
-            {{admin.phone}}
-          </div>
-          <div style="margin-top: 10px">
-            <span style="font-weight: bold">
-              电话号码：
-            </span>
-            {{admin.telephone}}
-          </div>
-          <div style="margin-top: 10px">
-            <span style="font-weight: bold">
-              联系地址：
-            </span>
-            {{admin.address}}
-          </div>
+<!--          <div style="margin-top: 10px">-->
+<!--            <span style="font-weight: bold">-->
+<!--              手机号码：-->
+<!--            </span>-->
+<!--            {{admin.phone}}-->
+<!--          </div>-->
+<!--          <div style="margin-top: 10px">-->
+<!--            <span style="font-weight: bold">-->
+<!--              座机号码：-->
+<!--            </span>-->
+<!--            {{admin.telephone}}-->
+<!--          </div>-->
+<!--          <div style="margin-top: 10px">-->
+<!--            <span style="font-weight: bold">-->
+<!--              联系地址：-->
+<!--            </span>-->
+<!--            {{admin.address}}-->
+<!--          </div>-->
           <div style="font-weight: bold">激活状态：
             <el-switch
                 class="switchModel"

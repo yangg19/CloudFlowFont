@@ -14,6 +14,7 @@
                  v-loading="loading"
                  element-loading-text="正在登录"
                  :model="loginForm"
+                 @keydown.enter.native="submitLogin"
                  class="right-con">
           <div class="inputBox">
             <el-form-item prop="username">
@@ -25,13 +26,13 @@
           </div>
 
           <el-button class="loginBtn" @click="submitLogin">登录</el-button>
-          <a href="" class="forget">忘记密码?</a>
-          <div class="sign-up">
-            <a href="" class="signupBtn">新建账户</a>
-          </div>
+<!--          <a href="" class="forget">忘记密码?</a>-->
+<!--          <div class="sign-up">-->
+<!--            <a href="" class="signupBtn">新建账户</a>-->
+<!--          </div>-->
         </el-form>
 <!--        <p><b>新建账户服务</b>目前直接联系管理员即可</p>-->
-        <p><b>众人拾柴</b> 火焰高.</p>
+<!--        <p><b>众人拾柴</b> 火焰高.</p>-->
       </div>
       <div class="groupCopyright">
         <h5 style="color: #5a5959">Copyright©2022 研发A8团队</h5>
@@ -65,11 +66,17 @@ export default {
       }
     }
   },
+  mounted() {
+    this.directLogin()
+  },
   methods: {
     // // 更新验证码方法
     // updateCaptcha() {
     //   this.captchaUrl = '/captcha?time=' + new Date()
     // },
+    directLogin() {
+      this.$router.replace('/home');
+    },
     // 登录方法
     submitLogin() {
       this.$refs['loginForm'].validate((valid) => {
@@ -78,7 +85,6 @@ export default {
           this.postRequest('/login', this.loginForm).then(resp => {
             // 如果有返回值，跳转到home
             if (resp) {
-              // this.loading = false;
               // 从返回报文中获取token
               const tokenStr = resp.obj.tokenHead + resp.obj.token;
               // 存储用户token

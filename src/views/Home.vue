@@ -3,13 +3,14 @@
     <el-container>
       <el-header class="homeHeader">
           <div>
-            <el-image :src="require('../img/TEAMPARK4.png')" fit="contain" class="el-image-logo"></el-image>
+            <el-image :src="require('../img/TEAMPARK5.png')" fit="contain" class="el-image-logo"></el-image>
           </div>
+        <span style="color: white; font-size: 15px; position: absolute; right: 75px" >
+                    {{user.name}}
+        </span>
         <el-dropdown class="userInfo" @command="commandHandler">
           <span class="el-dropdown-link">
-            <span style="position: fixed; top: 25px; right: 80px; font-size: 15px" >
-              {{user.name}}
-            </span>
+
               <i><img :src="user.userFace"></i>
           </span>
 

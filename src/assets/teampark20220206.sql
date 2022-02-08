@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : teampark
+ Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 50736
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 06/02/2022 23:34:19
+ Date: 08/02/2022 18:08:39
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `billboard`  (
   `noticeContent3` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公告内容第三段',
   `creatDate` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of billboard
@@ -3749,8 +3749,15 @@ DROP TABLE IF EXISTS `t_admin`;
 CREATE TABLE `t_admin`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '姓名',
+  `gender` char(4) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '性别',
+  `birthday` date NULL DEFAULT NULL COMMENT '出生日期',
+  `idCard` char(18) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '身份证号',
+  `wedlock` enum('已婚','未婚','离异') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '婚姻状况',
+  `nationId` int(8) NULL DEFAULT NULL COMMENT '民族',
+  `politicId` int(8) NULL DEFAULT NULL COMMENT '政治面貌',
+  `nativePlace` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '籍贯',
+  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
   `phone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号码',
-  `telephone` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '住宅电话',
   `address` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系地址',
   `enabled` tinyint(1) NULL DEFAULT 1 COMMENT '是否启用',
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
@@ -3758,23 +3765,27 @@ CREATE TABLE `t_admin`  (
   `userFace` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户头像',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   `workID` int(12) NULL DEFAULT NULL COMMENT '工号',
-  `birthday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出生日期',
-  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
   `workGroup` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组别',
+  `jobLevelId` int(11) NULL DEFAULT NULL COMMENT '职称ID',
+  `posId` int(11) NULL DEFAULT NULL COMMENT '职位ID',
+  `tiptopDegree` enum('博士','硕士','本科','大专','高中','初中','小学','其他') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '最高学历',
+  `specialty` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属专业',
+  `school` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '毕业院校',
+  `telephone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '座机号码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
-INSERT INTO `t_admin` VALUES (1, '系统管理员', '13812361398', '71937538', '香港特别行政区强县长寿柳州路p座123', 1, 'admin', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic4.zhimg.com/80/v2-ba463b35397065623bf7df77d274c232_1440w.jpg', '系统管理员', 100001, '1995-01-01', 'yangg19@spdb.com.cn', '交易');
-INSERT INTO `t_admin` VALUES (2, '余洋', '18875971675', '41413109', '河北省秀荣市萧山长沙街p座 737268', 1, 'yuyang', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-ed7f05e7c9948451454a99e110f8fdbe_1440w.jpg', '我是网贷恶霸', 100002, '1995-01-01', 'yangg19@spdb.com.cn', '交易');
-INSERT INTO `t_admin` VALUES (3, '郭幸', '14588110811', '50603155', '山东省凤英县长寿银川街l座', 1, 'guoxing', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-ed7f05e7c9948451454a99e110f8fdbe_1440w.jpg', '假的假的假的', 100003, '1995-01-01', 'yangg19@spdb.com.cn', '交易');
-INSERT INTO `t_admin` VALUES (4, '许莉雯', '15608178290', '2554625321', '宁夏回族自治区帆市翔安昆明路b座 672985', 1, 'xuliwen', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic3.zhimg.com/80/v2-5c7096c702848e7182188f13129a9201_1440w.jpg', '我颇具生产力', 100004, '1995-01-01', 'yangg19@spdb.com.cn', '交易');
-INSERT INTO `t_admin` VALUES (5, '魏子然', '18030710396', '27523842', '宁夏回族自治区秀兰县涪城邯郸路t座 618651', 1, 'weiziran', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pica.zhimg.com/80/v2-b0f86a38d49b78a6b7c3a2d8fb3ba8b4_1440w.jpg', '上海浦东发展银行总行科技部软件开发', 100005, '1995-01-01', 'yangg19@spdb.com.cn', '交易');
-INSERT INTO `t_admin` VALUES (6, '弓静', '18888888888', '27523842', '北京市朝阳区三里屯皇家沟正黄旗天龙人路', 1, 'gongjing', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-36dfd366598ece8c219c9d2d3f24223a_1440w.jpg', '上海浦东发展银行总行科技部软件开发', 100006, '1995-01-01', 'yangg19@spdb.com.cn', '交易');
-INSERT INTO `t_admin` VALUES (7, '干卓凡', '18888888888', '12345678', '北京市朝阳区三里屯皇家沟正黄旗天龙人路', 1, 'ganzhuofan', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-36dfd366598ece8c219c9d2d3f24223a_1440w.jpg', '上海浦东发展银行总行科技部软件开发', 100007, '1995-01-01', 'yangg19@spdb.com.cn', '交易');
-INSERT INTO `t_admin` VALUES (8, '周敏', '18888888888', '12345678', '北京市朝阳区三里屯皇家沟正黄旗天龙人路', 1, 'zhoumin', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-36dfd366598ece8c219c9d2d3f24223a_1440w.jpg', '上海浦东发展银行总行科技部软件开发', 100008, '1995-01-01', 'yangg19@spdb.com.cn', '交易');
+INSERT INTO `t_admin` VALUES (1, '系统管理员', '男', '1995-01-01', '320382199302260016', '未婚', 1, 15, '四川省成都市', 'yangg19@spdb.com.cn', '13812361398', '香港特别行政区强县长寿柳州路p座123', 1, 'admin', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic4.zhimg.com/80/v2-ba463b35397065623bf7df77d274c232_1440w.jpg', '系统管理员', 100001, '交易', 1, 1, '硕士', '计算机技术', '西南石油大学', '13812361391');
+INSERT INTO `t_admin` VALUES (2, '余洋', '男', '1995-01-01', '320382199302260016', '未婚', 1, 15, '四川省成都市', 'yangg19@spdb.com.cn', '18875971675', '河北省秀荣市萧山长沙街p座 737268', 1, 'yuyang', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-ed7f05e7c9948451454a99e110f8fdbe_1440w.jpg', '我是网贷恶霸', 100002, '交易', 1, 1, '硕士', '计算机技术', '西南石油大学', '13812361398');
+INSERT INTO `t_admin` VALUES (3, '郭幸', '男', '1995-01-01', '320382199302260016', '未婚', 1, 15, '四川省成都市', 'yangg19@spdb.com.cn', '14588110811', '山东省凤英县长寿银川街l座', 1, 'guoxing', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-ed7f05e7c9948451454a99e110f8fdbe_1440w.jpg', '假的假的假的', 100003, '交易', 1, 1, '硕士', '计算机技术', '西南石油大学', '13812361398');
+INSERT INTO `t_admin` VALUES (4, '许莉雯', '女', '1995-01-01', '320382199302260016', '未婚', 1, 15, '四川省成都市', 'yangg19@spdb.com.cn', '15608178290', '宁夏回族自治区帆市翔安昆明路b座 672985', 1, 'xuliwen', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic3.zhimg.com/80/v2-5c7096c702848e7182188f13129a9201_1440w.jpg', '我颇具生产力', 100004, '交易', 1, 1, '硕士', '计算机技术', '西南石油大学', '13812361398');
+INSERT INTO `t_admin` VALUES (5, '魏子然', '男', '1995-01-01', '320382199302260016', '未婚', 1, 15, '四川省成都市', 'yangg19@spdb.com.cn', '18030710396', '宁夏回族自治区秀兰县涪城邯郸路t座 618651', 1, 'weiziran', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pica.zhimg.com/80/v2-b0f86a38d49b78a6b7c3a2d8fb3ba8b4_1440w.jpg', '上海浦东发展银行总行科技部软件开发', 100005, '交易', 1, 1, '硕士', '计算机技术', '西南石油大学', '13812361398');
+INSERT INTO `t_admin` VALUES (6, '弓静', '男', '1995-01-01', '320382199302260016', '未婚', 1, 15, '四川省成都市', 'yangg19@spdb.com.cn', '18888888888', '北京市朝阳区三里屯皇家沟正黄旗天龙人路', 1, 'gongjing', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-36dfd366598ece8c219c9d2d3f24223a_1440w.jpg', '上海浦东发展银行总行科技部软件开发', 100006, '交易', 1, 1, '硕士', '计算机技术', '西南石油大学', '13812361398');
+INSERT INTO `t_admin` VALUES (7, '干卓凡', '男', '1995-01-01', '320382199302260016', '未婚', 2, 1, '四川省成都市', 'yangg19@spdb.com.cn', '18888888888', '北京市朝阳区三里屯皇家沟正黄旗天龙人路', 1, 'ganzhuofan', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-36dfd366598ece8c219c9d2d3f24223a_1440w.jpg', '上海浦东发展银行总行科技部软件开发', 100007, '交易', 2, 2, '硕士', '计算机技术', '西南石油大学', '13812361398');
+INSERT INTO `t_admin` VALUES (8, '周敏', '女', '1995-01-01', '320382199302260016', '已婚', 2, 1, '四川省成都市', 'yangg19@spdb.com.cn', '18888888888', '北京市朝阳区三里屯皇家沟正黄旗天龙人路', 1, 'zhoumin', '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.', 'https://pic2.zhimg.com/80/v2-36dfd366598ece8c219c9d2d3f24223a_1440w.jpg', '上海浦东发展银行总行科技部软件开发', 100008, '交易', 2, 2, '硕士', '计算机技术', '西南石油大学', '13812361398');
 
 -- ----------------------------
 -- Table structure for t_admin_role
@@ -3789,7 +3800,7 @@ CREATE TABLE `t_admin_role`  (
   INDEX `adminId`(`adminId`) USING BTREE,
   CONSTRAINT `t_admin_role_ibfk_1` FOREIGN KEY (`adminId`) REFERENCES `t_admin` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `t_admin_role_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `t_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 170 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 176 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_admin_role
@@ -3825,6 +3836,12 @@ INSERT INTO `t_admin_role` VALUES (166, 1, 2);
 INSERT INTO `t_admin_role` VALUES (167, 1, 3);
 INSERT INTO `t_admin_role` VALUES (168, 1, 4);
 INSERT INTO `t_admin_role` VALUES (169, 1, 5);
+INSERT INTO `t_admin_role` VALUES (170, 8, 1);
+INSERT INTO `t_admin_role` VALUES (171, 8, 2);
+INSERT INTO `t_admin_role` VALUES (172, 8, 3);
+INSERT INTO `t_admin_role` VALUES (173, 8, 4);
+INSERT INTO `t_admin_role` VALUES (174, 8, 5);
+INSERT INTO `t_admin_role` VALUES (175, 8, 6);
 
 -- ----------------------------
 -- Table structure for t_employee
@@ -3905,7 +3922,7 @@ CREATE TABLE `t_menu`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `parentId`(`parentId`) USING BTREE,
   CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`parentId`) REFERENCES `t_menu` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_menu
@@ -3922,7 +3939,7 @@ INSERT INTO `t_menu` VALUES (24, '/system/cfg/**', '/sys/cfg', 'SysCfg', '系统
 INSERT INTO `t_menu` VALUES (25, '/system/log/**', '/sys/log', 'SysLog', '操作日志管理', NULL, NULL, 1, 6, 1);
 INSERT INTO `t_menu` VALUES (26, '/system/admin/**', '/sys/admin', 'SysAdmin', '操作员管理', NULL, NULL, 1, 6, 1);
 INSERT INTO `t_menu` VALUES (27, '/system/data/**', '/sys/data', 'SysData', '备份恢复数据库', NULL, NULL, 1, 6, 1);
-INSERT INTO `t_menu` VALUES (28, '/system/init/**', '/sys/init', 'SysInit', '初始化数据库', NULL, NULL, 1, 6, 1);
+INSERT INTO `t_menu` VALUES (28, '/system/adminInfo/**', '/sys/adminInfo', 'SysAdminInfo', '用户信息管理', NULL, NULL, 1, 6, 1);
 INSERT INTO `t_menu` VALUES (29, '/', '/home', 'Home', '检索', 'fa fa-search', NULL, 1, 1, 1);
 INSERT INTO `t_menu` VALUES (30, '/retrieval/dic/**', '/ret/dic', 'RetDic', '字典检索', NULL, NULL, 1, 29, 1);
 
@@ -4125,14 +4142,14 @@ CREATE TABLE `todolist`  (
 -- ----------------------------
 -- Records of todolist
 -- ----------------------------
-INSERT INTO `todolist` VALUES (51, '3', '健步走视频拍摄+剪辑', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (52, '3', '新闻采写+公众号编辑转发等', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (53, '3', '协助科室设备采购', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (54, '3', '配合厂内新闻宣传+图片视频拍摄', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (55, '3', '分公司气排球比赛拍摄（暂缓）', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (56, '4', '健步走跑步视频拍摄', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (57, '4', '协助策划工厂新闻宣传骨干交流培训班', 4, 1, '2022-02-04', '逾期', NULL, '');
-INSERT INTO `todolist` VALUES (58, '4', '分公司气排球比赛拍摄（暂缓）', 4, 0, '2022-02-08', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (51, '3', '健步走视频拍摄+剪辑', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (52, '3', '新闻采写+公众号编辑转发等', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (53, '3', '协助科室设备采购', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (54, '3', '配合厂内新闻宣传+图片视频拍摄', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (55, '3', '分公司气排球比赛拍摄（暂缓）', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (56, '4', '健步走跑步视频拍摄', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (57, '4', '协助策划工厂新闻宣传骨干交流培训班', 4, 1, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (58, '4', '分公司气排球比赛拍摄（暂缓）', 4, 0, '2022-02-12', '进行中', NULL, '');
 INSERT INTO `todolist` VALUES (59, '4', '六菱公司报销追踪', 4, 0, '2022-02-05', '完成', NULL, '');
 INSERT INTO `todolist` VALUES (60, '5', '巡视整改问题（考试材料正在收集）', 4, 0, '2022-02-05', '完成', NULL, '');
 INSERT INTO `todolist` VALUES (61, '5', '新宣传片制作合同打印', 4, 0, '2022-02-05', '完成', NULL, '');
@@ -4149,21 +4166,21 @@ INSERT INTO `todolist` VALUES (71, '5', '拟定各党支部理论学习内容清
 INSERT INTO `todolist` VALUES (72, '5', '廉洁教育活动报销', 4, 0, '2022-02-05', '完成', NULL, '');
 INSERT INTO `todolist` VALUES (73, '6', '4笔工会财务报销', 4, 0, '2022-02-05', '完成', NULL, '');
 INSERT INTO `todolist` VALUES (74, '6', '新闻、公众号策划', 4, 0, '2022-02-05', '完成', NULL, '');
-INSERT INTO `todolist` VALUES (75, '6', '企业文化综合信息', 4, 1, '2022-02-04', '逾期', NULL, '');
-INSERT INTO `todolist` VALUES (76, '6', '2022年工会活动预算', 4, 1, '2022-02-04', '逾期', NULL, '');
-INSERT INTO `todolist` VALUES (77, '6', '提案征集通知、帮扶实施细则通知下发', 4, 1, '2022-02-04', '逾期', NULL, '');
-INSERT INTO `todolist` VALUES (78, '7', '分公司跟岗锻炼', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (79, '8', '督促相关部门做好巡察整改工作，并做好纪检方面反馈问题整改', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (80, '8', '参加分公司经审培训', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (81, '8', '报请厂党委，关于工会换届选举的请示', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (82, '2', '安排清理科室规章制度，并报送计划经营科', 4, 2, '2022-02-04', '逾期', NULL, '');
-INSERT INTO `todolist` VALUES (83, '2', '落实公司党史学习教育第二阶段相关资料', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (84, '2', '组织党史学习领导小组会', 4, 0, '2022-02-08', '完成', NULL, '');
-INSERT INTO `todolist` VALUES (85, '2', '铁人先锋APP线上考试核验各支部答题情况', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (86, '2', '上报合气文化先进团队、个人以及优秀案例材料', 4, 0, '2022-02-08', '完成', NULL, '');
-INSERT INTO `todolist` VALUES (87, '2', '召开科室2022年度预算会，提交党群科2022年度财务预算表', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (88, '2', '检查各党支部2021年理论学习完成情况', 4, 0, '2022-02-08', '进行中', NULL, '');
-INSERT INTO `todolist` VALUES (89, '2', '组织第一、第二党支部活动阵地打造第二次会议', 4, 0, '2022-02-08', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (75, '6', '企业文化综合信息', 4, 1, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (76, '6', '2022年工会活动预算', 4, 1, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (77, '6', '提案征集通知、帮扶实施细则通知下发', 4, 1, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (78, '7', '分公司跟岗锻炼', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (79, '8', '督促相关部门做好巡察整改工作，并做好纪检方面反馈问题整改', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (80, '8', '参加分公司经审培训', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (81, '8', '报请厂党委，关于工会换届选举的请示', 4, 0, '2022-02-12', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (82, '2', '安排清理科室规章制度，并报送计划经营科', 4, 2, '2022-02-12', '进行中', NULL, '工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述');
+INSERT INTO `todolist` VALUES (83, '2', '落实公司党史学习教育第二阶段相关资料', 4, 0, '2022-02-11', '完成', NULL, '');
+INSERT INTO `todolist` VALUES (84, '2', '组织党史学习领导小组会', 4, 0, '2022-02-11', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (85, '2', '铁人先锋APP线上考试核验各支部答题情况', 4, 0, '2022-02-08', '逾期', NULL, '');
+INSERT INTO `todolist` VALUES (86, '2', '上报合气文化先进团队、个人以及优秀案例材料', 4, 0, '2022-02-11', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (87, '2', '召开科室2022年度预算会，提交党群科2022年度财务预算表', 4, 0, '2022-02-11', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (88, '2', '检查各党支部2021年理论学习完成情况', 4, 0, '2022-02-11', '进行中', NULL, '');
+INSERT INTO `todolist` VALUES (89, '2', '组织第一、第二党支部活动阵地打造第二次会议', 4, 0, '2022-02-11', '进行中', NULL, '');
 
 -- ----------------------------
 -- Procedure structure for addDep

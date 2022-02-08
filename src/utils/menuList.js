@@ -11,8 +11,11 @@ export const initMenu = (router, store) => {
         if(data) {
             // 格式化Router
             let fmtRoutes = formatRoutes(data);
-            // 添加到Router
-            router.addRoutes(fmtRoutes);
+            for(let i = 0, length = fmtRoutes.length; i < length; i += 1) {
+                const element = fmtRoutes[i];
+                // 添加到Router
+                router.addRoute(element);
+            }
             // 将数据存入vuex
             store.commit('initRoutes', fmtRoutes);
         }

@@ -34,11 +34,11 @@ router.beforeEach((to, from, next) => {
       // 判断用户信息是否存在
       return getRequest('/admin/info').then(resp => {
         if (resp) {
-          // 存入用户信息，转字符串，存入 1
+          // 存入用户信息，转字符串，存入 sessionStorage
           window.sessionStorage.setItem('user', JSON.stringify(resp))
           // 同步用户信息 编辑用户
           store.commit('INIT_ADMIN',resp)
-          next();
+          next('/home');
         }
       })
     }
@@ -51,6 +51,7 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
+
 
 new Vue({
   router,
