@@ -28,6 +28,7 @@ router.beforeEach((to, from, next) => {
   // to 要去的路由; from 来自哪里的路由 ; next() 放行
   // 用户登录成功时，把 token 存入 sessionStorage，如果携带 token，初始化菜单，放行
   if (window.sessionStorage.getItem('tokenStr')) {
+
     initMenu(router, store)
     // 如果用户不存在
     if (!window.sessionStorage.getItem('user')) {

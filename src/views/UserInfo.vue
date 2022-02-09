@@ -3,11 +3,13 @@
     <div>
       <el-menu class="userMenu" mode="horizontal" @select="handleSelect" router>
         <el-menu-item index="/userInfo">个人信息</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">密码相关</template>
-          <el-menu-item index="/passInfo">密码修改</el-menu-item>
-          <el-menu-item index="/findPassword">密码保护</el-menu-item>
-        </el-submenu>
+        <el-menu-item index="/passInfo">密码保护</el-menu-item>
+
+<!--        <el-submenu index="2">-->
+<!--          <template slot="title">密码相关</template>-->
+<!--          <el-menu-item index="/passInfo">密码修改</el-menu-item>-->
+<!--          <el-menu-item index="/findPassword">密码保护</el-menu-item>-->
+<!--        </el-submenu>-->
 <!--        <el-menu-item index="/messageCenter">消息中心</el-menu-item>-->
       </el-menu>
     </div>
@@ -117,6 +119,7 @@
     <div>
       <el-dialog
           title="编辑用户信息"
+          class="adminDialog"
           :visible.sync="dialogVisible"
           width="30%">
         <div>
@@ -147,6 +150,7 @@
     </div>
     <div>
       <el-dialog  title="更新密码"
+                  class="passDialog"
                   :visible.sync="passwordDialogVisible"
                   width="30%">
         <div>
@@ -228,7 +232,7 @@ export default {
         if (valid) {
           this.ruleForm.adminId = this.admin.id;
           console.log(this.ruleForm);
-          this.putRequest('/admin/password/', this.ruleForm).then(resp=>{
+          this.putRequest('/system/admin/password', this.ruleForm).then(resp=>{
             if(resp) {
               // 更新密码成功后，退出登录
               this.postRequest('/logout');
@@ -242,7 +246,7 @@ export default {
             }
           });
         } else {
-          console.log('error submit!!');
+          console.log('修改密码失败!');
           return false;
         }
       });
@@ -298,7 +302,6 @@ export default {
   margin-left: 20px;
   margin-right: 20px;
   /*background-image: linear-gradient(to left top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);*/
-  /*background-image: url("../assets/blue.png");*/
   /*background: #605d54;*/
 }
 
@@ -310,4 +313,13 @@ export default {
   border-radius: 100px
 }
 
+.passDialog /deep/.el-dialog {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.adminDialog /deep/.el-dialog {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 </style>

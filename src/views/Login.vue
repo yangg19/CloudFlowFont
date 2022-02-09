@@ -26,13 +26,95 @@
           </div>
 
           <el-button class="loginBtn" @click="submitLogin">登录</el-button>
-<!--          <a href="" class="forget">忘记密码?</a>-->
-<!--          <div class="sign-up">-->
+          <el-button class="forget" @click="showAddAdminView">忘记密码?</el-button>
+<!--          <a href="" class="forget" @click="open">忘记密码?</a>-->
+          <div class="sign-up">
 <!--            <a href="" class="signupBtn">新建账户</a>-->
-<!--          </div>-->
+            <el-button class="signupBtn" @click="showAddAdminView">新建账户</el-button>
+
+          </div>
         </el-form>
 <!--        <p><b>新建账户服务</b>目前直接联系管理员即可</p>-->
 <!--        <p><b>众人拾柴</b> 火焰高.</p>-->
+      </div>
+      <div>
+        <el-dialog
+            title="创建你的账号"
+            class="addDialog"
+            :visible.sync="dialogVisible"
+            width="30%">
+          <div>
+            <span style="margin-bottom: 20px; font-weight: bold; display: flex">请填写真实信息，定期清理不规范账户</span>
+
+            <el-form ref="registerForm" :model="registerMainInfo" :rules="registerRules">
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="username">
+                    <el-input class="inputAdmin"
+                              v-model="registerMainInfo.username"
+                              placeholder="用户名">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="password">
+                    <el-input class="inputAdmin"
+                              type="password"
+                              v-model="registerMainInfo.password"
+                              placeholder="密码">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="name">
+                    <el-input class="inputAdmin"
+                              v-model="registerMainInfo.name"
+                              placeholder="姓名">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="workID">
+                    <el-input class="inputAdmin"
+                              v-model="registerMainInfo.workID"
+                              placeholder="工号">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="email">
+                    <el-input class="inputAdmin"
+                              v-model="registerMainInfo.email"
+                              placeholder="电子邮箱">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="phone">
+                    <el-input class="inputAdmin"
+                              v-model="registerMainInfo.phone"
+                              placeholder="手机号码">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="doRegister" style="background: #0e57a2; border-color: #0e57a2">确 定</el-button>
+          </span>
+        </el-dialog>
       </div>
       <div class="groupCopyright">
         <h5 style="color: #5a5959">Copyright©2022 研发A8团队</h5>
@@ -49,8 +131,32 @@ export default {
   name: "Login",
   data() {
     return {
-      // imgSrc:require('../img/background.png'),
-      // logo1: require("../assets/CloudFlow.png"),
+      registerMainInfo: {
+        name: '',
+        email: '',
+        workID: '',
+        username: '',
+        password: '',
+        phone: '',
+        enabled: true,
+        userFace: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+      },
+      registerSubInfo: {
+        gender: '',
+        birthday: '1900-01-01',
+        idCard: '',
+        wedlock: '',
+        nationId: 57,
+        nativePlace: '',
+        politicId: 13,
+        telephone: '',
+        address: '',
+        jobLevelId: 1,
+        posId: 1,
+        tiptopDegree: '',
+        specialty: '',
+        school: ''
+      },
       // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
         username: '',
@@ -63,6 +169,16 @@ export default {
         username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
         password: [{required: true, message: '请输入密码', trigger: 'blur'}],
         // code: [{required: true, message: '请输入验证码', trigger: 'blur'}]
+      },
+      dialogVisible: false,
+      registerRules:{
+        name: [{required: true, message: '请输工姓名', trigger: 'blur'}],
+        email: [{required: true, message: '请输入邮箱地址', trigger: 'blur'},
+          {type:'email', message: '邮箱地址格式不正确', trigger: 'blur'}],
+        phone: [{required: true, message: '请输入电话', trigger: 'blur'}],
+        workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
+        username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+        password: [{required: true, message: '请输入密码', trigger: 'blur'}]
       }
     }
   },
@@ -70,6 +186,26 @@ export default {
     this.directLogin()
   },
   methods: {
+    doRegister() {
+      console.log(this.registerMainInfo)
+      console.log(this.registerMainInfo)
+
+      this.$refs['registerForm'].validate(valid=>{
+        if(valid) {
+          console.log(this.registerMainInfo)
+          this.postRequest('/register', this.registerMainInfo).then(resp=> {
+            if(resp) {
+              this.dialogVisible = false;
+            }
+          })
+        }
+      })
+    },
+    showAddAdminView(){
+      console.log(this.registerMainInfo)
+
+      this.dialogVisible = true;
+    },
     // // 更新验证码方法
     // updateCaptcha() {
     //   this.captchaUrl = '/captcha?time=' + new Date()
@@ -81,10 +217,10 @@ export default {
     submitLogin() {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
-          this.loading = true;
           this.postRequest('/login', this.loginForm).then(resp => {
             // 如果有返回值，跳转到home
             if (resp) {
+              this.loading = true;
               // 从返回报文中获取token
               const tokenStr = resp.obj.tokenHead + resp.obj.token;
               // 存储用户token
@@ -94,9 +230,6 @@ export default {
               }, 200);
               // 跳转首页
               this.$router.replace('/home');
-
-              // let path = this.$route.query.redirect;
-              // this.$router.replace((path === '/' || path === undefined) ? '/home' : path);
             }
           })
         } else {
@@ -175,7 +308,7 @@ export default {
 
 
 
-form{
+.right-con{
   background-color: white;
   border-radius: 10px;
   width:400px;
@@ -185,7 +318,7 @@ form{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-form input{
+.right-con input{
   width: 100%;
   padding: 15px;
   margin-bottom: 10px;
@@ -226,11 +359,14 @@ form input{
 }
 
 .forget{
-  margin: 15px 0;
+  border-color: white;
+  margin: 5px 0;
   text-decoration: none;
   color: #1877f2;
   font-family: 'Arial';
   font-size: 14px;
+  /*height: 8px;*/
+  margin-right: 9px;
 }
 
 .sign-up{
@@ -244,6 +380,7 @@ form input{
 .signupBtn{
   background-color: #13a305;
   padding: 15px;
+  height: 55px;
   text-align: center;
   text-decoration: none;
   border-radius: 5px;
@@ -288,6 +425,27 @@ form input{
   text-align: center;
 }
 
+.addDialog /deep/.el-dialog {
+  border-radius: 10px;
+  font-weight: bold;
+  /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+}
+
+.el-row {
+  width: 100%;
+  /*margin-bottom: 10px;*/
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.inputAdmin /deep/ .el-input__inner{
+  height: 50px;
+  /*box-sizing: border-box;*/
+  /*-moz-box-sizing: border-box;*/
+  /*-webkit-box-sizing: border-box;*/
+
+}
 
 
 </style>

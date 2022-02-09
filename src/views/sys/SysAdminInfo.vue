@@ -463,18 +463,18 @@ export default {
         id: null,
         name: '',
         gender: '',
-        // birthday: '',
+        birthday: '1900-01-01',
         idCard: '',
         wedlock: '',
-        nationId: null,
+        nationId: 57,
         nativePlace: '',
-        politicId: null,
+        politicId: 13,
         email: '',
         phone: '',
         telephone: '',
         address: '',
-        jobLevelId: null,
-        posId: null,
+        jobLevelId: 1,
+        posId: 1,
         tiptopDegree: '',
         specialty: '',
         school: '',
@@ -601,7 +601,7 @@ export default {
     //   })
     // },
     initPositions(){
-      this.getRequest('/admin/positions').then(resp=>{
+      this.getRequest('/employee/basic/positions').then(resp=>{
         if(resp) {
           this.positions = resp;
         }
@@ -609,7 +609,7 @@ export default {
     },
     initData(){
       if (!window.sessionStorage.getItem('nations')) {
-        this.getRequest('/admin/').then(resp=>{
+        this.getRequest('/employee/basic/nations').then(resp=>{
           if(resp) {
             this.nations = resp;
             window.sessionStorage.setItem('nations', JSON.stringify(resp));
@@ -619,7 +619,7 @@ export default {
         this.nations = JSON.parse(window.sessionStorage.getItem('nations'));
       }
       if (!window.sessionStorage.getItem('joblevels')) {
-        this.getRequest('/admin/joblevels').then(resp=>{
+        this.getRequest('/employee/basic/joblevels').then(resp=>{
           if(resp) {
             this.joblevels = resp;
             window.sessionStorage.setItem('joblevels', JSON.stringify(resp));
@@ -629,7 +629,7 @@ export default {
         this.joblevels = JSON.parse(window.sessionStorage.getItem('joblevels'));
       }
       if (!window.sessionStorage.getItem('politicsstatus')) {
-        this.getRequest('/admin/politicsStatus').then(resp=>{
+        this.getRequest('/employee/basic/politicsStatus').then(resp=>{
           if(resp) {
             this.politicsstatus = resp;
             window.sessionStorage.setItem('politicsstatus', JSON.stringify(resp));
@@ -646,18 +646,18 @@ export default {
         id: null,
         name: '',
         gender: '',
-        // birthday: '',
+        birthday: '1900-01-01',
         idCard: '',
         wedlock: '',
-        nationId: null,
+        nationId: 57,
         nativePlace: '',
-        politicId: null,
+        politicId: 13,
         email: '',
         phone: '',
         telephone: '',
         address: '',
-        jobLevelId: null,
-        posId: null,
+        jobLevelId: 1,
+        posId: 1,
         tiptopDegree: '',
         specialty: '',
         school: '',

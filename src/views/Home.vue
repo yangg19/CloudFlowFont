@@ -5,12 +5,12 @@
           <div>
             <el-image :src="require('../img/TEAMPARK5.png')" fit="contain" class="el-image-logo"></el-image>
           </div>
-        <span style="color: white; font-size: 15px; position: absolute; right: 75px" >
+        <span style="color: white; font-size: 15px; position: absolute; right: 65px" >
                     {{user.name}}
         </span>
         <el-dropdown class="userInfo" @command="commandHandler">
           <span class="el-dropdown-link">
-
+<!--            <el-avatar icon="el-icon-user-solid"></el-avatar>-->
               <i><img :src="user.userFace"></i>
           </span>
 
@@ -249,10 +249,12 @@ export default {
 }
 
 .el-dropdown-link img {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 24px;
   margin-left: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
   /*color: white;*/
 }
 

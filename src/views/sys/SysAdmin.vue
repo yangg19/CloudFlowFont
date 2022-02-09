@@ -102,12 +102,12 @@
               <el-button slot="reference" type="text" icon="el-icon-edit"></el-button>
             </el-popover>
           </div>
-          <div style="margin-top: 10px">
-            <span style="font-weight: bold">
-              备注信息：
-            </span>
-            {{admin.remark}}
-          </div>
+<!--          <div style="margin-top: 10px">-->
+<!--            <span style="font-weight: bold">-->
+<!--              备注信息：-->
+<!--            </span>-->
+<!--            {{admin.remark}}-->
+<!--          </div>-->
         </div>
       </el-card>
     </div>
@@ -232,10 +232,11 @@ export default {
 <style scoped>
 
 .adminCard {
-  margin-top: 20px;
-  margin-right: 50px;
-  justify-content: space-between;
-  width: 400px;
+  margin: 30px;
+  /*margin-top: 20px;*/
+  /*margin-right: 50px;*/
+  /*justify-content: space-between;*/
+  width: 300px;
 }
 
 .adminContainer {

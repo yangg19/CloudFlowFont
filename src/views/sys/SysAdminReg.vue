@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "SysData",
+  name: "SysAdminReg",
   data() {
     return {
       dataTable: [{
