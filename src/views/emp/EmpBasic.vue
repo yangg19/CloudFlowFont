@@ -601,7 +601,7 @@ export default {
     },
     initData(){
       if (!window.sessionStorage.getItem('nations')) {
-        this.getRequest('/admin/').then(resp=>{
+        this.getRequest('/admin/nations').then(resp=>{
           if(resp) {
             this.nations = resp;
             window.sessionStorage.setItem('nations', JSON.stringify(resp));

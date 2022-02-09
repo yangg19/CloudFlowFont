@@ -203,10 +203,10 @@ export default {
           this.$store.commit('initRoutes', []);
           this.$router.replace('/');
         }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消'
-          });
+          // this.$message({
+          //   type: 'info',
+          //   message: '已取消'
+          // });
         });
       }
       if (command === 'userInfo') {

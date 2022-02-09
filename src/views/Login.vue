@@ -134,7 +134,7 @@ export default {
       registerMainInfo: {
         name: '',
         email: '',
-        workID: '',
+        workID: null,
         username: '',
         password: '',
         phone: '',
@@ -147,7 +147,7 @@ export default {
         politicId: 13,
         jobLevelId: 1,
         posId: 1,
-        workID: ''
+        workID: null
       },
       // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
@@ -183,25 +183,23 @@ export default {
         if(valid) {
           this.postRequest('/register', this.registerMainInfo).then(resp=> {
             if(resp) {
-              // this.dialogVisible = false;
-              console.log(this.registerMainInfo)
-              console.log(this.registerSubInfo)
-
-              this.registerSubInfo.workID = this.registerMainInfo.workID;
-              this.putRequest('/registerSub/', this.registerSubInfo).then(resp=> {
-                if(resp) {
-                  this.dialogVisible = false;
-                  // this.initAdminInfo();
-                }
-              })
+              this.doRegisterSub(this.registerMainInfo.workID)
             }
           })
         }
       })
     },
+    doRegisterSub(workID) {
+      console.log(this.registerSubInfo)
+      this.registerSubInfo.workID = workID;
+      console.log(this.registerSubInfo)
+      this.putRequest('/registerSub', this.registerSubInfo).then(resp=> {
+        if(resp) {
+          this.dialogVisible = false;
+        }
+      })
+    },
     showAddAdminView(){
-      console.log(this.registerMainInfo)
-
       this.dialogVisible = true;
     },
     // // 更新验证码方法

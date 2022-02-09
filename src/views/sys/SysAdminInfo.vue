@@ -601,7 +601,7 @@ export default {
     //   })
     // },
     initPositions(){
-      this.getRequest('/employee/basic/positions').then(resp=>{
+      this.getRequest('/admin/positions').then(resp=>{
         if(resp) {
           this.positions = resp;
         }
@@ -609,7 +609,7 @@ export default {
     },
     initData(){
       if (!window.sessionStorage.getItem('nations')) {
-        this.getRequest('/employee/basic/nations').then(resp=>{
+        this.getRequest('/admin/nations').then(resp=>{
           if(resp) {
             this.nations = resp;
             window.sessionStorage.setItem('nations', JSON.stringify(resp));
@@ -619,7 +619,7 @@ export default {
         this.nations = JSON.parse(window.sessionStorage.getItem('nations'));
       }
       if (!window.sessionStorage.getItem('joblevels')) {
-        this.getRequest('/employee/basic/joblevels').then(resp=>{
+        this.getRequest('/admin/joblevels').then(resp=>{
           if(resp) {
             this.joblevels = resp;
             window.sessionStorage.setItem('joblevels', JSON.stringify(resp));
@@ -629,7 +629,7 @@ export default {
         this.joblevels = JSON.parse(window.sessionStorage.getItem('joblevels'));
       }
       if (!window.sessionStorage.getItem('politicsstatus')) {
-        this.getRequest('/employee/basic/politicsStatus').then(resp=>{
+        this.getRequest('/admin/politicsStatus').then(resp=>{
           if(resp) {
             this.politicsstatus = resp;
             window.sessionStorage.setItem('politicsstatus', JSON.stringify(resp));
