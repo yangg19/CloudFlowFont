@@ -142,20 +142,12 @@ export default {
         userFace: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
       },
       registerSubInfo: {
-        gender: '',
         birthday: '1900-01-01',
-        idCard: '',
-        wedlock: '',
         nationId: 57,
-        nativePlace: '',
         politicId: 13,
-        telephone: '',
-        address: '',
         jobLevelId: 1,
         posId: 1,
-        tiptopDegree: '',
-        specialty: '',
-        school: ''
+        workID: ''
       },
       // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
@@ -187,15 +179,21 @@ export default {
   },
   methods: {
     doRegister() {
-      console.log(this.registerMainInfo)
-      console.log(this.registerMainInfo)
-
       this.$refs['registerForm'].validate(valid=>{
         if(valid) {
-          console.log(this.registerMainInfo)
           this.postRequest('/register', this.registerMainInfo).then(resp=> {
             if(resp) {
-              this.dialogVisible = false;
+              // this.dialogVisible = false;
+              console.log(this.registerMainInfo)
+              console.log(this.registerSubInfo)
+
+              this.registerSubInfo.workID = this.registerMainInfo.workID;
+              this.putRequest('/registerSub/', this.registerSubInfo).then(resp=> {
+                if(resp) {
+                  this.dialogVisible = false;
+                  // this.initAdminInfo();
+                }
+              })
             }
           })
         }
