@@ -26,7 +26,7 @@
           </div>
 
           <el-button class="loginBtn" @click="submitLogin">登录</el-button>
-          <el-button class="forget" @click="showAddAdminView">忘记密码?</el-button>
+          <el-button class="forget" @click="showFindPassView">忘记密码?</el-button>
 <!--          <a href="" class="forget" @click="open">忘记密码?</a>-->
           <div class="sign-up">
 <!--            <a href="" class="signupBtn">新建账户</a>-->
@@ -37,6 +37,68 @@
 <!--        <p><b>新建账户服务</b>目前直接联系管理员即可</p>-->
 <!--        <p><b>众人拾柴</b> 火焰高.</p>-->
       </div>
+      <div>
+        <el-dialog
+            title="找回密码"
+            class="findPassDialog"
+            :visible.sync="findPassDialogVisible"
+            width="30%">
+          <div>
+            <span style="margin-bottom: 20px; font-weight: bold; display: flex">如忘记密保答案，请联系管理员</span>
+
+            <el-form ref="findPassForm" :model="findPassInfo" :rules="findPassRules">
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="username">
+                    <el-input class="inputAdmin"
+                              v-model="findPassInfo.username"
+                              placeholder="用户名">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="passQuestion">
+                    <el-input class="inputAdmin"
+                              type="password"
+                              v-model="findPassInfo.passQuestion"
+                              placeholder="密保问题">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="passAnswer">
+                    <el-input class="inputAdmin"
+                              v-model="findPassInfo.passAnswer"
+                              maxlength="8"
+                              placeholder="密保答案">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item prop="password">
+                    <el-input class="inputAdmin"
+                              v-model="findPassInfo.password"
+                              maxlength="12"
+                              placeholder="新密码">
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="findPassDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="doRegister" style="background: #0e57a2; border-color: #0e57a2">确 定</el-button>
+          </span>
+        </el-dialog>
+      </div>
+
       <div>
         <el-dialog
             title="创建你的账号"
@@ -52,6 +114,7 @@
                   <el-form-item prop="username">
                     <el-input class="inputAdmin"
                               v-model="registerMainInfo.username"
+
                               placeholder="用户名">
                     </el-input>
                   </el-form-item>
@@ -73,6 +136,7 @@
                   <el-form-item prop="name">
                     <el-input class="inputAdmin"
                               v-model="registerMainInfo.name"
+                              maxlength="8"
                               placeholder="姓名">
                     </el-input>
                   </el-form-item>
@@ -83,6 +147,7 @@
                   <el-form-item prop="workID">
                     <el-input class="inputAdmin"
                               v-model="registerMainInfo.workID"
+                              maxlength="12"
                               placeholder="工号">
                     </el-input>
                   </el-form-item>
@@ -93,6 +158,7 @@
                   <el-form-item prop="email">
                     <el-input class="inputAdmin"
                               v-model="registerMainInfo.email"
+                              maxlength="30"
                               placeholder="电子邮箱">
                     </el-input>
                   </el-form-item>
@@ -103,6 +169,7 @@
                   <el-form-item prop="phone">
                     <el-input class="inputAdmin"
                               v-model="registerMainInfo.phone"
+                              maxlength="11"
                               placeholder="手机号码">
                     </el-input>
                   </el-form-item>
@@ -117,8 +184,8 @@
         </el-dialog>
       </div>
       <div class="groupCopyright">
-        <h5 style="color: #5a5959">Copyright©2022 研发A8团队</h5>
-        <h5 style="color: #5a5959">如有任何问题，请联系 yangg19@spdb.com.cn</h5>
+        <h5 style="color: #5a5959">Copyright©2022 研发XX团队</h5>
+        <h5 style="color: #5a5959">如有任何问题，请联系 40334361@qq.com</h5>
       </div>
     </div>
 
@@ -131,6 +198,12 @@ export default {
   name: "Login",
   data() {
     return {
+      findPassInfo: {
+        username: '',
+        passQuestion: '',
+        passAnswer: '',
+        password: ''
+      },
       registerMainInfo: {
         name: '',
         email: '',
@@ -163,6 +236,7 @@ export default {
         // code: [{required: true, message: '请输入验证码', trigger: 'blur'}]
       },
       dialogVisible: false,
+      findPassDialogVisible: false,
       registerRules:{
         name: [{required: true, message: '请输工姓名', trigger: 'blur'}],
         email: [{required: true, message: '请输入邮箱地址', trigger: 'blur'},
@@ -171,6 +245,11 @@ export default {
         workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
         username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
         password: [{required: true, message: '请输入密码', trigger: 'blur'}]
+      },
+      findPassRules:{
+        username: [{required: true, message: '请输工用户名', trigger: 'blur'}],
+        passAnswer: [{required: true, message: '请输入密保答案', trigger: 'blur'}],
+        password: [{required: true, message: '请输入密码', trigger: 'blur'}]
       }
     }
   },
@@ -178,6 +257,11 @@ export default {
     this.directLogin()
   },
   methods: {
+    initAdmin() {
+      this.getRequest('/admin/info/').then(resp=>{
+        this.findPassInfo.passQuestion = resp.passQuestion;
+      })
+    },
     doRegister() {
       this.$refs['registerForm'].validate(valid=>{
         if(valid) {
@@ -198,6 +282,9 @@ export default {
           this.dialogVisible = false;
         }
       })
+    },
+    showFindPassView(){
+      this.findPassDialogVisible = true;
     },
     showAddAdminView(){
       this.dialogVisible = true;
@@ -422,6 +509,12 @@ export default {
 }
 
 .addDialog /deep/.el-dialog {
+  border-radius: 10px;
+  font-weight: bold;
+  /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+}
+
+.findPassDialog /deep/.el-dialog {
   border-radius: 10px;
   font-weight: bold;
   /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/

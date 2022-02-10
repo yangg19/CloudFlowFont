@@ -264,13 +264,14 @@
           :visible.sync="dialogVisible"
           width="80%">
         <div>
-          <el-form ref="empForm" :model="adminInfo" :rules="rules">
+          <el-form ref="empForm" :model="adminInfo">
             <el-row>
               <el-col :span="6">
                 <el-form-item label="姓名：" prop="name">
                   <el-input size="mini"
                             style="width: 150px" v-model="adminInfo.name"
                             prefix-icon="el-icon-edit"
+                            maxlength="8"
                             placeholder="请输入员工姓名">
                   </el-input>
                 </el-form-item>
@@ -322,17 +323,35 @@
               </el-col>
               <el-col :span="5">
                 <el-form-item label="籍贯：" prop="nativePlace">
-                  <el-input v-model="adminInfo.nativePlace" placeholder="请输入籍贯" prefix-icon="el-icon-edit" size="mini" style="width:120px"></el-input>
+                  <el-input v-model="adminInfo.nativePlace"
+                            placeholder="请输入籍贯"
+                            prefix-icon="el-icon-edit"
+                            size="mini"
+                            maxlength="20"
+                            style="width:120px">
+                  </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="6">
                 <el-form-item label="电子邮箱：" prop="email">
-                  <el-input v-model="adminInfo.email" placeholder="请输入电子邮箱" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
+                  <el-input v-model="adminInfo.email"
+                            placeholder="请输入电子邮箱"
+                            prefix-icon="el-icon-edit"
+                            size="mini"
+                            maxlength="30"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="7">
                 <el-form-item label="联系地址：" prop="address">
-                  <el-input v-model="adminInfo.address" placeholder="请输入联系地址" prefix-icon="el-icon-message" size="mini" style="width:200px"></el-input>
+                  <el-input v-model="adminInfo.address"
+                            placeholder="请输入联系地址"
+                            prefix-icon="el-icon-message"
+                            size="mini"
+                            maxlength="64"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -363,19 +382,37 @@
               </el-col>
               <el-col :span="6">
                 <el-form-item label="电话号码：" prop="phone">
-                  <el-input v-model="adminInfo.phone" placeholder="请输入联系地址" prefix-icon="el-icon-phone" size="mini" style="width:200px"></el-input>
+                  <el-input v-model="adminInfo.phone"
+                            placeholder="请输入电话号码"
+                            prefix-icon="el-icon-phone"
+                            size="mini"
+                            maxlength="11"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="6">
                 <el-form-item label="座机号码：" prop="telephone">
-                  <el-input v-model="adminInfo.telephone" placeholder="请输入联系地址" prefix-icon="el-icon-phone" size="mini" style="width:200px"></el-input>
+                  <el-input v-model="adminInfo.telephone"
+                            placeholder="请输入座机号码"
+                            prefix-icon="el-icon-phone"
+                            size="mini"
+                            maxlength="11"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="6">
                 <el-form-item label="工号：" prop="workID">
-                  <el-input v-model="adminInfo.workID" placeholder="请输入工号" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
+                  <el-input v-model="adminInfo.workID"
+                            placeholder="请输入工号"
+                            prefix-icon="el-icon-edit"
+                            size="mini"
+                            maxlength="12"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="5">
@@ -392,19 +429,37 @@
               </el-col>
               <el-col :span="6">
                 <el-form-item label="毕业院校：" prop="school">
-                  <el-input v-model="adminInfo.school" placeholder="请输入毕业院校" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
+                  <el-input v-model="adminInfo.school"
+                            placeholder="请输入毕业院校"
+                            prefix-icon="el-icon-edit"
+                            size="mini"
+                            maxlength="32"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="7">
                 <el-form-item label="专业名称：" prop="specialty">
-                  <el-input v-model="adminInfo.specialty" placeholder="请输入专业名称" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
+                  <el-input v-model="adminInfo.specialty"
+                            placeholder="请输入专业名称"
+                            prefix-icon="el-icon-edit"
+                            size="mini"
+                            maxlength="32"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="6">
                 <el-form-item label="身份证号码：" prop="idCard">
-                  <el-input v-model="adminInfo.idCard" placeholder="请输入身份证号码" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
+                  <el-input v-model="adminInfo.idCard"
+                            placeholder="请输入身份证号码"
+                            prefix-icon="el-icon-edit"
+                            size="mini"
+                            maxlength="18"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="5">
@@ -417,13 +472,18 @@
                 </el-form-item>
               </el-col>
               <el-col :span="6">
-                <el-form-item label="工作域名：" prop="username">
-                  <el-input v-model="adminInfo.username" placeholder="请输入工作域名" prefix-icon="el-icon-edit" size="mini" style="width:200px"></el-input>
+                <el-form-item label="用户名：" prop="username">
+                  <el-input v-model="adminInfo.username"
+                            placeholder="请输入用户名"
+                            prefix-icon="el-icon-edit"
+                            size="mini"
+                            maxlength="15"
+                            style="width:200px">
+                  </el-input>
                 </el-form-item>
               </el-col>
             </el-row>
           </el-form>
-
         </div>
         <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
@@ -486,28 +546,28 @@ export default {
       politicsstatus:[],
       positions:[],
       tiptopDegrees:['博士','硕士','本科','大专','高中','初中','小学','其他'],
-      rules:{
-        name: [{required: true, message: '请输工姓名', trigger: 'blur'}],
-        gender: [{required: true, message: '请输入性别', trigger: 'blur'}],
-        birthday: [{required: true, message: '请输入出生日期', trigger: 'blur'}],
-        idCard: [{required: true, message: '请输入身份证号码', trigger: 'blur'}],
-        wedlock: [{required: true, message: '请输入婚姻状况', trigger: 'blur'}],
-        nationId: [{required: true, message: '请输入民族', trigger: 'blur'}],
-        nativePlace: [{required: true, message: '请输入籍贯', trigger: 'blur'}],
-        politicId: [{required: true, message: '请输入员工政治面貌', trigger: 'blur'}],
-        email: [{required: true, message: '请输入邮箱地址', trigger: 'blur'},
-          {type:'email', message: '邮箱地址格式不正确', trigger: 'blur'}],
-        phone: [{required: true, message: '请输入电话', trigger: 'blur'}],
-        telephone: [{required: true, message: '请输入座机电话', trigger: 'blur'}],
-        address: [{required: true, message: '请输入地址', trigger: 'blur'}],
-        jobLevelId: [{required: true, message: '请输入职称', trigger: 'blur'}],
-        posId: [{required: true, message: '请输入职位', trigger: 'blur'}],
-        tiptopDegree: [{required: true, message: '请输入学历', trigger: 'blur'}],
-        specialty: [{required: true, message: '请输入专业', trigger: 'blur'}],
-        school: [{required: true, message: '请输入学校', trigger: 'blur'}],
-        workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
-        username: [{required: true, message: '请输入域名', trigger: 'blur'}]
-      }
+      // rules:{
+      //   name: [{required: true, message: '请输工姓名', trigger: 'blur'}],
+      //   gender: [{required: true, message: '请输入性别', trigger: 'blur'}],
+      //   birthday: [{required: true, message: '请输入出生日期', trigger: 'blur'}],
+      //   idCard: [{required: true, message: '请输入身份证号码', trigger: 'blur'}],
+      //   wedlock: [{required: true, message: '请输入婚姻状况', trigger: 'blur'}],
+      //   nationId: [{required: true, message: '请输入民族', trigger: 'blur'}],
+      //   nativePlace: [{required: true, message: '请输入籍贯', trigger: 'blur'}],
+      //   politicId: [{required: true, message: '请输入员工政治面貌', trigger: 'blur'}],
+      //   email: [{required: true, message: '请输入邮箱地址', trigger: 'blur'},
+      //     {type:'email', message: '邮箱地址格式不正确', trigger: 'blur'}],
+      //   phone: [{required: true, message: '请输入电话', trigger: 'blur'}],
+      //   telephone: [{required: true, message: '请输入座机电话', trigger: 'blur'}],
+      //   address: [{required: true, message: '请输入地址', trigger: 'blur'}],
+      //   jobLevelId: [{required: true, message: '请输入职称', trigger: 'blur'}],
+      //   posId: [{required: true, message: '请输入职位', trigger: 'blur'}],
+      //   tiptopDegree: [{required: true, message: '请输入学历', trigger: 'blur'}],
+      //   specialty: [{required: true, message: '请输入专业', trigger: 'blur'}],
+      //   school: [{required: true, message: '请输入学校', trigger: 'blur'}],
+      //   workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
+      //   username: [{required: true, message: '请输入域名', trigger: 'blur'}]
+      // }
     }
   },
   mounted() {
