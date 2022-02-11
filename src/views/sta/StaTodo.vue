@@ -41,7 +41,6 @@ export default {
     AllProTask,
     AllDelTask
   },
-
   methods:{
     handleClick(tab) {
       if(tab.name === "AllProTask") {

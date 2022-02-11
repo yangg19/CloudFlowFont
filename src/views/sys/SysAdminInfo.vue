@@ -69,7 +69,11 @@
         <el-row>
           <el-col :span="5" style="margin-left: 100px">
             政治面貌：
-            <el-select v-model="searchValue.politicId" placeholder="政治面貌" size="mini" style="width: 150px">
+            <el-select v-model="searchValue.politicId"
+                       placeholder="政治面貌"
+                       size="mini"
+                       clearable
+                       style="width: 150px">
               <el-option
                   v-for="item in politicsstatus"
                   :key="item.id"
@@ -81,7 +85,11 @@
           </el-col>
           <el-col :span="5">
             员工民族：
-            <el-select v-model="searchValue.nationId" placeholder="民族" size="mini" style="width: 150px">
+            <el-select v-model="searchValue.nationId"
+                       placeholder="民族"
+                       clearable
+                       size="mini"
+                       style="width: 150px">
               <el-option
                   v-for="item in nations"
                   :key="item.id"
@@ -93,7 +101,11 @@
           </el-col>
           <el-col :span="5">
             员工职位：
-            <el-select v-model="searchValue.posId" placeholder="职位" size="mini" style="width: 150px">
+            <el-select v-model="searchValue.posId"
+                       placeholder="职位"
+                       size="mini"
+                       clearable
+                       style="width: 150px">
               <el-option
                   v-for="item in positions"
                   :key="item.id"
@@ -104,7 +116,11 @@
           </el-col>
           <el-col :span="5">
             员工职称：
-            <el-select v-model="searchValue.jobLevelId" placeholder="职称" size="mini" style="width: 150px">
+            <el-select v-model="searchValue.jobLevelId"
+                       placeholder="职称"
+                       clearable
+                       size="mini"
+                       style="width: 150px">
               <el-option
                   v-for="item in joblevels"
                   :key="item.id"
@@ -117,7 +133,7 @@
 
         <el-row style="margin-top: 20px; margin-left: 100px">
           <el-col :span="5">
-            <el-button size="mini" icon="el-icon-arrow-left">取消</el-button>
+            <el-button size="mini" icon="el-icon-arrow-left" @click="closeAdvance">取消</el-button>
             <el-button type="primary" icon="el-icon-search" @click="initAdminInfo('advanced')" size="mini" style="background: #0e57a2; border-color: #0e57a2">搜索</el-button>
           </el-col>
         </el-row>
@@ -408,6 +424,7 @@
                 <el-form-item label="工号：" prop="workID">
                   <el-input v-model="adminInfo.workID"
                             placeholder="请输入工号"
+                            disabled
                             prefix-icon="el-icon-edit"
                             size="mini"
                             maxlength="12"
@@ -477,6 +494,7 @@
                             placeholder="请输入用户名"
                             prefix-icon="el-icon-edit"
                             size="mini"
+                            disabled
                             maxlength="15"
                             style="width:200px">
                   </el-input>
@@ -576,6 +594,9 @@ export default {
     this.initPositions();
   },
   methods: {
+    closeAdvance(){
+      this.showAdvanceSearchVisible = false;
+    },
     onSuccess(){
       this.importDataButtonIcon = 'el-icon-upload2';
       this.importDataButtonText = '导入数据';

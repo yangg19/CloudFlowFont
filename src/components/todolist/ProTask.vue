@@ -123,6 +123,7 @@
             <el-form-item label="执行人：" prop="addTodolist.userID">
               <el-select v-model="addTodolist.userID"
                          clearable
+                         filterable
                          default-first-option
                          filterable placeholder="请选择执行人">
                 <el-option

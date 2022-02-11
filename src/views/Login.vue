@@ -61,7 +61,7 @@
                 <el-col :span="24">
                   <el-form-item prop="passQuestion">
                     <el-input class="inputAdmin"
-                              type="password"
+                              maxlength="30"
                               v-model="findPassInfo.passQuestion"
                               placeholder="密保问题">
                     </el-input>
@@ -73,7 +73,7 @@
                   <el-form-item prop="passAnswer">
                     <el-input class="inputAdmin"
                               v-model="findPassInfo.passAnswer"
-                              maxlength="8"
+                              maxlength="30"
                               placeholder="密保答案">
                     </el-input>
                   </el-form-item>
@@ -81,9 +81,10 @@
               </el-row>
               <el-row>
                 <el-col :span="24">
-                  <el-form-item prop="password">
+                  <el-form-item prop="pass">
                     <el-input class="inputAdmin"
-                              v-model="findPassInfo.password"
+                              type="password"
+                              v-model="findPassInfo.pass"
                               maxlength="12"
                               placeholder="新密码">
                     </el-input>
@@ -94,7 +95,7 @@
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button @click="findPassDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="doRegister" style="background: #0e57a2; border-color: #0e57a2">确 定</el-button>
+            <el-button type="primary" @click="doFindPass" style="background: #0e57a2; border-color: #0e57a2">确 定</el-button>
           </span>
         </el-dialog>
       </div>
@@ -202,7 +203,7 @@ export default {
         username: '',
         passQuestion: '',
         passAnswer: '',
-        password: ''
+        pass: ''
       },
       registerMainInfo: {
         name: '',
@@ -248,8 +249,9 @@ export default {
       },
       findPassRules:{
         username: [{required: true, message: '请输工用户名', trigger: 'blur'}],
+        passQuestion: [{required: true, message: '请输入密保问题', trigger: 'blur'}],
         passAnswer: [{required: true, message: '请输入密保答案', trigger: 'blur'}],
-        password: [{required: true, message: '请输入密码', trigger: 'blur'}]
+        pass: [{required: true, message: '请输入密码', trigger: 'blur'}]
       }
     }
   },
@@ -257,9 +259,22 @@ export default {
     this.directLogin()
   },
   methods: {
-    initAdmin() {
-      this.getRequest('/admin/info/').then(resp=>{
-        this.findPassInfo.passQuestion = resp.passQuestion;
+    // initAdmin() {
+    //   this.getRequest('/admin/info/').then(resp=>{
+    //     this.findPassInfo.passQuestion = resp.passQuestion;
+    //   })
+    // },
+    doFindPass(){
+      this.$refs['findPassForm'].validate(valid=>{
+        console.log(this.findPassInfo)
+
+        if(valid) {
+          this.putRequest('/find-pass', this.findPassInfo).then(resp=> {
+            if(resp) {
+              this.findPassDialogVisible = false;
+            }
+          })
+        }
       })
     },
     doRegister() {
@@ -277,7 +292,7 @@ export default {
       console.log(this.registerSubInfo)
       this.registerSubInfo.workID = workID;
       console.log(this.registerSubInfo)
-      this.putRequest('/registerSub', this.registerSubInfo).then(resp=> {
+      this.putRequest('/register-sub', this.registerSubInfo).then(resp=> {
         if(resp) {
           this.dialogVisible = false;
         }
