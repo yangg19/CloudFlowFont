@@ -16,7 +16,7 @@
 
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
-            <el-dropdown-item command="setting">设置</el-dropdown-item>
+<!--            <el-dropdown-item command="setting">设置</el-dropdown-item>-->
             <el-dropdown-item command="logout">注销登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -45,11 +45,13 @@
         </el-aside>
 
         <el-main>
-          <el-breadcrumb separator-class="el-icon-arrow-right"
-                         v-if="this.$router.currentRoute.path!=='/home'">
-            <el-breadcrumb-item :to="{path:'/home'}">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>{{ this.$router.currentRoute.name }}</el-breadcrumb-item>
-          </el-breadcrumb>
+          <div>
+            <el-breadcrumb separator-class="el-icon-arrow-right"
+                           v-if="this.$router.currentRoute.path!=='/home'">
+              <el-breadcrumb-item :to="{path:'/home'}">首页</el-breadcrumb-item>
+              <el-breadcrumb-item>{{ this.$router.currentRoute.name }}</el-breadcrumb-item>
+            </el-breadcrumb>
+          </div>
           <div class="homeInitPage" v-if="this.$router.currentRoute.path==='/home'">
             <template>
               <div><HomePage title="标题"></HomePage></div>
@@ -180,7 +182,7 @@ export default {
 
 *{
   margin: 0;
-  padding: 0;
+  /*padding: 0;*/
   box-sizing: border-box;
 }
 

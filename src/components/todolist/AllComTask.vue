@@ -63,9 +63,8 @@
           </template>
         </el-table-column>
       </el-table>
-      <div style="display: flex; justify-content: flex-end; margin-top: 10px">
+      <div style="margin-top: 10px">
         <el-pagination
-            small
             background
             layout="prev, pager, next, jumper, ->, total"
             @current-change="currentChange"
@@ -161,6 +160,11 @@ export default {
   margin-right: 0;
   margin-bottom: 0;
   /*  width: 50%;*/
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #0e57a2;
+  color: #fff;
 }
 
 </style>

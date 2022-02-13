@@ -6,25 +6,20 @@
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>通知</span>
-              <!--                          <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
-            </div>
-            <div style="font-size: 20px; text-align:left; font-family: 新宋体">
-              各位同事好：
             </div>
             <div>
-              &nbsp
-            </div>
-            <div style="font-size: 20px; text-align:left; font-family: 新宋体">
-              &nbsp&nbsp<span v-text="noticeContent1"> </span>
-            </div>
-            <div style="font-size: 20px; text-align:left; font-family: 新宋体; margin-top: 10px">
-              &nbsp&nbsp<span v-text="noticeContent2"> </span>
-            </div>
-            <div style="font-size: 20px; text-align:left; font-family: 新宋体; margin-top: 10px">
-              &nbsp&nbsp<span v-text="noticeContent3"> </span>
-            </div>
-            <div style="font-size: 20px; text-align:right; font-family: 新宋体; margin-top: 30px;">
-              &nbsp&nbsp<span v-text="createDate"> </span>
+              <el-input
+                  class="billboardText"
+                  type="textarea"
+                  :rows="2"
+                  overflow:hidden
+                  :autosize="{ minRows: 10, maxRows: 20}"
+                  show-word-limit="true"
+                  clearable
+                  size="medium"
+                  style="font-size: 20px; text-align:left; font-family: 新宋体"
+                  v-model="billboard.noticeContent">
+              </el-input>
             </div>
 
           </el-card>
@@ -69,10 +64,10 @@ name: "HomePage",
       addDialogVisible: false,
       repoDialogVisible: false,
       finishDialogVisible: false,
-      noticeContent1:'',
-      noticeContent2:'',
-      noticeContent3:'',
-      createDate:''
+      billboard:{
+        noticeContent: '',
+        createDate: ''
+      }
     }
   },
   components:{
@@ -87,10 +82,8 @@ name: "HomePage",
     notice() {
       this.getRequest('/billboard/').then(resp=>{
         if(resp) {
-          this.noticeContent1 = resp.noticeContent1;
-          this.noticeContent2 = resp.noticeContent2;
-          this.noticeContent3 = resp.noticeContent3;
-          this.createDate = resp.createDate;
+          this.billboard.noticeContent = resp.noticeContent;
+          this.billboard.createDate = resp.createDate;
         }
       })
     },
@@ -110,7 +103,7 @@ name: "HomePage",
         this.isProTaskUpdate = false;
         this.isComTaskUpdate = true;
         this.isDelTaskUpdate = false;
-      } else if(tab.name == "DelTask") {
+      } else if(tab.name === "DelTask") {
         this.isProTaskUpdate = false;
         this.isComTaskUpdate = false;
         this.isDelTaskUpdate = true;
@@ -123,7 +116,7 @@ name: "HomePage",
 <style scoped>
 *{
   margin: 0;
-  padding: 0;
+  /*padding: 0;*/
   box-sizing: border-box;
 }
 
@@ -152,28 +145,19 @@ name: "HomePage",
   /*align-content: center;*/
   /*align-items: center;*/
   /*justify-content: center;*/
-  margin: 10px;
-  flex:1;
+  margin: 30px;
+  /*flex:1;*/
 }
 
 .left{
   /*width:500px;*/
   align-items: flex-end;
-  margin-right: 100px;
+  margin-right: 50px;
 }
 
 .right{
   /*width:500px;*/
   align-items: flex-start;
-}
-
-.calendarDate {
-
-  /*margin: 20px;*/
-  width: 90%;
-  font-size: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-
 }
 
 .todolistTab {
@@ -194,4 +178,12 @@ name: "HomePage",
   padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
+
+/* 如果你的 el-input type 设置成textarea ，就要用这个了 */
+.billboardText>>>.el-textarea__inner {
+  border: 0;
+  resize: none;/* 这个是去掉 textarea 下面拉伸的那个标志，如下图 */
+}
+
 </style>

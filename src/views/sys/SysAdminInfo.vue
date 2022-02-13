@@ -28,22 +28,22 @@
           </el-button>
         </div>
         <div>
-          <el-upload
-              style="display: inline-flex; margin-right: 10px"
-              :show-file-list="false"
-              :before-upload="beforeUpload"
-              :on-success="onSuccess"
-              :on-error="onError"
-              :headers="headers"
-              :disabled="importDataDisabled"
-              action="/admin/import">
-            <el-button type="primary"
-                       style="background: #0e57a2;border-color: #0e57a2"
-                       :disabled="importDataDisabled = false"
-                       :icon="importDataButtonIcon">
-              {{ importDataButtonText }}
-            </el-button>
-          </el-upload>
+<!--          <el-upload-->
+<!--              style="display: inline-flex; margin-right: 10px"-->
+<!--              :show-file-list="false"-->
+<!--              :before-upload="beforeUpload"-->
+<!--              :on-success="onSuccess"-->
+<!--              :on-error="onError"-->
+<!--              :headers="headers"-->
+<!--              :disabled="importDataDisabled"-->
+<!--              action="/admin/import">-->
+<!--            <el-button type="primary"-->
+<!--                       style="background: #0e57a2;border-color: #0e57a2"-->
+<!--                       :disabled="importDataDisabled = false"-->
+<!--                       :icon="importDataButtonIcon">-->
+<!--              {{ importDataButtonText }}-->
+<!--            </el-button>-->
+<!--          </el-upload>-->
 
           <el-button type="primary"
                      @click="exportData"
@@ -51,16 +51,8 @@
                      style="background: #0e57a2;border-color: #0e57a2">
             导出数据
           </el-button>
-          <el-button
-              type="primary"
-              style="background: #0e57a2;border-color: #0e57a2"
-              @click="showAddAdminView"
-              icon="el-icon-plus">
-            添加员工
-          </el-button>
         </div>
       </div>
-
     </div>
     <transition name="slide-fade">
       <div class="advanceSearchBox" v-show="showAdvanceSearchVisible">
@@ -257,14 +249,14 @@
         <el-table-column
             label="操作"
             fixed="right"
-            width="115">
+            width="120">
           <template slot-scope="scope">
             <el-button @click="showEditAdminView(scope.row)" style="padding:8px">编辑</el-button>
             <el-button @click="deleteAdmin(scope.row)" style="padding:8px;color: white;background: #c61919; border-color: #c61919">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <div style="display: flex; justify-content: flex-end; margin-top: 10px">
+      <div style="margin-top: 10px">
         <el-pagination
             background
             layout="sizes, prev, pager, next, jumper, ->, total"
@@ -275,9 +267,9 @@
       </div>
 
       <el-dialog
-          class="addDialog"
+          class="updateDialog"
           title="员工信息"
-          :visible.sync="dialogVisible"
+          :visible.sync="updateDialogVisible"
           width="80%">
         <div>
           <el-form ref="empForm" :model="adminInfo">
@@ -504,7 +496,7 @@
           </el-form>
         </div>
         <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button @click="updateDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="doAddAdmin">确 定</el-button>
       </span>
       </el-dialog>
@@ -536,7 +528,7 @@ export default {
       currentPage: 1,
       size: 10,
       adminName: '',
-      dialogVisible: false,
+      updateDialogVisible: false,
       adminInfo: {
         id: null,
         name: '',
@@ -564,28 +556,6 @@ export default {
       politicsstatus:[],
       positions:[],
       tiptopDegrees:['博士','硕士','本科','大专','高中','初中','小学','其他'],
-      // rules:{
-      //   name: [{required: true, message: '请输工姓名', trigger: 'blur'}],
-      //   gender: [{required: true, message: '请输入性别', trigger: 'blur'}],
-      //   birthday: [{required: true, message: '请输入出生日期', trigger: 'blur'}],
-      //   idCard: [{required: true, message: '请输入身份证号码', trigger: 'blur'}],
-      //   wedlock: [{required: true, message: '请输入婚姻状况', trigger: 'blur'}],
-      //   nationId: [{required: true, message: '请输入民族', trigger: 'blur'}],
-      //   nativePlace: [{required: true, message: '请输入籍贯', trigger: 'blur'}],
-      //   politicId: [{required: true, message: '请输入员工政治面貌', trigger: 'blur'}],
-      //   email: [{required: true, message: '请输入邮箱地址', trigger: 'blur'},
-      //     {type:'email', message: '邮箱地址格式不正确', trigger: 'blur'}],
-      //   phone: [{required: true, message: '请输入电话', trigger: 'blur'}],
-      //   telephone: [{required: true, message: '请输入座机电话', trigger: 'blur'}],
-      //   address: [{required: true, message: '请输入地址', trigger: 'blur'}],
-      //   jobLevelId: [{required: true, message: '请输入职称', trigger: 'blur'}],
-      //   posId: [{required: true, message: '请输入职位', trigger: 'blur'}],
-      //   tiptopDegree: [{required: true, message: '请输入学历', trigger: 'blur'}],
-      //   specialty: [{required: true, message: '请输入专业', trigger: 'blur'}],
-      //   school: [{required: true, message: '请输入学校', trigger: 'blur'}],
-      //   workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
-      //   username: [{required: true, message: '请输入域名', trigger: 'blur'}]
-      // }
     }
   },
   mounted() {
@@ -620,14 +590,13 @@ export default {
       this.title = '编辑员工信息';
       this.adminInfo = data;
       this.initPositions();
-      this.dialogVisible = true;
+      this.updateDialogVisible = true;
     },
     showAdminView(data) {
       this.title = '查看员工信息';
       this.adminInfo = data;
       this.initPositions();
-      this.dialogVisible = true;
-
+      this.updateDialogVisible = true;
     },
     deleteAdmin(data) {
       this.$confirm('此操作将永久删除[' + data.name + '], 是否继续?', '提示', {
@@ -648,39 +617,18 @@ export default {
       });
     },
     doAddAdmin(){
-      if (this.adminInfo.id) {
         this.$refs['empForm'].validate(valid=>{
           if(valid) {
             this.putRequest('/admin/', this.adminInfo).then(resp=> {
               console.log(this.adminInfo)
               if(resp) {
-                this.dialogVisible = false;
+                this.updateDialogVisible = false;
                 this.initAdminInfo();
               }
             })
           }
         })
-      } else {
-        this.$refs['empForm'].validate(valid=>{
-          if(valid) {
-            this.postRequest('/admin/', this.adminInfo).then(resp=> {
-              if(resp) {
-                this.dialogVisible = false;
-                this.initAdminInfo();
-              }
-            })
-          }
-        })
-      }
-
     },
-    // getMaxWorkID(){
-    //   this.getRequest('/admin/maxWorkID').then(resp=>{
-    //      if(resp) {
-    //        this.adminInfo.workID = resp.obj;
-    //      }
-    //   })
-    // },
     initPositions(){
       this.getRequest('/admin/positions').then(resp=>{
         if(resp) {
@@ -721,32 +669,6 @@ export default {
       }
     },
 
-    showAddAdminView(){
-      this.initPositions();
-      this.adminInfo= {
-        id: null,
-        name: '',
-        gender: '',
-        birthday: '1900-01-01',
-        idCard: '',
-        wedlock: '',
-        nationId: 57,
-        nativePlace: '',
-        politicId: 13,
-        email: '',
-        phone: '',
-        telephone: '',
-        address: '',
-        jobLevelId: 1,
-        posId: 1,
-        tiptopDegree: '',
-        specialty: '',
-        school: '',
-        workID: '',
-        username: '',
-      }
-      this.dialogVisible = true;
-    },
     initAdminInfo(type) {
       let url = '/admin/?currentPage=' + this.currentPage + '&size=' + this.size;
       if (type && type === 'advanced') {

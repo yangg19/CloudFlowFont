@@ -3,8 +3,8 @@
     <div class="container">
       <div class="left">
         <h1>TEAMPARK</h1>
-        <p>问答系统，知识检索，尽在协作公园</p>
-<!--        <p>工作统计，进度跟踪，尽在协作公园</p>-->
+<!--        <p>问答系统，知识检索，尽在协作公园</p>-->
+        <p>工作统计，进度跟踪，尽在协作公园</p>
 
       </div>
       <div class="right">
@@ -185,8 +185,8 @@
         </el-dialog>
       </div>
       <div class="groupCopyright">
-        <h5 style="color: #5a5959">Copyright©2022 研发XX团队</h5>
-        <h5 style="color: #5a5959">如有任何问题，请联系 40334361@qq.com</h5>
+<!--        <h5 style="color: #5a5959">Copyright©2022 研发XX团队</h5>-->
+<!--        <h5 style="color: #5a5959">如有任何问题，请联系 40334361@qq.com</h5>-->
       </div>
     </div>
 
@@ -344,7 +344,7 @@ export default {
 
 *{
   margin: 0;
-  padding: 0;
+  /*padding: 0;*/
   box-sizing: border-box;
 }
 
@@ -380,7 +380,7 @@ export default {
 .left{
   width:500px;
   align-items: flex-end;
-  margin-right: 200px;
+  margin-right: 100px;
 }
 
 .right{

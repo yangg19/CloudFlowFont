@@ -8,15 +8,13 @@
     </div>
     <div class="passWordMenu">
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="ruleForm">
-        <el-form-item label="密码保护问题" prop="oldPass">
+        <el-form-item label="密保问题" prop="oldPass">
           <el-input v-model="ruleForm.passQuestion" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码保护答案" prop="pass">
+        <el-form-item label="密保答案" prop="pass">
           <el-input v-model="ruleForm.passAnswer" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="updatePasswordInfo('ruleForm')">提交</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button type="primary" style="background: #0e57a2; border-color: #0e57a2; width: 100%; margin-top: 30px" @click="updatePasswordInfo('ruleForm')">提交</el-button>
+
         </el-form-item>
       </el-form>
     </div>
@@ -68,9 +66,6 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
     handleSelect(index) {
       this.$router.push(index);
     },
@@ -95,11 +90,19 @@ export default {
 
 .passWordMenu {
   margin-top: 20px;
+  display: flex;
+  justify-content: left;
 }
 
 .ruleForm {
   width: 30%;
 }
+
+/*.passWordMenu /deep/.el-form-item {*/
+/*  border-radius: 10px;*/
+/*  font-weight: bold;*/
+/*  !*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*!*/
+/*}*/
 
 
 </style>

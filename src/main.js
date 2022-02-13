@@ -51,6 +51,7 @@ router.beforeEach((to, from, next) => {
       next('/?redirect=' + to.path)
     }
   }
+  next()
 })
 
 
