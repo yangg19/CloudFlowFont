@@ -49,7 +49,7 @@ axios.interceptors.response.use(success => {
 });
 
 // 请求地址前置路径
-let base = '';
+let base = '/api/';
 
 // 传送json格式的post请求
 export const postRequest = (url, params) => {
