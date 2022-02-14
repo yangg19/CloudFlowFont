@@ -20,9 +20,9 @@
               <el-form-item label="任务分数">
                 <span>{{ props.row.taskScore }}</span>
               </el-form-item>
-              <el-form-item label="延期次数">
-                <span>{{ props.row.postCount }}</span>
-              </el-form-item>
+<!--              <el-form-item label="延期次数">-->
+<!--                <span>{{ props.row.postCount }}</span>-->
+<!--              </el-form-item>-->
               <el-form-item label="待办详情">
                 <span>{{ props.row.taskDetails }}</span>
               </el-form-item>
@@ -47,7 +47,7 @@
             :filters="[{ text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"
             :filter-method="filterTag"
             filter-placement="bottom-end"
-            width="100">
+            width="70">
           <template slot-scope="scope">
             <el-tag
                 @click="changeStatus"

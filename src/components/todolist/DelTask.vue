@@ -27,7 +27,7 @@
         </el-table-column>
         <el-table-column
             label="操作"
-            width="150">
+            width="120">
           <template slot-scope="scope">
             <el-button @click="redoTask(scope.row)" icon="el-icon-refresh" style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"></el-button>
             <el-button @click="deleteTask(scope.row)" icon="el-icon-close" style="padding:8px" type="danger"></el-button>

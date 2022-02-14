@@ -42,11 +42,11 @@
               icon="el-icon-delete">
           </el-button>
         </div>
-        <div>
-          <div class="imageContainer">
-            <img :src="admin.userFace" :alt="admin.name" :title="admin.name" class="userFaceImage">
-          </div>
-        </div>
+<!--        <div>-->
+<!--          <div class="imageContainer">-->
+<!--            <img :src="'../assets/' + admin.userFace" :alt="admin.name" :title="admin.name" class="userFaceImage">-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="userInfoContainer">
           <div style="font-weight: bold">激活状态：
             <el-switch
