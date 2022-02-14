@@ -170,7 +170,7 @@
           </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="closeAddTask">取 消</el-button>
-          <el-button type="primary" @click="addTodoTask">确 定</el-button>
+          <el-button type="primary" @click="addTodoTask" style="background: #0e57a2;border-color: #0e57a2">确 定</el-button>
         </span>
       </el-dialog>
     </div>

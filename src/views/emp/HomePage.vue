@@ -14,7 +14,7 @@
                   :rows="2"
                   overflow:hidden
                   :autosize="{ minRows: 10, maxRows: 20}"
-                  show-word-limit="true"
+                  show-word-limit
                   clearable
                   size="medium"
                   style="font-size: 20px; text-align:left; font-family: 新宋体"

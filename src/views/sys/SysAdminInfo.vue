@@ -497,7 +497,7 @@
         </div>
         <span slot="footer" class="dialog-footer">
         <el-button @click="updateDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="doAddAdmin">确 定</el-button>
+        <el-button type="primary" @click="doAddAdmin" style="background: #0e57a2;border-color: #0e57a2">确 定</el-button>
       </span>
       </el-dialog>
     </div>
@@ -592,12 +592,12 @@ export default {
       this.initPositions();
       this.updateDialogVisible = true;
     },
-    showAdminView(data) {
-      this.title = '查看员工信息';
-      this.adminInfo = data;
-      this.initPositions();
-      this.updateDialogVisible = true;
-    },
+    // showAdminView(data) {
+    //   this.title = '查看员工信息';
+    //   this.adminInfo = data;
+    //   this.initPositions();
+    //   this.updateDialogVisible = true;
+    // },
     deleteAdmin(data) {
       this.$confirm('此操作将永久删除[' + data.name + '], 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -740,8 +740,9 @@ export default {
   opacity: 0;
 }
 
-.addDialog /deep/.el-dialog {
-  border-radius: 10px;
-  /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+.updateDialog /deep/.el-dialog {
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 </style>

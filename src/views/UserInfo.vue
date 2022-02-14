@@ -7,7 +7,9 @@
       </el-menu>
     </div>
     <div class="avatarInfo">
-      <img title="点击修改用户头像" :src="admin.userFace" class="avatarImage" alt="">
+<!--      <img title="点击修改用户头像" src="../assets/CloudFlow.png" class="avatarImage" alt="">-->
+      <img :src="imgPath" fit="contain" class="avatarImage"></img>
+
       <span style="margin-top: 50px">
         <span style="font-size: 20px;font-weight: bolder; margin-left: 30px">{{admin.name}}</span>
         <div style="margin-left: 30px; margin-top: 10px; font-size: 15px; font-family: '微软雅黑 Light'">{{admin.remark}}</div>
@@ -399,11 +401,9 @@
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updateAdmin">确 定</el-button>
+        <el-button type="primary" @click="updateAdmin" style="background: #0e57a2;border-color: #0e57a2">确 定</el-button>
       </span>
     </el-dialog>
-
-
     <div>
       <el-dialog  title="更新密码"
                   class="passDialog"
@@ -421,7 +421,7 @@
               <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="updatePassword('ruleForm')">提交</el-button>
+              <el-button type="primary" @click="updatePassword('ruleForm')" style="background: #0e57a2;border-color: #0e57a2">提交</el-button>
               <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
           </el-form>
@@ -458,6 +458,7 @@ export default {
       admin: '',
       // adminSub: '',
       adminDisplay: '',
+      imgPath: '',
       // adminSubDisplay: '',
       dialogVisible: false,
       nations:[],
@@ -586,7 +587,8 @@ export default {
     initAdmin() {
       this.getRequest('/admin/adminInfo').then(resp=>{
         this.admin = resp;
-        console.log(this.admin)
+        this.imgPath = require('../assets/' + resp.userFace);
+        console.log(this.imgPath)
 
         // this.adminInfo = resp;
         // 拷贝admin信息用于展示
@@ -642,10 +644,17 @@ export default {
 
 .passDialog /deep/.el-dialog {
   border-radius: 8px;
+  font-weight: bold;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .adminDialog /deep/.el-dialog {
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.addDialog /deep/.el-dialog {
   border-radius: 8px;
   font-weight: bold;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);

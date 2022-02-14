@@ -11,7 +11,8 @@
         <el-dropdown class="userInfo" @command="commandHandler">
           <span class="el-dropdown-link">
 <!--            <el-avatar icon="el-icon-user-solid"></el-avatar>-->
-              <i><img :src="user.userFace"></i>
+              <i><img :src="require('../assets/' + user.userFace)"></i>
+<!--            <img :src="imgPath" fit="contain" class="avatarImage"></img>-->
           </span>
 
           <el-dropdown-menu slot="dropdown">
@@ -73,20 +74,32 @@ export default {
   name: "Home",
   data() {
     return {
+      imgPath: '',
       openeds:['0','1','2','3'],
+      admin: '',
       user: JSON.parse(window.sessionStorage.getItem('user')), // 将获取的用户信息转换为对象
-
     }
   },
   components:{
     HomePage
   },
+  // mounted(){
+  //   this.initAdmin()
+  // },
   computed: {
     routes() {
       return this.$store.state.routes;
     }
   },
   methods:{
+    // initAdmin() {
+    //   this.getRequest('/admin/adminInfo').then(resp=>{
+    //     // this.admin = resp;
+    //     this.imgPath = require('../assets/' + resp.userFace);
+    //     this.admin = resp;
+    //     console.log(this.imgPath)
+    //   })
+    // },
     commandHandler(command){
       if (command === 'logout') {
         this.$confirm('此操作将注销登录, 是否继续?', '提示', {

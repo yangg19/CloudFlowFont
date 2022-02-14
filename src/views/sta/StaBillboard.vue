@@ -1,14 +1,14 @@
 <template>
 
   <div>
-    <div style="width: 35%">
+    <div style="width: 44%">
       <el-input
           class="billboardText"
           type="textarea"
           :rows="2"
           placeholder="请输入内容通知内容"
           :autosize="{ minRows: 20, maxRows: 30}"
-          show-word-limit="true"
+          show-word-limit
           clearable
           size="medium"
           style="font-size: 20px; text-align:left; font-family: 新宋体"
