@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-menu :default-active="activeIndex" class="userMenu" mode="horizontal" @select="handleSelect" router>
+      <el-menu class="userMenu" mode="horizontal" router @select="handleSelect">
         <el-menu-item index="/userInfo">概览</el-menu-item>
         <el-submenu index="2">
           <template slot="title">密码相关</template>
@@ -16,10 +16,10 @@
 
 <script>
 export default {
-  name: "FindMessage",
-  methods:{
+  name: 'FindMessage',
+  methods: {
     handleSelect(index) {
-      this.$router.push(index);
+      this.$router.push(index)
     }
   }
 }

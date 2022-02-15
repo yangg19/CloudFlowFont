@@ -2,8 +2,9 @@
   <div>
     <div>
       <el-table
-          :data="todolists"
-          style="width: 100%">
+        :data="todolists"
+        style="width: 100%"
+      >
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" class="table-expand">
@@ -21,28 +22,38 @@
         </el-table-column>
 
         <el-table-column
-            prop="todoTask"
-            label="待办事项"
-            width="500">
-        </el-table-column>
+          prop="todoTask"
+          label="待办事项"
+          width="500"
+        />
         <el-table-column
-            label="操作"
-            width="150">
+          label="操作"
+          width="150"
+        >
           <template slot-scope="scope">
-            <el-button @click="redoTask(scope.row)" icon="el-icon-refresh" style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"></el-button>
-            <el-button @click="deleteTask(scope.row)" icon="el-icon-close" style="padding:8px" type="danger"></el-button>
+            <el-button
+              icon="el-icon-refresh"
+              style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"
+              @click="redoTask(scope.row)"
+            />
+            <el-button
+              icon="el-icon-close"
+              style="padding:8px"
+              type="danger"
+              @click="deleteTask(scope.row)"
+            />
           </template>
         </el-table-column>
       </el-table>
 
       <div style="margin-top: 10px">
         <el-pagination
-            background
-            layout="prev, pager, next, jumper, ->, total"
-            @current-change="currentChange"
-            @size-change="sizeChange"
-            :total="total">
-        </el-pagination>
+          background
+          layout="prev, pager, next, jumper, ->, total"
+          :total="total"
+          @current-change="currentChange"
+          @size-change="sizeChange"
+        />
       </div>
     </div>
   </div>
@@ -50,27 +61,27 @@
 
 <script>
 export default {
-  name: "AllComTask",
+  name: 'AllComTask',
   data() {
     return {
-      todolists:[],
-      type:'',
-      taskStatusID:'删除',
+      todolists: [],
+      type: '',
+      taskStatusID: '删除',
       total: 0,
       currentPage: 1,
-      size: 10,
+      size: 10
     }
   },
   mounted() {
-    this.initTodolist();
+    this.initTodolist()
   },
   methods: {
 
     initTodolist() {
       this.getRequest('/todolist/all/query/?currentPage=' + this.currentPage + '&size=' + this.size + '&taskStatusID=' + this.taskStatusID).then(resp => {
         if (resp) {
-          this.todolists = resp.data;
-          this.total = resp.total;
+          this.todolists = resp.data
+          this.total = resp.total
         }
       })
     },
@@ -80,18 +91,18 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-          this.deleteRequest('/todolist/' + data.id).then(resp => {
-            if (resp) {
-              this.initTodolist();
-            }
-          })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });
-        });
-      },
+        this.deleteRequest('/todolist/' + data.id).then(resp => {
+          if (resp) {
+            this.initTodolist()
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
 
     redoTask(data) {
       this.$confirm('此操作将重新开启：[' + data.todoTask + '], 是否继续?', '提示', {
@@ -101,24 +112,24 @@ export default {
       }).then(() => {
         this.putRequest('/todolist/redo/?id=' + data.id).then(resp => {
           if (resp) {
-            this.initTodolist();
+            this.initTodolist()
           }
         })
       }).catch(() => {
         this.$message({
           type: 'info',
           message: '已取消重新开启'
-        });
-      });
+        })
+      })
     },
 
     currentChange(currentPage) {
-      this.currentPage = currentPage;
-      this.initTodolist();
+      this.currentPage = currentPage
+      this.initTodolist()
     },
     sizeChange(size) {
-      this.size = size;
-      this.initTodolist();
+      this.size = size
+      this.initTodolist()
     }
   }
 }

@@ -3,46 +3,49 @@
     <div class="container">
       <div class="left">
         <h1>TEAMPARK</h1>
-<!--        <p>问答系统，知识检索，尽在协作公园</p>-->
+        <!--        <p>问答系统，知识检索，尽在协作公园</p>-->
         <p>工作统计，进度跟踪，尽在协作公园</p>
 
       </div>
       <div class="right">
-        <el-form action=""
-                 :rules="rules"
-                 ref="loginForm"
-                 v-loading="loading"
-                 element-loading-text="正在登录"
-                 :model="loginForm"
-                 @keydown.enter.native="submitLogin"
-                 class="right-con">
+        <el-form
+          ref="loginForm"
+          v-loading="loading"
+          action=""
+          :rules="rules"
+          element-loading-text="正在登录"
+          :model="loginForm"
+          class="right-con"
+          @keydown.enter.native="submitLogin"
+        >
           <div class="inputBox">
             <el-form-item prop="username">
-              <el-input type="text" placeholder="用户名" v-model="loginForm.username" size="big"> </el-input>
+              <el-input v-model="loginForm.username" type="text" placeholder="用户名" size="big" />
             </el-form-item>
             <el-form-item prop="password">
-              <el-input type="password" placeholder="密码" v-model="loginForm.password" size="big"> </el-input>
+              <el-input v-model="loginForm.password" type="password" placeholder="密码" size="big" />
             </el-form-item>
           </div>
 
           <el-button class="loginBtn" @click="submitLogin">登录</el-button>
           <el-button class="forget" @click="showFindPassView">忘记密码?</el-button>
-<!--          <a href="" class="forget" @click="open">忘记密码?</a>-->
+          <!--          <a href="" class="forget" @click="open">忘记密码?</a>-->
           <div class="sign-up">
-<!--            <a href="" class="signupBtn">新建账户</a>-->
+            <!--            <a href="" class="signupBtn">新建账户</a>-->
             <el-button class="signupBtn" @click="showAddAdminView">新建账户</el-button>
 
           </div>
         </el-form>
-<!--        <p><b>新建账户服务</b>目前直接联系管理员即可</p>-->
-<!--        <p><b>众人拾柴</b> 火焰高.</p>-->
+        <!--        <p><b>新建账户服务</b>目前直接联系管理员即可</p>-->
+        <!--        <p><b>众人拾柴</b> 火焰高.</p>-->
       </div>
       <div>
         <el-dialog
-            title="找回密码"
-            class="findPassDialog"
-            :visible.sync="findPassDialogVisible"
-            width="30%">
+          title="找回密码"
+          class="findPassDialog"
+          :visible.sync="findPassDialogVisible"
+          width="30%"
+        >
           <div>
             <span style="margin-bottom: 20px; font-weight: bold; display: flex">如忘记密保答案，请联系管理员</span>
 
@@ -50,44 +53,48 @@
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="username">
-                    <el-input class="inputAdmin"
-                              v-model="findPassInfo.username"
-                              placeholder="用户名">
-                    </el-input>
+                    <el-input
+                      v-model="findPassInfo.username"
+                      class="inputAdmin"
+                      placeholder="用户名"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="passQuestion">
-                    <el-input class="inputAdmin"
-                              maxlength="30"
-                              v-model="findPassInfo.passQuestion"
-                              placeholder="密保问题">
-                    </el-input>
+                    <el-input
+                      v-model="findPassInfo.passQuestion"
+                      class="inputAdmin"
+                      maxlength="30"
+                      placeholder="密保问题"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="passAnswer">
-                    <el-input class="inputAdmin"
-                              v-model="findPassInfo.passAnswer"
-                              maxlength="30"
-                              placeholder="密保答案">
-                    </el-input>
+                    <el-input
+                      v-model="findPassInfo.passAnswer"
+                      class="inputAdmin"
+                      maxlength="30"
+                      placeholder="密保答案"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="pass">
-                    <el-input class="inputAdmin"
-                              type="password"
-                              v-model="findPassInfo.pass"
-                              maxlength="12"
-                              placeholder="新密码">
-                    </el-input>
+                    <el-input
+                      v-model="findPassInfo.pass"
+                      class="inputAdmin"
+                      type="password"
+                      maxlength="12"
+                      placeholder="新密码"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -95,17 +102,18 @@
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button @click="findPassDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="doFindPass" style="background: #0e57a2; border-color: #0e57a2">确 定</el-button>
+            <el-button type="primary" style="background: #0e57a2; border-color: #0e57a2" @click="doFindPass">确 定</el-button>
           </span>
         </el-dialog>
       </div>
 
       <div>
         <el-dialog
-            title="创建你的账号"
-            class="addDialog"
-            :visible.sync="dialogVisible"
-            width="30%">
+          title="创建你的账号"
+          class="addDialog"
+          :visible.sync="dialogVisible"
+          width="30%"
+        >
           <div>
             <span style="margin-bottom: 20px; font-weight: bold; display: flex">请填写真实信息，定期清理不规范账户</span>
 
@@ -113,66 +121,72 @@
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="username">
-                    <el-input class="inputAdmin"
-                              v-model="registerMainInfo.username"
+                    <el-input
+                      v-model="registerMainInfo.username"
+                      class="inputAdmin"
 
-                              placeholder="用户名">
-                    </el-input>
+                      placeholder="用户名"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="password">
-                    <el-input class="inputAdmin"
-                              type="password"
-                              v-model="registerMainInfo.password"
-                              placeholder="密码">
-                    </el-input>
+                    <el-input
+                      v-model="registerMainInfo.password"
+                      class="inputAdmin"
+                      type="password"
+                      placeholder="密码"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="name">
-                    <el-input class="inputAdmin"
-                              v-model="registerMainInfo.name"
-                              maxlength="8"
-                              placeholder="姓名">
-                    </el-input>
+                    <el-input
+                      v-model="registerMainInfo.name"
+                      class="inputAdmin"
+                      maxlength="8"
+                      placeholder="姓名"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="workID">
-                    <el-input class="inputAdmin"
-                              v-model="registerMainInfo.workID"
-                              maxlength="12"
-                              placeholder="工号">
-                    </el-input>
+                    <el-input
+                      v-model="registerMainInfo.workID"
+                      class="inputAdmin"
+                      maxlength="12"
+                      placeholder="工号"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="email">
-                    <el-input class="inputAdmin"
-                              v-model="registerMainInfo.email"
-                              maxlength="30"
-                              placeholder="电子邮箱">
-                    </el-input>
+                    <el-input
+                      v-model="registerMainInfo.email"
+                      class="inputAdmin"
+                      maxlength="30"
+                      placeholder="电子邮箱"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
                   <el-form-item prop="phone">
-                    <el-input class="inputAdmin"
-                              v-model="registerMainInfo.phone"
-                              maxlength="11"
-                              placeholder="手机号码">
-                    </el-input>
+                    <el-input
+                      v-model="registerMainInfo.phone"
+                      class="inputAdmin"
+                      maxlength="11"
+                      placeholder="手机号码"
+                    />
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -180,13 +194,13 @@
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="doRegister" style="background: #0e57a2; border-color: #0e57a2">确 定</el-button>
+            <el-button type="primary" style="background: #0e57a2; border-color: #0e57a2" @click="doRegister">确 定</el-button>
           </span>
         </el-dialog>
       </div>
       <div class="groupCopyright">
-<!--        <h5 style="color: #5a5959">Copyright©2022 研发XX团队</h5>-->
-<!--        <h5 style="color: #5a5959">如有任何问题，请联系 40334361@qq.com</h5>-->
+        <!--        <h5 style="color: #5a5959">Copyright©2022 研发XX团队</h5>-->
+        <!--        <h5 style="color: #5a5959">如有任何问题，请联系 40334361@qq.com</h5>-->
       </div>
     </div>
 
@@ -196,7 +210,7 @@
 <script>
 
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       findPassInfo: {
@@ -226,32 +240,32 @@ export default {
       // captchaUrl: '/captcha?time=' + new Date(), // 确保验证码能够正确刷新
       loginForm: {
         username: '',
-        password: '',
+        password: ''
         // code: ''
       },
       loading: false,
       checked: true,
       rules: {
-        username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
-        password: [{required: true, message: '请输入密码', trigger: 'blur'}],
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
         // code: [{required: true, message: '请输入验证码', trigger: 'blur'}]
       },
       dialogVisible: false,
       findPassDialogVisible: false,
-      registerRules:{
-        name: [{required: true, message: '请输工姓名', trigger: 'blur'}],
-        email: [{required: true, message: '请输入邮箱地址', trigger: 'blur'},
-          {type:'email', message: '邮箱地址格式不正确', trigger: 'blur'}],
-        phone: [{required: true, message: '请输入电话', trigger: 'blur'}],
-        workID: [{required: true, message: '请输入工号', trigger: 'blur'}],
-        username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
-        password: [{required: true, message: '请输入密码', trigger: 'blur'}]
+      registerRules: {
+        name: [{ required: true, message: '请输工姓名', trigger: 'blur' }],
+        email: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' },
+          { type: 'email', message: '邮箱地址格式不正确', trigger: 'blur' }],
+        phone: [{ required: true, message: '请输入电话', trigger: 'blur' }],
+        workID: [{ required: true, message: '请输入工号', trigger: 'blur' }],
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
-      findPassRules:{
-        username: [{required: true, message: '请输工用户名', trigger: 'blur'}],
-        passQuestion: [{required: true, message: '请输入密保问题', trigger: 'blur'}],
-        passAnswer: [{required: true, message: '请输入密保答案', trigger: 'blur'}],
-        pass: [{required: true, message: '请输入密码', trigger: 'blur'}]
+      findPassRules: {
+        username: [{ required: true, message: '请输工用户名', trigger: 'blur' }],
+        passQuestion: [{ required: true, message: '请输入密保问题', trigger: 'blur' }],
+        passAnswer: [{ required: true, message: '请输入密保答案', trigger: 'blur' }],
+        pass: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       }
     }
   },
@@ -264,24 +278,24 @@ export default {
     //     this.findPassInfo.passQuestion = resp.passQuestion;
     //   })
     // },
-    doFindPass(){
-      this.$refs['findPassForm'].validate(valid=>{
+    doFindPass() {
+      this.$refs['findPassForm'].validate(valid => {
         console.log(this.findPassInfo)
 
-        if(valid) {
-          this.putRequest('/find-pass', this.findPassInfo).then(resp=> {
-            if(resp) {
-              this.findPassDialogVisible = false;
+        if (valid) {
+          this.putRequest('/find-pass', this.findPassInfo).then(resp => {
+            if (resp) {
+              this.findPassDialogVisible = false
             }
           })
         }
       })
     },
     doRegister() {
-      this.$refs['registerForm'].validate(valid=>{
-        if(valid) {
-          this.postRequest('/register', this.registerMainInfo).then(resp=> {
-            if(resp) {
+      this.$refs['registerForm'].validate(valid => {
+        if (valid) {
+          this.postRequest('/register', this.registerMainInfo).then(resp => {
+            if (resp) {
               this.doRegisterSub(this.registerMainInfo.workID)
             }
           })
@@ -290,26 +304,26 @@ export default {
     },
     doRegisterSub(workID) {
       console.log(this.registerSubInfo)
-      this.registerSubInfo.workID = workID;
+      this.registerSubInfo.workID = workID
       console.log(this.registerSubInfo)
-      this.putRequest('/register-sub', this.registerSubInfo).then(resp=> {
-        if(resp) {
-          this.dialogVisible = false;
+      this.putRequest('/register-sub', this.registerSubInfo).then(resp => {
+        if (resp) {
+          this.dialogVisible = false
         }
       })
     },
-    showFindPassView(){
-      this.findPassDialogVisible = true;
+    showFindPassView() {
+      this.findPassDialogVisible = true
     },
-    showAddAdminView(){
-      this.dialogVisible = true;
+    showAddAdminView() {
+      this.dialogVisible = true
     },
     // // 更新验证码方法
     // updateCaptcha() {
     //   this.captchaUrl = '/captcha?time=' + new Date()
     // },
     directLogin() {
-      this.$router.replace('/home');
+      this.$router.replace('/home')
     },
     // 登录方法
     submitLogin() {
@@ -318,23 +332,23 @@ export default {
           this.postRequest('/login', this.loginForm).then(resp => {
             // 如果有返回值，跳转到home
             if (resp) {
-              this.loading = true;
+              this.loading = true
               // 从返回报文中获取token
-              const tokenStr = resp.obj.tokenHead + resp.obj.token;
+              const tokenStr = resp.obj.tokenHead + resp.obj.token
               // 存储用户token
-              window.sessionStorage.setItem('tokenStr', tokenStr);
+              window.sessionStorage.setItem('tokenStr', tokenStr)
               setTimeout(() => {
-                this.loading = false;
-              }, 200);
+                this.loading = false
+              }, 200)
               // 跳转首页
-              this.$router.replace('/home');
+              this.$router.replace('/home')
             }
           })
         } else {
-          this.$message.error('请输入所有字段！');
-          return false;
+          this.$message.error('请输入所有字段！')
+          return false
         }
-      });
+      })
     }
   }
 }
@@ -403,8 +417,6 @@ export default {
   display: flex;
   align-items: flex-start;
 }
-
-
 
 .right-con{
   background-color: white;
@@ -550,6 +562,5 @@ export default {
   /*-webkit-box-sizing: border-box;*/
 
 }
-
 
 </style>

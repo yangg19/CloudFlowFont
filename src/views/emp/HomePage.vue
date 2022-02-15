@@ -9,36 +9,38 @@
             </div>
             <div>
               <el-input
-                  class="billboardText"
-                  type="textarea"
-                  :rows="2"
-                  overflow:hidden
-                  :autosize="{ minRows: 10, maxRows: 20}"
-                  show-word-limit
-                  clearable
-                  size="medium"
-                  style="font-size: 20px; text-align:left; font-family: 新宋体"
-                  v-model="billboard.noticeContent">
-              </el-input>
+                v-model="billboard.noticeContent"
+                class="billboardText"
+                type="textarea"
+                :rows="2"
+                overflow:hidden
+                :autosize="{ minRows: 10, maxRows: 20}"
+                show-word-limit
+                clearable
+                size="medium"
+                style="font-size: 20px; text-align:left; font-family: 新宋体"
+              />
             </div>
 
           </el-card>
         </div>
       </div>
       <div class="right">
-        <el-tabs class="todolistTab"
-                 v-model="activeName"
-                 @tab-click="handleClick"
-                 stretch
-                 type="border-card">
+        <el-tabs
+          v-model="activeName"
+          class="todolistTab"
+          stretch
+          type="border-card"
+          @tab-click="handleClick"
+        >
           <el-tab-pane label="任务清单" name="ProTask">
-            <ProTask v-if="isProTaskUpdate"></ProTask>
+            <ProTask v-if="isProTaskUpdate" />
           </el-tab-pane>
           <el-tab-pane label="完成任务" name="ComTask">
-            <ComTask v-if="isComTaskUpdate"></ComTask>
+            <ComTask v-if="isComTaskUpdate" />
           </el-tab-pane>
           <el-tab-pane label="删除任务" name="DelTask">
-            <DelTask v-if="isDelTaskUpdate"></DelTask>
+            <DelTask v-if="isDelTaskUpdate" />
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -48,67 +50,67 @@
 </template>
 
 <script>
-import ComTask from "../../components/todolist/ComTask";
-import ProTask from "../../components/todolist/ProTask";
-import DelTask from "../../components/todolist/DelTask";
+import ComTask from '../../components/todolist/ComTask'
+import ProTask from '../../components/todolist/ProTask'
+import DelTask from '../../components/todolist/DelTask'
 
 export default {
-name: "HomePage",
+  name: 'HomePage',
+  components: {
+    ComTask,
+    ProTask,
+    DelTask
+  },
   data() {
     return {
-      isProTaskUpdate:true,
-      isComTaskUpdate:false,
-      isDelTaskUpdate:false,
+      isProTaskUpdate: true,
+      isComTaskUpdate: false,
+      isDelTaskUpdate: false,
       calendarDate: new Date(),
       activeName: 'ProTask',
       addDialogVisible: false,
       repoDialogVisible: false,
       finishDialogVisible: false,
-      billboard:{
+      billboard: {
         noticeContent: '',
         createDate: ''
       }
     }
   },
-  components:{
-    ComTask,
-    ProTask,
-    DelTask
-  },
-  mounted(){
+  mounted() {
     this.notice()
   },
-  methods:{
+  methods: {
     notice() {
-      this.getRequest('/billboard/').then(resp=>{
-        if(resp) {
-          this.billboard.noticeContent = resp.noticeContent;
-          this.billboard.createDate = resp.createDate;
+      this.getRequest('/billboard/').then(resp => {
+        if (resp) {
+          this.billboard.noticeContent = resp.noticeContent
+          this.billboard.createDate = resp.createDate
         }
       })
     },
     handleClose(done) {
       this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
+        .then(_ => {
+          done()
+        })
+        .catch(_ => {})
     },
     handleClick(tab) {
-      if(tab.name === "ProTask") {
-        this.isProTaskUpdate = true;
-        this.isComTaskUpdate = false;
-        this.isDelTaskUpdate = false;
-      } else if(tab.name === "ComTask") {
-        this.isProTaskUpdate = false;
-        this.isComTaskUpdate = true;
-        this.isDelTaskUpdate = false;
-      } else if(tab.name === "DelTask") {
-        this.isProTaskUpdate = false;
-        this.isComTaskUpdate = false;
-        this.isDelTaskUpdate = true;
+      if (tab.name === 'ProTask') {
+        this.isProTaskUpdate = true
+        this.isComTaskUpdate = false
+        this.isDelTaskUpdate = false
+      } else if (tab.name === 'ComTask') {
+        this.isProTaskUpdate = false
+        this.isComTaskUpdate = true
+        this.isDelTaskUpdate = false
+      } else if (tab.name === 'DelTask') {
+        this.isProTaskUpdate = false
+        this.isComTaskUpdate = false
+        this.isDelTaskUpdate = true
       }
-    },
+    }
   }
 }
 </script>
@@ -178,7 +180,6 @@ name: "HomePage",
   padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-
 
 /* 如果你的 el-input type 设置成textarea ，就要用这个了 */
 .billboardText>>>.el-textarea__inner {

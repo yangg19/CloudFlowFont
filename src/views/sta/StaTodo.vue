@@ -2,17 +2,19 @@
   <div>
     <div class="wrap">
       <div class="container">
-        <el-tabs class="todolistTab"
-                 v-model="activeName"
-                 @tab-click="handleClick">
+        <el-tabs
+          v-model="activeName"
+          class="todolistTab"
+          @tab-click="handleClick"
+        >
           <el-tab-pane label="任务清单" name="AllProTask">
-            <AllProTask v-if="isProTaskUpdate"></AllProTask>
+            <AllProTask v-if="isProTaskUpdate" />
           </el-tab-pane>
           <el-tab-pane label="完成任务" name="AllComTask">
-            <AllComTask v-if="isComTaskUpdate"></AllComTask>
+            <AllComTask v-if="isComTaskUpdate" />
           </el-tab-pane>
           <el-tab-pane label="删除任务" name="AllDelTask">
-            <AllDelTask v-if="isDelTaskUpdate"></AllDelTask>
+            <AllDelTask v-if="isDelTaskUpdate" />
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -22,41 +24,41 @@
 
 <script>
 
-import AllComTask from "../../components/todolist/AllComTask";
-import AllDelTask from "../../components/todolist/AllDelTask";
-import AllProTask from "../../components/todolist/AllProTask";
+import AllComTask from '../../components/todolist/AllComTask'
+import AllDelTask from '../../components/todolist/AllDelTask'
+import AllProTask from '../../components/todolist/AllProTask'
 
 export default {
-  name: "StaTodo",
-  data() {
-    return {
-      isProTaskUpdate:true,
-      isComTaskUpdate:false,
-      isDelTaskUpdate:false,
-      activeName: 'AllProTask'
-    }
-  },
-  components:{
+  name: 'StaTodo',
+  components: {
     AllComTask,
     AllProTask,
     AllDelTask
   },
-  methods:{
+  data() {
+    return {
+      isProTaskUpdate: true,
+      isComTaskUpdate: false,
+      isDelTaskUpdate: false,
+      activeName: 'AllProTask'
+    }
+  },
+  methods: {
     handleClick(tab) {
-      if(tab.name === "AllProTask") {
-        this.isProTaskUpdate = true;
-        this.isComTaskUpdate = false;
-        this.isDelTaskUpdate = false;
-      } else if(tab.name === "AllComTask") {
-        this.isProTaskUpdate = false;
-        this.isComTaskUpdate = true;
-        this.isDelTaskUpdate = false;
-      } else if(tab.name == "AllDelTask") {
-        this.isProTaskUpdate = false;
-        this.isComTaskUpdate = false;
-        this.isDelTaskUpdate = true;
+      if (tab.name === 'AllProTask') {
+        this.isProTaskUpdate = true
+        this.isComTaskUpdate = false
+        this.isDelTaskUpdate = false
+      } else if (tab.name === 'AllComTask') {
+        this.isProTaskUpdate = false
+        this.isComTaskUpdate = true
+        this.isDelTaskUpdate = false
+      } else if (tab.name === 'AllDelTask') {
+        this.isProTaskUpdate = false
+        this.isComTaskUpdate = false
+        this.isDelTaskUpdate = true
       }
-    },
+    }
   }
 
 }
@@ -92,16 +94,5 @@ export default {
   /*height: calc(100vh - 110px);*/
 
   /*overflow-y: auto;*/
-}
-/*.todolistTab {*/
-/*  !*height: calc(100vh - 110px);*!*/
-/*  !*overflow-y: auto;*!*/
-/*  !*border-radius: 15px;*!*/
-/*  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
-/*}*/
-
-.box-card {
-  width: 1000px;
-  height: 1000px;
 }
 </style>

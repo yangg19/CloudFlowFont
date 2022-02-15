@@ -2,8 +2,9 @@
   <div>
     <div>
       <el-table
-          :data="todolists"
-          style="width: 100%">
+        :data="todolists"
+        style="width: 100%"
+      >
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" class="table-expand">
@@ -20,30 +21,41 @@
           </template>
         </el-table-column>
         <el-table-column
-            prop="todoTask, planTime"
-            label="待办事项"
-            width="600">
+          prop="todoTask, planTime"
+          label="待办事项"
+          width="600"
+        >
           <template slot-scope="scope">
-            <el-tag type="">{{scope.row.planTime}}</el-tag>&nbsp&nbsp&nbsp&nbsp&nbsp{{scope.row.todoTask}}
+            <el-tag type="">{{ scope.row.planTime }}</el-tag>&nbsp&nbsp&nbsp&nbsp&nbsp{{ scope.row.todoTask }}
           </template>
         </el-table-column>
         <el-table-column
-            label="操作"
-            width="120">
+          label="操作"
+          width="120"
+        >
           <template slot-scope="scope">
-            <el-button @click="redoTask(scope.row)" icon="el-icon-refresh" style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"></el-button>
-            <el-button @click="deleteTask(scope.row)" icon="el-icon-close" style="padding:8px" type="danger"></el-button>
+            <el-button
+              icon="el-icon-refresh"
+              style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"
+              @click="redoTask(scope.row)"
+            />
+            <el-button
+              icon="el-icon-close"
+              style="padding:8px"
+              type="danger"
+              @click="deleteTask(scope.row)"
+            />
           </template>
         </el-table-column>
       </el-table>
       <div style="margin-top: 10px">
         <el-pagination
-            background
-            layout="prev, pager, next, jumper, ->, total"
-            @current-change="currentChange"
-            @size-change="sizeChange"
-            :total="total">
-        </el-pagination>
+          background
+          layout="prev, pager, next, jumper, ->, total"
+          :total="total"
+          @current-change="currentChange"
+          @size-change="sizeChange"
+        />
       </div>
     </div>
   </div>
@@ -52,19 +64,19 @@
 
 <script>
 export default {
-  name: "ComTask",
+  name: 'ComTask',
   data() {
     return {
-      todolists:[],
-      type:'',
-      taskStatusID:'完成',
+      todolists: [],
+      type: '',
+      taskStatusID: '完成',
       total: 0,
       currentPage: 1,
-      size: 10,
+      size: 10
     }
   },
   mounted() {
-    this.initTodolist();
+    this.initTodolist()
   },
   methods: {
     redoTask(data) {
@@ -75,39 +87,39 @@ export default {
       }).then(() => {
         this.putRequest('/todolist/redo/?id=' + data.id).then(resp => {
           if (resp) {
-            this.initTodolist();
+            this.initTodolist()
           }
         })
       }).catch(() => {
         this.$message({
           type: 'info',
           message: '已取消重新开启'
-        });
-      });
+        })
+      })
     },
     initTodolist() {
       this.getRequest('/todolist/query/?currentPage=' + this.currentPage + '&size=' + this.size + '&taskStatusID=' + this.taskStatusID).then(resp => {
         if (resp) {
-          this.todolists = resp.data;
-          this.total = resp.total;
+          this.todolists = resp.data
+          this.total = resp.total
         }
       })
     },
     deleteTask(data) {
       this.putRequest('/todolist/del/?id=' + data.id).then(resp => {
-        if(resp) {
-          this.initTodolist();
+        if (resp) {
+          this.initTodolist()
         }
       })
     },
     currentChange(currentPage) {
-      this.currentPage = currentPage;
-      this.initTodolist();
+      this.currentPage = currentPage
+      this.initTodolist()
     },
     sizeChange(size) {
-      this.size = size;
-      this.initTodolist();
-    },
+      this.size = size
+      this.initTodolist()
+    }
 
   }
 }
@@ -134,7 +146,6 @@ export default {
   margin-bottom: 0;
   /*  width: 50%;*/
 }
-
 
 .el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #0e57a2;
