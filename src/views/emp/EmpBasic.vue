@@ -43,13 +43,6 @@
           >
             导出数据
           </el-button>
-          <!--          <el-button-->
-          <!--              type="primary"-->
-          <!--              style="background: #0e57a2;border-color: #0e57a2"-->
-          <!--              @click="showAddAdminView"-->
-          <!--              icon="el-icon-plus">-->
-          <!--            添加员工-->
-          <!--          </el-button>-->
         </div>
       </div>
 
@@ -58,76 +51,69 @@
       <div v-show="showAdvanceSearchVisible" class="advanceSearchBox">
         <el-row />
         <el-row>
-          <el-col :span="5" style="margin-left: 100px">
-            政治面貌：
-            <el-select
-              v-model="searchValue.politicId"
-              placeholder="政治面貌"
-              size="mini"
-              clearable
-              style="width: 150px"
-            >
-              <el-option
-                v-for="item in politicsstatus"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              />
-            </el-select>
+          <el-select
+            v-model="searchValue.politicId"
+            placeholder="政治面貌"
+            size="mini"
+            clearable
+            style="width: 100%; margin-top: 10px"
+          >
+            <el-option
+              v-for="item in politicsstatus"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
+          </el-select>
+        </el-row>
+        <el-row>
+          <el-select
+            v-model="searchValue.nationId"
+            placeholder="民族"
+            size="mini"
+            clearable
+            style="width: 100%; margin-top: 10px"
+          >
+            <el-option
+              v-for="item in nations"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
+          </el-select>
+        </el-row>
 
-          </el-col>
-          <el-col :span="5">
-            员工民族：
-            <el-select
-              v-model="searchValue.nationId"
-              placeholder="民族"
-              size="mini"
-              clearable
-              style="width: 150px"
-            >
-              <el-option
-                v-for="item in nations"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              />
-            </el-select>
-
-          </el-col>
-          <el-col :span="5">
-            员工职位：
-            <el-select
-              v-model="searchValue.posId"
-              placeholder="职位"
-              size="mini"
-              clearable
-              style="width: 150px"
-            >
-              <el-option
-                v-for="item in positions"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              />
-            </el-select>
-          </el-col>
-          <el-col :span="5">
-            员工职称：
-            <el-select
-              v-model="searchValue.jobLevelId"
-              placeholder="职称"
-              size="mini"
-              clearable
-              style="width: 150px"
-            >
-              <el-option
-                v-for="item in joblevels"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              />
-            </el-select>
-          </el-col>
+        <el-row>
+          <el-select
+            v-model="searchValue.posId"
+            placeholder="职位"
+            size="mini"
+            clearable
+            style="width: 100%; margin-top: 10px"
+          >
+            <el-option
+              v-for="item in positions"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
+          </el-select>
+        </el-row>
+        <el-row>
+          <el-select
+            v-model="searchValue.jobLevelId"
+            placeholder="职称"
+            size="mini"
+            clearable
+            style="width: 100%; margin-top: 10px"
+          >
+            <el-option
+              v-for="item in joblevels"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
+          </el-select>
         </el-row>
 
         <el-row style="margin-top: 20px; margin-left: 100px">
@@ -151,7 +137,7 @@
           prop="name"
           label="姓名"
           fixed="left"
-          align="left"
+          align="center"
           width="90"
         />
         <el-table-column
@@ -252,7 +238,6 @@
           prop="specialty"
           label="专业"
           align="left"
-          width="150"
         />
       </el-table>
       <div style="margin-top: 10px">
@@ -422,6 +407,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 15px;
+  width: 30%;
 }
 
 .el-pagination.is-background .el-pager li:not(.disabled).active {

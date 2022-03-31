@@ -4,23 +4,27 @@
       <div class="left">
         <div>
           <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>通知</span>
+            <div slot="header">
+              <span style="font-size: 30px; display: flex; justify-content: center">通知</span>
             </div>
             <div>
-              <el-input
+              <mavon-editor
+                ref="md"
                 v-model="billboard.noticeContent"
-                class="billboardText"
-                type="textarea"
-                :rows="2"
-                overflow:hidden
-                :autosize="{ minRows: 10, maxRows: 20}"
-                show-word-limit
-                clearable
-                size="medium"
-                style="font-size: 20px; text-align:left; font-family: 新宋体"
+                preview-background="#FFFFFF"
+                :box-shadow="isFalse"
+                :toolbars-flag="isFalse"
+                :default-open="defaultOpen"
+                :subfield="isFalse"
+                style="font-size: 20px;
+                  text-align:left;
+                  font-family: '新宋体';
+                  word-wrap: break-word;
+                  white-space: pre-wrap;
+                  border-color: white"
               />
             </div>
+
           </el-card>
         </div>
       </div>
@@ -54,7 +58,7 @@ import ProTask from '../../components/todolist/ProTask'
 import DelTask from '../../components/todolist/DelTask'
 
 export default {
-  name: 'HomePage',
+  name: 'StaHome',
   components: {
     ComTask,
     ProTask,
@@ -65,29 +69,6 @@ export default {
       isFalse: false,
       isTrue: true,
       defaultOpen: 'preview',
-      // toolbars: {
-      //   bold: true,
-      //   italic: true,
-      //   header: true,
-      //   underline: true,
-      //   strikethrough: true,
-      //   mark: true,
-      //   superscript: true,
-      //   subscript: true,
-      //   quote: true,
-      //   ol: true,
-      //   ul: true,
-      //   table: true,
-      //   fullscreen: true,
-      //   readmodel: true,
-      //   help: true,
-      //   undo: true,
-      //   redo: true,
-      //   alignleft: true,
-      //   aligncenter: true,
-      //   alignright: true,
-      //   subfield: true
-      // },
       isProTaskUpdate: true,
       isComTaskUpdate: false,
       isDelTaskUpdate: false,
@@ -148,7 +129,7 @@ export default {
 }
 
 .main {
-  margin-top: 0.4rem
+  margin-top: 2.2rem
 }
 
 .main .insights {

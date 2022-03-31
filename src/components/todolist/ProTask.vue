@@ -1,32 +1,40 @@
 <template>
   <div class="taskClass">
     <div slot="header">
-      <el-input
-        v-model="addTodolist.todoTask"
-        class="addInput"
-        prefix-icon="el-icon-plus"
-        clearable
-        placeholder="添加待办事项"
-        @keydown.enter.native="showAddTodoTask"
-      />
+
+      <!--<el-input-->
+      <!--  v-model="addTodolist.todoTask"-->
+      <!--  class="addInput"-->
+      <!--  prefix-icon="el-icon-plus"-->
+      <!--  clearable-->
+      <!--  placeholder="添加待办事项"-->
+      <!--  @keydown.enter.native="showAddTodoTask"-->
+      <!--/>-->
+      <el-button
+        icon="el-icon-plus"
+        style="float: right; margin-bottom: 10px;margin-top: 10px"
+        width="100%"
+        @click="showAddTodoTask"
+      >
+        添加待办事项
+      </el-button>
     </div>
     <div>
       <el-table
-        ref="filterTable"
         :data="todolists"
         style="width: 100%"
+        :default-expand-all="isExpand"
       >
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" class="table-expand">
+              <el-form-item label="待办详情">
+                <el-divider />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <span>{{ props.row.taskDetails }}</span>
+                <el-divider />
+              </el-form-item>
               <el-form-item label="任务分数">
                 <span>{{ props.row.taskScore }}</span>
-              </el-form-item>
-              <!--              <el-form-item label="延期次数">-->
-              <!--                <span>{{ props.row.postCount }}</span>-->
-              <!--              </el-form-item>-->
-              <el-form-item label="待办详情">
-                <span>{{ props.row.taskDetails }}</span>
               </el-form-item>
             </el-form>
           </template>
@@ -34,7 +42,6 @@
         <el-table-column
           prop="todoTask, planTime"
           label="待办事项"
-          width="500"
         >
           <template slot-scope="scope">
             <el-tag
@@ -43,22 +50,23 @@
             >
               {{ scope.row.planTime }}
             </el-tag>
-            <!--            &nbsp&nbsp&nbsp&nbsp&nbsp{{ scope.row.todoTask }}-->
-            {{ scope.row.todoTask }}
+            &nbsp&nbsp&nbsp{{ scope.row.todoTask }}
+            <!--<el-button style="border-color: white" @click="displaySubBond">-->
+            <!--  {{ scope.row.todoTask }}-->
+            <!--</el-button>-->
           </template>
         </el-table-column>
         <el-table-column
           prop="isProcess"
           label="状态"
-          :filters="[{ text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"
-          :filter-method="filterTag"
-          filter-placement="bottom-end"
-          width="70"
+          width="80"
         >
+          <!--:filters="[{ text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"-->
+          <!--:filter-method="filterTag"-->
+          <!--filter-placement="bottom-end"-->
           <template slot-scope="scope">
             <el-tag
               :type="scope.row.taskStatusID === '逾期' ? 'danger' : ''"
-              @click="changeStatus"
             >
               {{ scope.row.taskStatusID }}
             </el-tag>
@@ -69,9 +77,9 @@
           width="150"
         >
           <template slot-scope="scope">
-            <el-button icon="el-icon-check" style="padding:8px" @click="completeTask(scope.row)" />
-            <el-button icon="el-icon-edit" style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff" @click="showEditTodoTask(scope.row)" />
-            <el-button icon="el-icon-close" style="padding:8px" type="danger" @click="deleteTask(scope.row)" />
+            <el-button title="完成" icon="el-icon-check" style="padding:8px" @click="completeTask(scope.row)" />
+            <el-button title="编辑" icon="el-icon-edit" style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff" @click="showEditTodoTask(scope.row)" />
+            <el-button title="删除" icon="el-icon-close" style="padding:8px" type="danger" @click="deleteTask(scope.row)" />
           </template>
         </el-table-column>
       </el-table>
@@ -91,8 +99,9 @@
         title="添加待办"
         style="text-align: left; font-weight: bold"
         :visible.sync="addDialogVisible"
-        :close-on-press-escape="false"
-        :close-on-click-modal="false"
+        :close-on-press-escape="isFalse"
+        :close-on-click-modal="isFalse"
+        :show-close="isFalse"
         width="35%"
         height="100%"
         :before-close="handleClose"
@@ -118,27 +127,12 @@
               width="100%"
             />
           </el-form-item>
-          <!--            <el-form-item label="分数设置：" prop="addTodolist.todoTask">-->
-          <!--              <el-radio-group v-model="addTodolist.taskScore">-->
-          <!--                <el-radio-button label="1"></el-radio-button>-->
-          <!--                <el-radio-button label="2"></el-radio-button>-->
-          <!--                <el-radio-button label="3"></el-radio-button>-->
-          <!--                <el-radio-button label="4"></el-radio-button>-->
-          <!--              </el-radio-group>-->
-          <!--            </el-form-item>-->
-          <!--            <el-form-item label="状态设置：" prop="addTodolist.taskStatusID">-->
-          <!--              <el-radio-group v-model="addTodolist.taskStatusID">-->
-          <!--                <el-radio-button label="新建"></el-radio-button>-->
-          <!--                <el-radio-button label="进行中"></el-radio-button>-->
-          <!--              </el-radio-group>-->
-          <!--            </el-form-item>-->
           <el-form-item label="执行人：" prop="addTodolist.userID">
             <el-select
               v-model="addTodolist.userID"
               clearable
               filterable
               default-first-option
-              filterable
               placeholder="请选择执行人"
             >
               <el-option
@@ -176,6 +170,9 @@ export default {
   name: 'ProTask',
   data() {
     return {
+      isFalse: false,
+      isTrue: true,
+      isExpand: false,
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() < Date.now() - 3600 * 1000 * 24
@@ -231,6 +228,17 @@ export default {
     this.initUserID()
   },
   methods: {
+    displaySubBond() {
+      console.log('进入')
+      this.active = !this.active
+      if (this.active) {
+        console.log('展开')
+        this.isExpand = true
+      } else {
+        console.log('关闭')
+        this.isExpand = false
+      }
+    },
     initUserID() {
       this.getRequest('/system/admin/').then(resp => {
         if (resp) {
@@ -282,6 +290,7 @@ export default {
     showEditTodoTask(data) {
       this.title = '编辑待办信息'
       this.addTodolist = data
+      this.addTodolist.taskStatusID = '进行中'
       this.addDialogVisible = true
       this.initTodolist()
     },
@@ -297,9 +306,18 @@ export default {
             this.putRequest('/todolist/', this.addTodolist).then(resp => {
               if (resp) {
                 this.dialogVisible = false
-                this.addTodolist.todoTask = ''
+                // this.addTodolist.todoTask = ''
                 this.initTodolist()
                 this.addDialogVisible = false
+                this.addTodolist = {
+                  todoTask: '',
+                  taskScore: 0,
+                  postCount: '',
+                  planTime: '',
+                  tagColor: '',
+                  taskStatusID: '进行中',
+                  taskDetails: ''
+                }
               }
             })
           }
@@ -310,9 +328,18 @@ export default {
             this.postRequest('/todolist/', this.addTodolist).then(resp => {
               if (resp) {
                 this.addDialogVisible = false
-                this.addTodolist.todoTask = ''
+                // this.addTodolist.todoTask = ''
                 this.initTodolist()
                 this.addDialogVisible = false
+                this.addTodolist = {
+                  todoTask: '',
+                  taskScore: 0,
+                  postCount: '',
+                  planTime: '',
+                  tagColor: '',
+                  taskStatusID: '进行中',
+                  taskDetails: ''
+                }
               }
             })
           }
@@ -359,11 +386,15 @@ export default {
   margin-top: 10px;
 }
 
-.table-expand {
-  margin-left: 20px;
-  font-size: 0;
-  color: #000000;
-}
+/*.table-expand {*/
+/*  !*font-size: 0;*!*/
+/*  color: #000000;*/
+/*  background: #fafafa;*/
+/*  border: 1px solid #dcdfe6;*/
+/*  box-shadow: 0 0 1px #cac6c6;*/
+/*  border-radius:  4px;*/
+/*  box-sizing: border-box;*/
+/*}*/
 .table-expand label {
   width: 90px;
   font-size: 15px;
@@ -373,7 +404,7 @@ export default {
 .table-expand .el-form-item {
   margin-right: 0;
   margin-bottom: 0;
-/*  width: 50%;*/
+  /*  width: 50%;*/
 }
 
 .addDialog /deep/.el-dialog {

@@ -17,7 +17,6 @@
         <el-table-column
           prop="todoTask"
           label="待办事项"
-          width="300"
         >
           <template slot-scope="scope">
             {{ scope.row.todoTask }}
@@ -36,6 +35,18 @@
           </template>
         </el-table-column>
         <el-table-column
+          prop="comTime"
+          label="完成时间"
+          width="150"
+        >
+          <template slot-scope="scope">
+            <el-tag
+              color="white"
+              style="color: #000000"
+            >{{ scope.row.comTime }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="userID"
           label="任务执行人"
           width="100"
@@ -44,15 +55,15 @@
             {{ scope.row.adminName.name }}
           </template>
         </el-table-column>
-        <el-table-column
-          prop="postCount"
-          label="延期次数"
-          width="100"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.postCount }}
-          </template>
-        </el-table-column>
+        <!--<el-table-column-->
+        <!--  prop="postCount"-->
+        <!--  label="延期次数"-->
+        <!--  width="100"-->
+        <!--&gt;-->
+        <!--  <template slot-scope="scope">-->
+        <!--    {{ scope.row.postCount }}-->
+        <!--  </template>-->
+        <!--</el-table-column>-->
         <el-table-column
           prop="taskScore"
           label="任务分数"
@@ -68,11 +79,14 @@
         >
           <template slot-scope="scope">
             <el-button
+              title="复用"
               icon="el-icon-refresh"
               style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"
               @click="redoTask(scope.row)"
             />
             <el-button
+              title="删除"
+
               icon="el-icon-close"
               style="padding:8px"
               type="danger"

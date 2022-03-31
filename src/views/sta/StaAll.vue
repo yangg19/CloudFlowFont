@@ -1,13 +1,12 @@
 <template>
   <div>
     <div class="wrap">
-
       <div class="container">
         <div class="left">
           <div style="font-size: 15px; font-weight: bold">
             <span v-text="this.lastStartDate + ' ～ ' + this.lastEndDate" />
           </div>
-          <div style="">
+          <div style>
             <el-button
               type="primary"
               icon="el-icon-download"
@@ -43,13 +42,17 @@
                 </el-table-column>
                 <el-table-column
                   prop="todoTask"
-                  width="400"
                   label="任务"
                   align="left"
                 />
                 <el-table-column
                   prop="planTime"
                   label="计划时间"
+                  width="90"
+                />
+                <el-table-column
+                  prop="comTime"
+                  label="完成时间"
                   width="90"
                 />
                 <el-table-column
@@ -119,13 +122,17 @@
                 </el-table-column>
                 <el-table-column
                   prop="todoTask"
-                  width="400"
                   label="任务"
                   align="left"
                 />
                 <el-table-column
                   prop="planTime"
                   label="计划时间"
+                  width="90"
+                />
+                <el-table-column
+                  prop="comTime"
+                  label="完成时间"
                   width="90"
                 />
                 <el-table-column
@@ -179,7 +186,7 @@ export default {
     // this.onMergeLines();
   },
   methods: {
-  // 获取表格序号
+    // 获取表格序号
     getIndex($index) {
       return $index + 1
     },
@@ -291,68 +298,31 @@ export default {
 <style scoped>
 *{
   margin: 0;
-  /*padding: 0;*/
   box-sizing: border-box;
-}
-
-.wrap{
-  display: flex;
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  /*background-color: #f0f2f5;*/
-  /*background-image: linear-gradient(to left bottom, #ffffff, #f4f3f4, #e9e8e9, #dedcdd, #d4d1d1);*/
-  width: 100%;
-  /*height: 100vh;*/
-  /*margin: 10px;*/
 }
 
 .container{
   width:100%;
-  height:100%;
   display: flex;
-  /*justify-content: space-around	;*/
-  /*align-items: center;*/
+
 }
 
-.left, .right, form{
-  display: flex;
-  flex-direction: column;
-  /*align-content: center;*/
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  margin: 10px;
-  flex:1;
+.wrap .container{
+  display: grid;
+  grid-template-columns: 49% 49%;
+  gap: 1rem;
 }
 
-.left{
-  /*width:500px;*/
-  align-items: flex-start;
-  margin-right: 100px;
-}
-
-.right{
-  /*width:500px;*/
+.right {
   align-items: flex-start;
 }
 
-.calendarDate {
-
-  /*margin: 20px;*/
-  width: 90%;
-  font-size: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-
+.left {
+  align-items: flex-start;
+  margin-right: 10px;
 }
 
 .todolistTab {
-  /*height: calc(100vh - 110px);*/
-
-  /*overflow-y: auto;*/
-}
-.todolistTab {
-  /*height: calc(100vh - 110px);*/
-  /*overflow-y: auto;*/
-  /*border-radius: 15px;*/
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 

@@ -2,9 +2,8 @@
   <div class="wrap">
     <div class="container">
       <div class="left">
-        <h1>TEAMPARK</h1>
-        <!--        <p>问答系统，知识检索，尽在协作公园</p>-->
-        <p>工作统计，进度跟踪，尽在协作公园</p>
+        <h1>党群工作科(纪委办公室)工作时控表</h1>
+        <p>团结 协作 高效</p>
 
       </div>
       <div class="right">
@@ -394,7 +393,7 @@ export default {
 .left{
   width:500px;
   align-items: flex-end;
-  margin-right: 100px;
+  margin-right: 50px;
 }
 
 .right{
@@ -404,13 +403,13 @@ export default {
 
 .left h1{
   font-family: "facebook letter faces";
-  font-size: 60px;
+  font-size: 45px;
   color: #0e57a2;
   align-items: flex-start;
 }
 
 .left p{
-  font-size: 30px;
+  font-size: 40px;
   color:#1c1e21;
   height: 200px;
   font-family: "Roboto Condensed", sans-serif;

@@ -23,23 +23,30 @@
         <el-table-column
           prop="todoTask, planTime"
           label="待办事项"
-          width="600"
+
         >
           <template slot-scope="scope">
             <el-tag type="">{{ scope.row.planTime }}</el-tag>&nbsp&nbsp&nbsp&nbsp&nbsp{{ scope.row.todoTask }}
           </template>
         </el-table-column>
         <el-table-column
+          prop="comTime"
+          label="完成时间"
+          width="120"
+        />
+        <el-table-column
           label="操作"
           width="120"
         >
           <template slot-scope="scope">
             <el-button
+              title="复用"
               icon="el-icon-refresh"
               style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"
               @click="redoTask(scope.row)"
             />
             <el-button
+              title="删除"
               icon="el-icon-close"
               style="padding:8px"
               type="danger"

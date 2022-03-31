@@ -2,20 +2,16 @@
   <div>
     <el-container>
       <el-header class="homeHeader">
-        <!--LOGO-->
-        <div>
-          <el-image :src="require('../img/TEAMPARK5.png')" fit="contain" class="el-image-logo" />
+        <div style="color: white">
+          党群工作科（纪委办公室）工作时控表
         </div>
-        <!--右上角的名字-->
         <span style="color: white; font-size: 15px; position: absolute; right: 65px">
           {{ user.name }}
         </span>
-        <!--右上角头像，有下拉栏-->
         <el-dropdown class="userInfo" @command="commandHandler">
           <span class="el-dropdown-link">
             <i><img :src="require('../img/avatar/' + user.userFace)"></i>
           </span>
-          <!--定义下拉栏子菜单-->
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
             <!--            <el-dropdown-item command="setting">设置</el-dropdown-item>-->
@@ -131,9 +127,7 @@ export default {
 <style scoped>
 
 .homeHeader {
-  /*background: #170707;*/
   background: #0e57a2;
-  /*background-image: linear-gradient(to bottom, #0e57a2, #115aa6, #135daa, #1661ae, #1864b2, #1864b2, #1864b2, #1864b2, #1661ae, #135daa, #115aa6, #0e57a2);*/
   display: flex;
   /*居中*/
   align-items: center;

@@ -1,5 +1,5 @@
 <template>
-  <div class="taskClass">
+  <div class="main">
     <div slot="header">
       <el-input
         v-model="addTodolist.todoTask"
@@ -10,109 +10,110 @@
         @keydown.enter.native="showAddTodoTask"
       />
     </div>
-    <div>
-      <el-table
-        ref="filterTable"
-        :data="todolists"
-        style="width: 100%"
-      >
-        <el-table-column type="expand">
-          <template slot-scope="props">
-            <el-form class="table-expand" label-position="left">
-              <el-form-item label="待办详情">
-                <span>{{ props.row.taskDetails }}</span>
-              </el-form-item>
-            </el-form>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="todoTask"
-          label="待办事项"
-          width="500"
+    <div class="insights">
+      <div>
+        <el-table
+          ref="filterTable"
+          :data="todolists"
+          style="width: 100%"
         >
-          <template slot-scope="scope">
-            {{ scope.row.todoTask }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="planTime"
-          label="计划时间"
-          width="150"
-        >
-          <template slot-scope="scope">
-            <el-tag
-              color="white"
-              style="color: #000000"
-            >{{ scope.row.planTime }}</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="userID"
-          label="任务执行人"
-          width="100"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.adminName.name }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="postCount"
-          label="延期次数"
-          width="100"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.postCount }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="taskScore"
-          label="任务分数"
-          width="100"
-        >
-          <template slot-scope="scope">
-            {{ scope.row.taskScore }}
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="taskStatusID"
-          label="状态"
-          :filters="[{ text: '进行中', value: '进行中' }, { text: '逾期', value: '逾期' }]"
-          :filter-method="filterTag"
-          filter-placement="bottom-end"
-          width="100"
-        >
-          <template slot-scope="scope">
-            <el-tag
-              :type="scope.row.taskStatusID === '逾期' ? 'danger' : ''"
-            >
-              {{ scope.row.taskStatusID }}
-            </el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="操作"
-          width="150"
-        >
-          <template slot-scope="scope">
-            <el-button
-              icon="el-icon-check"
-              style="padding:8px"
-              @click="completeTask(scope.row)"
-            />
-            <el-button
-              icon="el-icon-edit"
-              style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"
-              @click="showEditTodoTask(scope.row)"
-            />
-            <el-button
-              icon="el-icon-close"
-              style="padding:8px"
-              type="danger"
-              @click="deleteTask(scope.row)"
-            />
-          </template>
-        </el-table-column>
-      </el-table>
+          <el-table-column type="expand">
+            <template slot-scope="props">
+              <el-form class="table-expand" label-position="left">
+                <el-form-item label="待办详情">
+                  <span>{{ props.row.taskDetails }}</span>
+                </el-form-item>
+              </el-form>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="todoTask"
+            label="待办事项"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.todoTask }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="planTime"
+            label="计划时间"
+            width="150"
+          >
+            <template slot-scope="scope">
+              <el-tag
+                color="white"
+                style="color: #000000"
+              >{{ scope.row.planTime }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="userID"
+            label="任务执行人"
+            width="100"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.adminName.name }}
+            </template>
+          </el-table-column>
+          <!--<el-table-column-->
+          <!--  prop="postCount"-->
+          <!--  label="延期次数"-->
+          <!--  width="100"-->
+          <!--&gt;-->
+          <!--  <template slot-scope="scope">-->
+          <!--    {{ scope.row.postCount }}-->
+          <!--  </template>-->
+          <!--</el-table-column>-->
+          <el-table-column
+            prop="taskScore"
+            label="任务分数"
+            width="100"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.taskScore }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="taskStatusID"
+            label="状态"
+            width="100"
+          >
+            <template slot-scope="scope">
+              <el-tag
+                :type="scope.row.taskStatusID === '逾期' ? 'danger' : ''"
+              >
+                {{ scope.row.taskStatusID }}
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="操作"
+            width="150"
+          >
+            <template slot-scope="scope">
+              <el-button
+                title="完成"
+                icon="el-icon-check"
+                style="padding:8px"
+                @click="completeTask(scope.row)"
+              />
+              <el-button
+                title="编辑"
+                icon="el-icon-edit"
+                style="padding:8px;background: #0e57a2;border-color: #0e57a2; color: #ffffff"
+                @click="showEditTodoTask(scope.row)"
+              />
+              <el-button
+                title="删除"
+                icon="el-icon-close"
+                style="padding:8px"
+                type="danger"
+                @click="deleteTask(scope.row)"
+              />
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
       <div style="margin-top: 10px">
         <el-pagination
           background
@@ -164,12 +165,6 @@
               <el-radio-button label="4" />
             </el-radio-group>
           </el-form-item>
-          <!--            <el-form-item label="状态设置：" prop="addTodolist.taskStatusID">-->
-          <!--              <el-radio-group v-model="addTodolist.taskStatusID">-->
-          <!--                <el-radio-button label="新建"></el-radio-button>-->
-          <!--                <el-radio-button label="进行中"></el-radio-button>-->
-          <!--              </el-radio-group>-->
-          <!--            </el-form-item>-->
           <el-form-item label="执行人：" prop="addTodolist.userID">
             <el-select
               v-model="addTodolist.userID"
@@ -322,16 +317,6 @@ export default {
     },
     showAddTodoTask() {
       this.initTodolist()
-      // this.addTodolist = {
-      //   userID: 4,
-      //   todoTask:'',
-      //   taskScore: 0,
-      //   postCount:'',
-      //   planTime:'',
-      //   tagColor:'',
-      //   taskStatusID:'新建',
-      //   taskDetails: ''
-      // };
       this.addDialogVisible = true
     },
     addTodoTask() {
@@ -364,19 +349,6 @@ export default {
         })
       }
     },
-    // addTodoTask(){
-    //   this.$refs['taskForm'].validate(valid=>{
-    //     if(valid) {
-    //       this.postRequest('/todolist/', this.addTodolist).then(resp=>{
-    //         if(resp) {
-    //           this.addDialogVisible = false;
-    //           this.addTodolist.todoTask = '';
-    //           this.initTodolist()
-    //         }
-    //       })
-    //     }
-    //   })
-    // },
     currentChange(currentPage) {
       this.currentPage = currentPage
       this.initTodolist()
@@ -392,15 +364,6 @@ export default {
         })
         .catch(_ => {})
     },
-    // resetDateFilter() {
-    //   this.$refs.filterTable.clearFilter('date');
-    // },
-    // clearFilter() {
-    //   this.$refs.filterTable.clearFilter();
-    // },
-    // formatter(row, column) {
-    //   return row.address;
-    // },
     filterTag(value, row) {
       return row.taskStatusID === value
     },
@@ -413,12 +376,9 @@ export default {
 </script>
 
 <style scoped>
+
 .scoreTab {
   margin-top: 20px;
-}
-
-.taskClass {
-  /*position: relative;*/
 }
 
 .paginationClass {
@@ -452,5 +412,9 @@ export default {
   background-color: #0e57a2;
   color: #fff;
 }
+
+/*.main .insights {*/
+/*  display: grid;*/
+/*}*/
 
 </style>

@@ -67,32 +67,10 @@ export default {
 <style scoped>
 *{
   margin: 0;
-  /*padding: 0;*/
   box-sizing: border-box;
 }
 
 .wrap{
-  display: flex;
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  /*background-color: #f0f2f5;*/
-  /*background-image: linear-gradient(to left bottom, #ffffff, #f4f3f4, #e9e8e9, #dedcdd, #d4d1d1);*/
   width: 100%;
-  /*height: 100vh;*/
-  /*margin: 10px;*/
-}
-
-.container{
-  width:100%;
-  height:100%;
-  display: flex;
-  /*justify-content: space-around	;*/
-  /*align-items: center;*/
-}
-
-.todolistTab {
-  /*height: calc(100vh - 110px);*/
-
-  /*overflow-y: auto;*/
 }
 </style>

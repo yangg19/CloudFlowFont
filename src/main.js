@@ -11,8 +11,8 @@ import store from './store'
 import { initMenu } from './utils/menuList'
 import 'font-awesome/css/font-awesome.css'
 import { downloadRequest } from './utils/download'
-// import VCharts from 'v-charts'
-// Vue.use(VCharts)
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { size: 'small' })
@@ -21,7 +21,7 @@ Vue.prototype.putRequest = putRequest
 Vue.prototype.getRequest = getRequest
 Vue.prototype.deleteRequest = deleteRequest
 Vue.prototype.downloadRequest = downloadRequest
-// Vue.use(ECharts)
+Vue.use(mavonEditor)
 
 import Router from 'vue-router'
 

@@ -49,7 +49,6 @@ const routes = [
         name: '信息中心',
         component: MessageCenter
       }
-
     ]
   }
 
